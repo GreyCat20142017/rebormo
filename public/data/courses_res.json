@@ -1,0 +1,17 @@
+[
+  {
+  "id": 1,
+  "name": "first",
+  "lastlesson": 3
+},
+  {
+    "id": 2,
+    "name": "second",
+    "lastlesson": 2
+  },
+  {
+    "id": 3,
+    "name": "test",
+    "lastlesson": 5
+  }
+]
