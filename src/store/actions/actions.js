@@ -18,13 +18,13 @@ export const ACTIONS = {
     CONTENT_LOADING_START: 'CONTENT_LOADING_START',
     CONTENT_LOADING_FINISH: 'CONTENT_LOADING_FINISH',
     CONTENT_LOADING_SUCCESS: 'CONTENT_LOADING_SUCCESS',
-    CONTENT_LOADING_ERROR: 'CONTENT_LOADING_ERROR'
+    CONTENT_LOADING_ERROR: 'CONTENT_LOADING_ERROR',
+    DATA_SOURCE_SELECT: 'DATA_SOURCE_SELECT'
 };
 
 const getFromJson = async (path, params, unitsPerLesson = WORDS_PER_LESSON) => {
     const response = await axios.get(path);
     let result = response ? response.data : [];
-    console.log(params);
     if (params['lesson']) {
         result = result.filter((el, ind) => {
             const startInd = (parseInt(params['lesson'], 10) - 1) * unitsPerLesson || 0;
@@ -55,9 +55,10 @@ const getData = async (dispatch, json, db, params = {}) => {
     }
 };
 
-export const coursesLoading = () => {
+export const coursesLoading = (key = DATA_SOURCES.TEST) => {
+    const dataPath =  DATA_SOURCES[key] ?  DATA_SOURCES[key]['COURSES']  : DATA_SOURCES.TEST.COURSES;
     return dispatch => {
-        getData(dispatch, COURSES_PATH, DATA_SOURCES.PHP_LOCAL.COURSES);
+        getData(dispatch, COURSES_PATH, dataPath);
     };
 };
 
@@ -143,4 +144,8 @@ const getContentData = async (dispatch, json, db, params = {}) => {
     }
 };
 
+export const changeDataSource = (key) => ({
+    type: ACTIONS.DATA_SOURCE_SELECT,
+    payload: key
+});
 

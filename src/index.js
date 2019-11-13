@@ -5,7 +5,6 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {BrowserRouter as Router} from 'react-router-dom';
 
-
 import './mdbcss/bootstrap.min.css';
 import './mdbcss/mdb.min.css';
 import './index.css';

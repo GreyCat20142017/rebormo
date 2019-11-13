@@ -43,7 +43,7 @@ export const DEBOUNCE_INTERVAL = 222;
 export const DELAY_TIMEOUT  = 1500;
 
 const url = window.location.origin;
-export const SERVER_ROOT = (url.match(/github\.io/gi)) ? '/bormo/' : '/';
+export const SERVER_ROOT = (url.match(/github\.io/gi)) ? '/rebormo/' : '/';
 
 export const KEY_CODES = {
   ESC: 27,
@@ -152,3 +152,20 @@ export const MODAL_TYPES = {
   ABOUT: 'about',
   HELP: ' help'
 };
+
+
+export const MENU_ICON_SIZE = 18;
+export const MENU_ICON_COLOR = 'white';
+
+export const KEYCODES = {
+  ENTER: 13,
+  ESC: 27
+};
+
+export const DROPDOWN_TYPE  = {
+  BUTTON : 'button',
+  LINK : 'a',
+  NAVLINK : 'NavLink',
+
+
+}

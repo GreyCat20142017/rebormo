@@ -34,7 +34,15 @@ const reducer = (state = initialState, action) => {
             const currentCourse = state.courses.find(course => course.id === action.payload);
             const lessons = currentCourse ? getLessonsArray(currentCourse.lastlesson) : [];
             const totalPages = currentCourse ? getTotalPages(currentCourse.lastlesson) : 1;
-            return {...state, currentCourse: parseInt(action.payload), lessons: lessons, currentPage: 1, totalPages: totalPages, currentLesson: null, content: []};
+            return {
+                ...state,
+                currentCourse: parseInt(action.payload),
+                lessons: lessons,
+                currentPage: 1,
+                totalPages: totalPages,
+                currentLesson: null,
+                content: []
+            };
         }
 
         case ACTIONS.COURSES_LOADING:
@@ -53,7 +61,7 @@ const reducer = (state = initialState, action) => {
             return {...state, error: action.payload, isLoading: false};
 
         case ACTIONS.PREV_LESSON_PAGE:
-            return state.currentPage > 1 ? {...state, currentPage: state.currentPage -1} : state;
+            return state.currentPage > 1 ? {...state, currentPage: state.currentPage - 1} : state;
 
         case ACTIONS.NEXT_LESSON_PAGE:
             return state.currentPage < state.totalPages ? {...state, currentPage: state.currentPage + 1} : state;
