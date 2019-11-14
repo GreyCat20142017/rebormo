@@ -1,12 +1,15 @@
 import React from 'react';
-// import {withRouter} from  'react-router-dom';
 
 import DropDown from '../dropdown/DropDownHook';
 import {NavItem} from './NavItem';
+import SidenavSwitcher from '../sidenav/SidenavSwitcher';
 import {DROPDOWN_TYPE} from '../../constants';
 
 const Header = (props) => (
     <ul className='list-unstyled container d-flex p-1 align-items-center'>
+        <li>
+            <SidenavSwitcher isSidenavOpen={props.isSideNavOpen} switchSidenav={props.switchSidenav}/>
+        </li>
         {props.menuItems.map(link =>
             <li key={link.href}>
                 <NavItem {...link}/>
@@ -24,7 +27,6 @@ const Header = (props) => (
     </ul>
 );
 
-// export default withRouter(Header);
 export default Header;
 
 

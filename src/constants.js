@@ -153,6 +153,8 @@ export const MODAL_TYPES = {
   HELP: ' help'
 };
 
+export const MDB_COLOR='#59698d';
+
 
 export const MENU_ICON_SIZE = 18;
 export const MENU_ICON_COLOR = 'white';

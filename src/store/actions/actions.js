@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {DATA_SOURCES, COURSES_PATH, BORMO_PATH, WORDS_PER_LESSON} from '../../constants';
+import {DATA_SOURCES, COURSES_PATH, BORMO_PATH, WORDS_PER_LESSON, TEST_KEY} from '../../constants';
 
 export const ACTIONS = {
     COURSES_LOADING: 'COURSES_LOADING',
@@ -19,7 +19,8 @@ export const ACTIONS = {
     CONTENT_LOADING_FINISH: 'CONTENT_LOADING_FINISH',
     CONTENT_LOADING_SUCCESS: 'CONTENT_LOADING_SUCCESS',
     CONTENT_LOADING_ERROR: 'CONTENT_LOADING_ERROR',
-    DATA_SOURCE_SELECT: 'DATA_SOURCE_SELECT'
+    DATA_SOURCE_SELECT: 'DATA_SOURCE_SELECT',
+    SIDENAV_STATE_SWITCH: 'SIDENAV_STATE_SWITCH'
 };
 
 const getFromJson = async (path, params, unitsPerLesson = WORDS_PER_LESSON) => {
@@ -35,7 +36,10 @@ const getFromJson = async (path, params, unitsPerLesson = WORDS_PER_LESSON) => {
 };
 
 const getFromDB = async (apiUrl, params) => {
-    const response = await axios.get(apiUrl, {params: params, timeout: 5000});
+    const response = await axios.get(apiUrl, {
+        params: params,
+        timeout: 5000
+    });
     return response ? response.data.content : [];
 };
 
@@ -45,6 +49,7 @@ const getData = async (dispatch, json, db, params = {}) => {
         dispatch(loadingSuccess(await getFromDB(db, params)));
         dispatch(loadingFinish());
     } catch (e) {
+        dispatch(changeDataSource(TEST_KEY));
         try {
             dispatch(loadingSuccess(await getFromJson(json, params)));
             dispatch(loadingFinish());
@@ -56,7 +61,7 @@ const getData = async (dispatch, json, db, params = {}) => {
 };
 
 export const coursesLoading = (key = DATA_SOURCES.TEST) => {
-    const dataPath =  DATA_SOURCES[key] ?  DATA_SOURCES[key]['COURSES']  : DATA_SOURCES.TEST.COURSES;
+    const dataPath = DATA_SOURCES[key] ? DATA_SOURCES[key]['COURSES'] : DATA_SOURCES.TEST.COURSES;
     return dispatch => {
         getData(dispatch, COURSES_PATH, dataPath);
     };
@@ -106,7 +111,10 @@ export const nextLessonPage = () => ({
 
 export const contentLoading = (course, lesson) => {
     return dispatch => {
-        getContentData(dispatch, BORMO_PATH, DATA_SOURCES.PHP_LOCAL.COURSES, {course, lesson});
+        getContentData(dispatch, BORMO_PATH, DATA_SOURCES.PHP_LOCAL.COURSES, {
+            course,
+            lesson
+        });
     };
 };
 
@@ -147,5 +155,10 @@ const getContentData = async (dispatch, json, db, params = {}) => {
 export const changeDataSource = (key) => ({
     type: ACTIONS.DATA_SOURCE_SELECT,
     payload: key
+});
+
+export const switchSidenavState = (sidenavState) => ({
+    type: ACTIONS.SIDENAV_STATE_SWITCH,
+    payload: sidenavState
 });
 

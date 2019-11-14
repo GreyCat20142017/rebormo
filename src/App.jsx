@@ -1,54 +1,33 @@
 import React from 'react';
-import {Switch, Route, withRouter} from 'react-router-dom';
-import Header from './components/header/Header';
+
 import FooterContainer from './store/containers/FooterContainer';
-import {ROUTES, SWITCHABLE_MODES, BORMO_MODES} from './routes';
-// import Bormo from './pages/Bormo';
-import NotFound from './pages/NotFound';
-
-const getNavigationLinks = (routes, submenu = true) => (
-    Object.keys(routes).filter(route => (routes[route]['submenu'] || false) === submenu).map(route => {
-        console.log(route, routes[route]);
-        return ({
-            'href': routes[route]['href'] || route,
-            'text': routes[route]['title'] || route,
-            'icon': routes[route]['icon'] || '',
-            'exact': routes[route]['exact'] || false
-        });
-    })
-);
-
-const menuItems = getNavigationLinks(ROUTES, false);
-const submenuItems = getNavigationLinks(ROUTES, true);
-
+import HeaderContainer from './store/containers/HeaderContainer';
+import MainContainer from './store/containers/MainContainer';
+import ContentContainer from './store/containers/ContentContainer';
 
 const App = (props) => (
     <div className='bg-white min-vh-100 d-flex flex-column'>
         <nav className='mdb-color lighten-1 text-white'>
-            <Header menuItems={menuItems} submenuItems={submenuItems}/>
+            <HeaderContainer/>
         </nav>
-        <div className='flex-grow-1 overflow-auto p-2'>
+        <div className='flex-grow-1 overflow-auto p-2 container'>
+            <MainContainer/>
+            <div className='row w-100 p-2'>
+                <div className="col-0 col-md-4">
 
-            <Switch>
+                </div>
 
-                {SWITCHABLE_MODES.map((route, ind) => (
-                    <Route key={ind + '-s'} exact path={route.href} render={(props) =>
-                        <p>{route.title}</p>
-                    }/>
-                ))}
+                <div className="col-12 col-md-7">
+                    <ContentContainer/>
+                </div>
+            </div>
 
-                {BORMO_MODES.map((route, ind) => (
-                    <Route key={ind + '-b'} path={route.href}
-                           render={props => <p>{route.title}</p>}/>))
-                }
-
-                <NotFound/>
-            </Switch>
         </div>
+
         <div className='mdb-color lighten-1 text-white'>
             <FooterContainer/>
         </div>
     </div>
 );
 
-export default withRouter(App);
+export default App;

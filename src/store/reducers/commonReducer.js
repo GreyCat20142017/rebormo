@@ -49,13 +49,13 @@ const reducer = (state = initialState, action) => {
             return {...state, isLoading: true};
 
         case ACTIONS.COURSES_LOADING_START:
-            return {...state, isLoading: true};
+            return {...state, isLoading: true, error: null};
 
         case ACTIONS.COURSES_LOADING_FINISH:
             return {...state, isLoading: false};
 
         case ACTIONS.COURSES_LOADING_SUCCESS:
-            return {...state, courses: [...action.payload], currentCourse: null};
+            return {...state, courses: [...action.payload], currentCourse: null, error: null};
 
         case ACTIONS.COURSES_LOADING_ERROR:
             return {...state, error: action.payload, isLoading: false};
