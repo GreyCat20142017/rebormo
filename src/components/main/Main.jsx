@@ -1,14 +1,20 @@
 import React from 'react';
 import {Switch, Route, withRouter} from 'react-router-dom';
 
+import {Drawer} from '@material-ui/core';
+
 import {BORMO_MODES, SWITCHABLE_MODES} from '../../routes';
 import NotFound from '../../pages/NotFound';
 import Sidenav from '../sidenav/Sidenav';
 
-const Main = (props) => {
+const Main = ({classes, isSideNavOpen, switchSidenav}) => {
     return (
         <>
-            <Sidenav isSideNavOpen={props.isSideNavOpen} switchSidenav={props.switchSidenav}/>
+
+            <Drawer open={isSideNavOpen} onClose={() => switchSidenav(false)}>
+                <Sidenav classes={classes} switchSidenav={switchSidenav}/>
+            </Drawer>
+
             <Switch>
 
                 {SWITCHABLE_MODES.map((route, ind) => (

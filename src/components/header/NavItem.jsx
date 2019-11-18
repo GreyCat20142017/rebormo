@@ -1,13 +1,23 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 
-import {getInlineSvg} from '../../sprite';
+import Button from '@material-ui/core/Button';
+import {useStyles} from '../../App.css';
+import BormoIcon from '../BormoIcon';
+import {DARKPINK_COLOR, PINK_COLOR} from '../../theme';
 
-export const NavItem = ({href, text, icon, exact = false}) => (
-    <NavLink className={'btn btn-sm btn-mdb-color p-2 d-flex align-items-center'} exact={exact} to={href}
-             activeClassName={'btn-light-green'}>
-        <span>{getInlineSvg(icon)}</span>
-        <span>&nbsp;&nbsp;</span>
-        <span>{text}</span>
-    </NavLink>
-);
+
+export const NavItem = ({href, text, icon, exact = false, onLight = false}) => {
+    const classes = useStyles();
+    const linkClass = onLight ? classes.linkDark : classes.link;
+    const activeColor = onLight ? DARKPINK_COLOR : PINK_COLOR;
+    return (
+        <NavLink className={linkClass} exact={exact} to={href} activeStyle={{color: activeColor}}>
+            <Button color={'inherit'}>
+                <BormoIcon icon={icon}/>
+                <span>&nbsp;</span>
+                <span>{text}</span>
+            </Button>
+        </NavLink>
+    );
+};

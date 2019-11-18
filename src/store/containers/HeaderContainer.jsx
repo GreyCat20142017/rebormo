@@ -5,7 +5,7 @@ import Header from '../../components/header/Header';
 const mapStateToProps = (state) => ({
     isSideNavOpen: state.ui.isSideNavOpen,
     menuItems: state.ui.menuItems,
-    sumenuItems: state.ui.submenuItems,
+    submenuItems: state.ui.submenuItems,
 });
 
 const mapDispatchToProps = (dispatch) => ({

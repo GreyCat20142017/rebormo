@@ -14,7 +14,7 @@ const getNavigationLinks = (routes, submenu = true) => (
 );
 
 export const initialState = {
-    isSideNavOpen: true,
+    isSideNavOpen: false,
     isBormo: true,
     menuItems: getNavigationLinks(ROUTES, false),
     submenuItems: getNavigationLinks(ROUTES, true)

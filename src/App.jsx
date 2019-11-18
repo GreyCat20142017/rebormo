@@ -1,33 +1,36 @@
 import React from 'react';
+import {ThemeProvider} from '@material-ui/styles';
+import {AppBar, Container, Paper} from '@material-ui/core';
+
+import {theme} from './theme';
+import {useStyles} from './App.css';
 
 import FooterContainer from './store/containers/FooterContainer';
 import HeaderContainer from './store/containers/HeaderContainer';
 import MainContainer from './store/containers/MainContainer';
 import ContentContainer from './store/containers/ContentContainer';
 
-const App = (props) => (
-    <div className='bg-white min-vh-100 d-flex flex-column'>
-        <nav className='mdb-color lighten-1 text-white'>
-            <HeaderContainer/>
-        </nav>
-        <div className='flex-grow-1 overflow-auto p-2 container'>
-            <MainContainer/>
-            <div className='row w-100 p-2'>
-                <div className="col-0 col-md-4">
 
-                </div>
+const App = (props) => {
+    const classes = useStyles();
+    // const [active, setActive] = useState(window.location.pathname);
 
-                <div className="col-12 col-md-7">
+    return (
+        <ThemeProvider theme={theme}>
+            <Container className={classes.app}>
+                <AppBar position='static'>
+                    <HeaderContainer classes={classes}/>
+                </AppBar>
+                <Paper className={classes.paperMain}>
+                    <MainContainer classes={classes}/>
                     <ContentContainer/>
-                </div>
-            </div>
-
-        </div>
-
-        <div className='mdb-color lighten-1 text-white'>
-            <FooterContainer/>
-        </div>
-    </div>
-);
+                </Paper>
+                <AppBar position='static'>
+                    <FooterContainer/>
+                </AppBar>
+            </Container>
+        </ThemeProvider>
+    );
+};
 
 export default App;

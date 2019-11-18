@@ -1,61 +1,62 @@
 import {SERVER_ROOT} from './constants';
 
+
 const BORMO_COMMON = SERVER_ROOT + 'bormocom';
 
 const ROUTES = {
     main: {
         href: SERVER_ROOT,
         title: 'Главная',
-        icon: 'main',
+        icon: 'Home',
         'exact': true
     },
     bormo: {
         href: BORMO_COMMON + '/bormo',
         title: 'Бормо',
-        icon: 'main'
+        icon: 'Bormo'
     },
     control: {
         href: BORMO_COMMON + '/control',
         title: 'Контроль',
-        icon: 'main'
+        icon: 'Control'
     },
     reverse: {
         href: BORMO_COMMON + '/reverse',
         title: 'Контроль наоборот',
-        icon: 'main'
+        icon: 'Reverse'
     },
     spelling: {
         href: BORMO_COMMON + '/spelling',
         title: 'Правописание',
-        icon: 'main'
+        icon: 'Spelling'
     },
     check: {
         href: BORMO_COMMON + '/check',
         title: 'Проверка',
-        icon: 'main'
+        icon: 'Check'
     },
     phrases: {
         href: SERVER_ROOT + 'phrases',
         title: 'Фразы',
-        icon: 'main',
+        icon: null,
         'submenu': true
     },
     search: {
         href: SERVER_ROOT + 'search',
         title: 'Поиск',
-        icon: 'main',
+        icon: null,
         'submenu': true
     },
     skyeng: {
         href: SERVER_ROOT + 'skyeng',
         title: 'SkyEng',
-        icon: 'main',
+        icon: null,
         'submenu': true
     },
     config: {
         href: SERVER_ROOT + 'config',
         title: 'Настройка',
-        icon: 'main',
+        icon: null,
         'submenu': true
     }
 };

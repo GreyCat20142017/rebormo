@@ -1,4 +1,8 @@
 import React, {useEffect} from 'react';
+import {Button, Typography, Paper} from '@material-ui/core';
+
+import {useStyles} from '../App.css';
+
 import Loader from './loader/Loader';
 
 const Courses = ({courses, currentCourse, isLoading, error, onCourseSelect, onCoursesLoading}) => {
@@ -6,20 +10,22 @@ const Courses = ({courses, currentCourse, isLoading, error, onCourseSelect, onCo
         onCoursesLoading();
     }, [onCoursesLoading]);
 
+    const classes = useStyles();
 
     return (
         <>
             {isLoading ? <Loader/> :
-                <ul className='list-unstyled'>
+                <Paper className={classes.courses}>
                     {courses.map((course, ind) =>
-                        <li key={ind}>
-                            <button onClick={() => onCourseSelect(course.id)}
-                                    className={'btn btn-sm ' + (parseInt(course.id) === parseInt(currentCourse) ? 'btn-light-green' : 'btn-mdb-color')}>
-                                {course.name}&nbsp;({course.lastlesson})
-                            </button>
-                        </li>)}
-                </ul>}
-            <p>{error}</p>
+                    <Button key={course.id} onClick={() => onCourseSelect(course.id)} className={classes.courseBtn}
+                            variant={(parseInt(course.id) === parseInt(currentCourse) ? 'contained' : 'outlined')}
+                            color={'primary'}>
+                        {course.name}&nbsp;({course.lastlesson})
+                    </Button>
+                    )}
+                    <Typography>{error}</Typography>
+                </Paper>
+            }
         </>
 
     );

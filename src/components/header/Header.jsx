@@ -1,30 +1,32 @@
 import React from 'react';
 
-import DropDown from '../dropdown/DropDownHook';
-import {NavItem} from './NavItem';
-import SidenavSwitcher from '../sidenav/SidenavSwitcher';
-import {DROPDOWN_TYPE} from '../../constants';
+import {IconButton, Toolbar, Typography, Divider, Hidden} from '@material-ui/core';
 
-const Header = (props) => (
-    <ul className='list-unstyled container d-flex p-1 align-items-center'>
-        <li>
-            <SidenavSwitcher isSidenavOpen={props.isSideNavOpen} switchSidenav={props.switchSidenav}/>
-        </li>
-        {props.menuItems.map(link =>
-            <li key={link.href}>
-                <NavItem {...link}/>
-            </li>)}
-        <li>
-            <DropDown data={props.submenuItems}
-                      ariaInfo={'dropdown menu'}
-                      togglerText={'...'}
-                      linkType={DROPDOWN_TYPE.NAVLINK}
-                      css={{
-                          togglerCss: 'btn btn-sm btn-mdb-color dropdown-toggle p-2',
-                          linkCss: 'dropdown-item p-2 d-flex align-items-center'
-                      }}/>
-        </li>
-    </ul>
+import AppsIcon from '@material-ui/icons/Apps';
+
+import {NavItem} from './NavItem';
+import Submenu from '../Submenu';
+
+const Header = ({classes, menuItems, submenuItems, switchSidenav}) => (
+
+    <Toolbar>
+        <IconButton edge='start' color='inherit' aria-label='menu' onClick={() => switchSidenav(true)}>
+            <AppsIcon/>
+        </IconButton>
+        <Typography variant='h6' className={classes.title} title={'Бормотунчик c Redux (Remake Bormo with Redux)'}>
+            Rebormo
+        </Typography>
+        <Divider className={classes.mLeft}/>
+        <Hidden smDown={true}>
+            {menuItems.map(link =>
+                <NavItem key={link.href} {...link}/>)}
+        </Hidden>
+        <Hidden smUp={true}>
+            <Submenu submenuItems={menuItems} switchIcon={'Menu'}/>
+        </Hidden>
+        {/*Здесь выпадающее меню*/}
+        <Submenu submenuItems={submenuItems}/>
+    </Toolbar>
 );
 
 export default Header;
