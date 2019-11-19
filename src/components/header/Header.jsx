@@ -5,7 +5,7 @@ import {IconButton, Toolbar, Typography, Divider, Hidden} from '@material-ui/cor
 import AppsIcon from '@material-ui/icons/Apps';
 
 import {NavItem} from './NavItem';
-import Submenu from '../Submenu';
+import Submenu from '../submenu/Submenu';
 
 const Header = ({classes, menuItems, submenuItems, switchSidenav}) => (
 
@@ -22,7 +22,7 @@ const Header = ({classes, menuItems, submenuItems, switchSidenav}) => (
                 <NavItem key={link.href} {...link}/>)}
         </Hidden>
         <Hidden smUp={true}>
-            <Submenu submenuItems={menuItems} switchIcon={'Menu'}/>
+            <Submenu submenuItems={menuItems} withNavLink={true} switchIcon={'Menu'}/>
         </Hidden>
         {/*Здесь выпадающее меню*/}
         <Submenu submenuItems={submenuItems}/>

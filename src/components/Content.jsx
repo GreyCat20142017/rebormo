@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import Loader from './loader/Loader';
 
+
 const Content = ({content, currentCourse, currentLesson, isLoading, error, onContentLoading}) => {
     useEffect(() => {
         if (currentCourse && currentLesson) {
@@ -9,16 +10,12 @@ const Content = ({content, currentCourse, currentLesson, isLoading, error, onCon
     }, [onContentLoading, currentCourse, currentLesson]);
 
     return (
-        <>
-            {isLoading ? <Loader/> :
-                <ul className='list-unstyled'>
-                    {content.map((row, ind) =>
-                        <li key={ind}>
-                            {row.english} {row.russian}
-                        </li>)}
-                </ul>}
-            <p>{error}</p>
-        </>
+
+
+            isLoading ? <Loader/> :
+                (error ? <p>{error}</p> : null)
+
+
 
     );
 };

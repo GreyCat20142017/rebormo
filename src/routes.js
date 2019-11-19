@@ -38,25 +38,25 @@ const ROUTES = {
     phrases: {
         href: SERVER_ROOT + 'phrases',
         title: 'Фразы',
-        icon: null,
+        icon: 'Extension',
         'submenu': true
     },
     search: {
         href: SERVER_ROOT + 'search',
         title: 'Поиск',
-        icon: null,
+        icon: 'Search',
         'submenu': true
     },
     skyeng: {
         href: SERVER_ROOT + 'skyeng',
         title: 'SkyEng',
-        icon: null,
+        icon: 'Sky',
         'submenu': true
     },
     config: {
         href: SERVER_ROOT + 'config',
         title: 'Настройка',
-        icon: null,
+        icon: 'Settings',
         'submenu': true
     }
 };

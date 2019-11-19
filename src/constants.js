@@ -153,5 +153,5 @@ export const KEYCODES = {
 
 export const SUBMENU_CONTENT = {
     NAVLINK: 'NavLink',
-    BUTTON: 'Button'
+    ITEM: 'MenuItem'
 };

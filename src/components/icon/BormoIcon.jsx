@@ -2,8 +2,9 @@ import React from 'react';
 
 import {
     Headset, Done, DoneAll, PlaylistAddCheck as Spelling, ListAlt as Check,
-    Home, Settings, Search, CloudQueue as Sky, Info,
-    MoreVert as More, HelpOutline as Help, MenuBook as Book, PriorityHigh as Error, Menu
+    Home, Settings, Search, CloudQueue as Sky, Info, Extension,
+    MoreVert as More, HelpOutline as Help, MenuBook as Book, PriorityHigh as Error, Menu,
+    ArrowLeft, ArrowRight
 } from '@material-ui/icons';
 
 
@@ -39,7 +40,12 @@ const BormoIcon = ({icon, iconSize = 'small'}) => {
             return <Book fontSize={iconSize}/>;
         case 'Error':
             return <Error fontSize={iconSize}/>;
-
+        case 'Extension':
+            return <Extension fontSize={iconSize}/>;
+        case 'Prev':
+            return <ArrowLeft fontSize={iconSize}/>;
+        case 'Next':
+            return <ArrowRight fontSize={iconSize}/>;
         default:
     }
     return null;

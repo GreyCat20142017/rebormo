@@ -3,6 +3,7 @@ import {PAGE_LIMIT} from '../constants';
 import {Fab, Button, ButtonGroup, Paper, Container} from '@material-ui/core';
 
 import {useStyles} from '../App.css';
+import BormoIcon from './icon/BormoIcon';
 
 const getLessonsPage = (currentPage, lessonsCount) => {
     let list = [];
@@ -31,12 +32,12 @@ const Lessons = ({currentCourse, currentPage, totalPages, lessonsCount, onLesson
 
                 <ButtonGroup>
                     <Button color={'inherit'} onClick={onPrevPage}
-                            disabled={isFirst}>
-                        prev
+                            disabled={isFirst} title={'Предыдущая страница'}>
+                        <BormoIcon icon={'Prev'}/>
                     </Button>
                     <Button color={'inherit'} onClick={onNextPage}
-                            disabled={isLast}>
-                        next
+                            disabled={isLast} title={'Следующая страница'}>
+                        <BormoIcon icon={'Next'}/>
                     </Button>
                 </ButtonGroup>
             </Paper>

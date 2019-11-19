@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import {useStyles} from '../../App.css';
-import BormoIcon from '../BormoIcon';
+import BormoIcon from '../icon/BormoIcon';
 import {DARKPINK_COLOR, PINK_COLOR} from '../../theme';
 
 

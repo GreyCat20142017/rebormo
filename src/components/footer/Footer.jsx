@@ -1,7 +1,7 @@
 import React from 'react';
-import {DATA_SOURCES, SUBMENU_CONTENT} from '../../constants';
+import {DATA_SOURCES} from '../../constants';
 import {Toolbar} from '@material-ui/core';
-import Submenu from '../Submenu';
+import Submenu from '../submenu/Submenu';
 
 const Footer = ({APIkey, onDataSourceChange, onCoursesLoading}) => {
     const dataSources = Object.keys(DATA_SOURCES).filter(key => !DATA_SOURCES[key].disabled).map((item, ind) => (
@@ -21,8 +21,8 @@ const Footer = ({APIkey, onDataSourceChange, onCoursesLoading}) => {
 
     return (
         <Toolbar>
+            <Submenu submenuItems={dataSources} withNavLink = {false} callback={onSelectDataSource} switchIcon={'Settings'}/>
             {APIkey ? <p className='p-0 m-0 ml-2'>{DATA_SOURCES[APIkey]['COMMENT'] || ''}</p> : null}
-            <Submenu submenuItems={dataSources} type={SUBMENU_CONTENT.BUTTON} callback={onSelectDataSource} switchIcon={'Settings'}/>
         </Toolbar>
     );
 

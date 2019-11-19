@@ -5,10 +5,10 @@ import {useStyles} from '../App.css';
 
 import Loader from './loader/Loader';
 
-const Courses = ({courses, currentCourse, isLoading, error, onCourseSelect, onCoursesLoading}) => {
+const Courses = ({APIkey, courses, currentCourse, isLoading, error, onCourseSelect, onCoursesLoading}) => {
     useEffect(() => {
-        onCoursesLoading();
-    }, [onCoursesLoading]);
+        onCoursesLoading(APIkey);
+    }, [onCoursesLoading, APIkey]);
 
     const classes = useStyles();
 

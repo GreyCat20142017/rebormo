@@ -1,13 +1,15 @@
 import {makeStyles} from '@material-ui/core/styles';
-import {MDB_COLOR} from './theme';
+import {theme} from './theme';
+
+const mainColor = theme.palette.primary.main;
 
 export const useStyles = makeStyles(theme => ({
     app: {
         textAlign: 'center',
-        padding: theme.spacing(2),
+        padding: theme.spacing(0),
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '100vh'
+        minHeight: '100vh',
     },
     paper: {
         padding: theme.spacing(1),
@@ -15,7 +17,23 @@ export const useStyles = makeStyles(theme => ({
     },
     paperMain: {
         width: '100%',
-        flexGrow: 1
+        flexGrow: 1,
+        backgroundColor: mainColor,
+        backgroundOrigin: 'content-box',
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+        backgroundSize: '100px 100px, 100px 100px, 20px 20px, 20px 20px',
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)`,
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    paperWhite: {
+        width: '100%',
+        flexGrow: 1,
+        padding: '20px'
     },
     link: {
         textDecoration: 'none',
@@ -23,7 +41,7 @@ export const useStyles = makeStyles(theme => ({
     },
     linkDark: {
         textDecoration: 'none',
-        color: MDB_COLOR
+        color: mainColor
     },
     mLeft: {
         marginLeft: 'auto'
@@ -50,6 +68,25 @@ export const useStyles = makeStyles(theme => ({
     },
     lessonBtn: {
         margin: theme.spacing(1)
+    },
+
+    card: {
+        // margin: '20vh auto',
+        alignSelf: 'center',
+        boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)',
+        maxWidth: '400px',
+        [theme.breakpoints.down('sm')]: {
+            maxWidth: '250px'
+        },
+
+    },
+    avatar: {
+        backgroundColor: theme.palette.primary.main
+    },
+
+    wrapper: {
+        width: '100%',
+        flexGrow: 1
     }
 
 }));

@@ -71,7 +71,7 @@ const reducer = (state = initialState, action) => {
             return {...state, currentLesson: action.payload};
 
         case ACTIONS.CONTENT_LOADING:
-            return {...state, isLoading: true};
+            return  {...state, isLoading: true};
 
         case ACTIONS.CONTENT_LOADING_START:
             return {...state, isLoading: true};

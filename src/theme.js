@@ -5,7 +5,7 @@ import {blueGrey, deepOrange, indigo, pink} from '@material-ui/core/colors';
 export const BACK_COLOR = 'rgba(242, 242, 242, 0.3)';
 export const DEFAULT_COLOR = 'rgba(122, 144, 244, 0.2)';
 export const MDB_COLOR = '#59698d';
-export const PINK_COLOR = pink[200];
+export const PINK_COLOR = pink[100];
 export const DARKPINK_COLOR = pink[800];
 
 export const theme = createMuiTheme({
@@ -16,7 +16,7 @@ export const theme = createMuiTheme({
             main: MDB_COLOR
         },
         secondary: {
-            main: blueGrey[500],
+            main: blueGrey[200],
             // dark: will be calculated from palette.secondary.main,
         },
         error: deepOrange,

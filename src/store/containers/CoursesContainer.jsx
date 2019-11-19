@@ -7,12 +7,13 @@ const mapStateToProps = (state) => ({
     courses: state.common.courses,
     currentCourse: state.common.currentCourse,
     error: state.common.error,
-    isLoading: state.common.isLoading
+    isLoading: state.common.isLoading,
+    APIkey: state.config.APIkey
 });
 
 const mapDispatchToProps = (dispatch) => ({
     onCourseSelect: (id) =>  dispatch(selectCourse(id)),
-    onCoursesLoading: () => dispatch(coursesLoading())
+    onCoursesLoading: (key) => dispatch(coursesLoading(key))
 });
 
 const CoursesContainer = connect(mapStateToProps, mapDispatchToProps)(Courses);

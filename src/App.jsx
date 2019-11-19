@@ -1,13 +1,14 @@
 import React from 'react';
+
 import {ThemeProvider} from '@material-ui/styles';
-import {AppBar, Container, Paper} from '@material-ui/core';
+import {AppBar, Container, CssBaseline} from '@material-ui/core';
 
 import {theme} from './theme';
 import {useStyles} from './App.css';
 
 import FooterContainer from './store/containers/FooterContainer';
 import HeaderContainer from './store/containers/HeaderContainer';
-import MainContainer from './store/containers/MainContainer';
+import BodyContainer from './store/containers/BodyContainer';
 import ContentContainer from './store/containers/ContentContainer';
 
 
@@ -17,14 +18,15 @@ const App = (props) => {
 
     return (
         <ThemeProvider theme={theme}>
+            <CssBaseline/>
             <Container className={classes.app}>
                 <AppBar position='static'>
                     <HeaderContainer classes={classes}/>
                 </AppBar>
-                <Paper className={classes.paperMain}>
-                    <MainContainer classes={classes}/>
+                <>
+                    <BodyContainer classes={classes}/>
                     <ContentContainer/>
-                </Paper>
+                </>
                 <AppBar position='static'>
                     <FooterContainer/>
                 </AppBar>
