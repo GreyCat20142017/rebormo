@@ -1,18 +1,19 @@
 import {connect} from 'react-redux';
 import {contentLoading} from '../actions/actions';
 
-import Content from '../../components/Content';
+import Content from '../../appparts/content/Content';
 
 const mapStateToProps = (state) => ({
-    content: state.common.content,
-    currentCourse: state.common.currentCourse,
-    currentLesson: state.common.currentLesson,
-    error: state.common.error,
-    isLoading: state.common.isLoading
+    apiKey: state.data.apiKey,
+    content: state.data.content,
+    currentCourse: state.data.currentCourse,
+    currentLesson: state.data.currentLesson,
+    error: state.data.error,
+    isLoading: state.data.isLoading
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    onContentLoading: (course, lesson) => dispatch(contentLoading(course, lesson))
+    onContentLoading: (course, lesson, apiKey) => dispatch(contentLoading(course, lesson, apiKey))
 });
 
 const ContentContainer = connect(mapStateToProps, mapDispatchToProps)(Content);

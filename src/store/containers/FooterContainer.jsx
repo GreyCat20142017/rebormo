@@ -1,14 +1,14 @@
 import {connect} from 'react-redux';
 import {changeDataSource, coursesLoading} from '../actions/actions';
-import Footer from '../../components/footer/Footer';
+import Footer from '../../appparts/footer/Footer';
 
 const mapStateToProps = (state) => ({
-    APIkey: state.config.APIkey
+    apiKey: state.data.apiKey,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     onDataSourceChange: (key) =>  dispatch(changeDataSource(key)),
-    onCoursesLoading: (key) => dispatch(coursesLoading(key))
+    onCoursesLoading: (key) => dispatch(coursesLoading(key)),
 });
 
 const FooterContainer = connect(mapStateToProps, mapDispatchToProps)(Footer);

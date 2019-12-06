@@ -5,7 +5,7 @@ import {IconButton, Toolbar, Typography, Divider, Hidden} from '@material-ui/cor
 import AppsIcon from '@material-ui/icons/Apps';
 
 import {NavItem} from './NavItem';
-import Submenu from '../submenu/Submenu';
+import Submenu from '../../components/submenu/Submenu';
 
 const Header = ({classes, menuItems, submenuItems, switchSidenav}) => (
 

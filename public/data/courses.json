@@ -1,12 +1,7 @@
 [
   {
-  "id": 1,
-  "name": "first",
-  "lastlesson": 10
-},
-  {
-    "id": 2,
-    "name": "second",
-    "lastlesson": 2
+    "id": 1,
+    "name": "test",
+    "lastlesson": 10
   }
 ]

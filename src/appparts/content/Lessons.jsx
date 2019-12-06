@@ -1,9 +1,9 @@
 import React from 'react';
-import {PAGE_LIMIT} from '../constants';
+import {PAGE_LIMIT} from '../../constants';
 import {Fab, Button, ButtonGroup, Paper, Container} from '@material-ui/core';
 
-import {useStyles} from '../App.css';
-import BormoIcon from './icon/BormoIcon';
+import {useStyles} from '../../App.css';
+import BormoIcon from '../../components/icon/BormoIcon';
 
 const getLessonsPage = (currentPage, lessonsCount) => {
     let list = [];
@@ -15,7 +15,7 @@ const getLessonsPage = (currentPage, lessonsCount) => {
     return list;
 };
 
-const Lessons = ({currentCourse, currentPage, totalPages, lessonsCount, onLessonSelect, onPrevPage, onNextPage}) => {
+const Lessons = ({apiKey, currentCourse, currentPage, totalPages, lessonsCount, onLessonSelect, onPrevPage, onNextPage}) => {
     const classes = useStyles();
     const isFirst = currentPage === 1;
     const isLast = currentPage === totalPages;
@@ -26,7 +26,10 @@ const Lessons = ({currentCourse, currentPage, totalPages, lessonsCount, onLesson
                 <Container className={classes.paper}>
                     {getLessonsPage(currentPage, lessonsCount).map(el =>
                         <Fab className={classes.lessonBtn} size={'small'} key={el}
-                             onClick={() => onLessonSelect(el)}>{el}</Fab>
+                             onClick={() => onLessonSelect(el)}
+                             title={'Загрузить контент урока № ' + el + ' курс ' + currentCourse + '  - ' + apiKey}>
+                            {el}
+                        </Fab>
                     )}
                 </Container>
 

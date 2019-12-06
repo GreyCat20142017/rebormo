@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {switchSidenavState} from '../actions/actions';
-import Header from '../../components/header/Header';
+import Header from '../../appparts/header/Header';
 
 const mapStateToProps = (state) => ({
     isSideNavOpen: state.ui.isSideNavOpen,

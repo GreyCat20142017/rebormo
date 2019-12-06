@@ -1,7 +1,7 @@
-import {ACTIONS} from '../actions/configActions';
+import {ACTIONS} from '../actions/searchActions';
 
 export const initialState = {
-    voice: ''
+    searchResult: []
 };
 
 const reducer = (state = initialState, action) => {

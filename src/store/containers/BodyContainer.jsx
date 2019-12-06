@@ -1,11 +1,11 @@
 import {connect} from 'react-redux';
 import {switchSidenavState} from '../actions/actions';
-import Body from '../../components/body/Body';
+import Body from '../../appparts/body/Body';
 
 const mapStateToProps = (state) => ({
     isSideNavOpen: state.ui.isSideNavOpen,
-    content: state.common.content,
-    APIkey: state.config.APIkey
+    content: state.data.content,
+    apiKey: state.config.apiKey
 });
 
 const mapDispatchToProps = (dispatch) => ({

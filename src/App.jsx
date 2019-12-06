@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {ThemeProvider} from '@material-ui/styles';
 import {AppBar, Container, CssBaseline} from '@material-ui/core';
@@ -11,27 +11,32 @@ import HeaderContainer from './store/containers/HeaderContainer';
 import BodyContainer from './store/containers/BodyContainer';
 import ContentContainer from './store/containers/ContentContainer';
 
+import VoiceContext, {getBormoSpeaker} from './VoiceContext';
+import ErrorMessageContainer from './store/containers/ErrorMessageContainer';
 
 const App = (props) => {
+    const [bormoSpeaker] = useState(getBormoSpeaker());
     const classes = useStyles();
-    // const [active, setActive] = useState(window.location.pathname);
 
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline/>
-            <Container className={classes.app}>
-                <AppBar position='static'>
-                    <HeaderContainer classes={classes}/>
-                </AppBar>
-                <>
-                    <BodyContainer classes={classes}/>
-                    <ContentContainer/>
-                </>
-                <AppBar position='static'>
-                    <FooterContainer/>
-                </AppBar>
-            </Container>
-        </ThemeProvider>
+        <VoiceContext.Provider value={{bormoSpeaker}}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline/>
+                <Container className={classes.app}>
+                    <AppBar position='static'>
+                        <HeaderContainer classes={classes}/>
+                    </AppBar>
+                    <>
+                        <BodyContainer classes={classes}/>
+                        <ContentContainer/>
+                        <ErrorMessageContainer/>
+                    </>
+                    <AppBar position='static'>
+                        <FooterContainer/>
+                    </AppBar>
+                </Container>
+            </ThemeProvider>
+        </VoiceContext.Provider>
     );
 };
 

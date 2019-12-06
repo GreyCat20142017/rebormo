@@ -1,9 +1,8 @@
-import {ACTIONS} from '../actions/actions';
+import {ACTIONS} from '../actions/uiActions';
 import {ROUTES} from '../../routes';
 
 const getNavigationLinks = (routes, submenu = true) => (
     Object.keys(routes).filter(route => (routes[route]['submenu'] || false) === submenu).map(route => {
-
         return ({
             'href': routes[route]['href'] || route,
             'text': routes[route]['title'] || route,

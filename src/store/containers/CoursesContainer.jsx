@@ -1,14 +1,14 @@
 import {connect} from 'react-redux';
 import {coursesLoading, selectCourse} from '../actions/actions';
 
-import Courses from '../../components/Courses';
+import Courses from '../../appparts/content/Courses';
 
 const mapStateToProps = (state) => ({
-    courses: state.common.courses,
-    currentCourse: state.common.currentCourse,
-    error: state.common.error,
-    isLoading: state.common.isLoading,
-    APIkey: state.config.APIkey
+    apiKey: state.data.apiKey,
+    courses: state.data.courses,
+    currentCourse: state.data.currentCourse,
+    error: state.data.error,
+    isLoading: state.data.isLoading
 });
 
 const mapDispatchToProps = (dispatch) => ({

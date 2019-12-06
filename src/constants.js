@@ -24,8 +24,9 @@ export const voiceParams = {
 
 export const PREFFERABLE_VOICE = 'Google UK English';
 
-export const BORMO_PATH = '/data/bormo.json';
 export const COURSES_PATH = '/data/courses.json';
+export const BORMO_PATH = '/data/bormo.json';
+export const SECTIONS_PATH = '/data/sections.json';
 export const PHRASES_PATH = '/data/phrases.json';
 
 export const PAGE_LIMIT = 9;
@@ -88,6 +89,7 @@ export const TEST_STATUSES = {
 export const DATA_SOURCES = {
     PHP_LOCAL: {
         COURSES: 'http://bormophpl.local:8080/courses.php',
+        CONTENT: 'http://bormophpl.local:8080/courses.php',
         SEARCH: 'http://bormophpl.local:8080/search.php',
         PHRASES: 'http://bormophpl.local:8080/phrases.php',
         TEST: 'http://bormophpl.local:8080/test.php',
@@ -96,6 +98,7 @@ export const DATA_SOURCES = {
     },
     TEST: {
         COURSES: COURSES_PATH,
+        CONTENT: BORMO_PATH,
         SEARCH: BORMO_PATH,
         PHRASES: PHRASES_PATH,
         disabled: false,
@@ -155,3 +158,6 @@ export const SUBMENU_CONTENT = {
     NAVLINK: 'NavLink',
     ITEM: 'MenuItem'
 };
+
+export const SNACK_OPEN_TIME =  7000;
+export  const  AXIOS_TIMEOUT = 7000;

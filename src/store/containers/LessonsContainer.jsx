@@ -6,13 +6,14 @@ import {
     nextLessonPage
 } from '../actions/actions';
 
-import Lessons from '../../components/Lessons';
+import Lessons from '../../appparts/content/Lessons';
 
 const mapStateToProps = (state) => ({
-    currentCourse: state.common.currentCourse,
-    currentPage: state.common.currentPage,
-    totalPages: state.common.totalPages,
-    lessonsCount: state.common.lessons.length
+    apiKey: state.data.apiKey,
+    currentCourse: state.data.currentCourse,
+    currentPage: state.data.currentPage,
+    totalPages: state.data.totalPages,
+    lessonsCount: state.data.lessons.length
 });
 
 const mapDispatchToProps = (dispatch) => ({

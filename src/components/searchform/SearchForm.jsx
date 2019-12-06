@@ -4,7 +4,7 @@ import {Typography, FormGroup, FormControlLabel, Button, TextField, Switch} from
 import {useStyles} from './SearchForm.css';
 import {KEY_CODES, TEST_KEY} from '../../constants';
 
-const SearchForm = ({APIkey, onlySkyEng = false}) => {
+const SearchForm = ({apiKey, onlySkyEng = false}) => {
 
     const [searchText, setSearchText] = useState('');
     const [skyEng, setSkyEng] = useState(onlySkyEng ? true : false);
@@ -13,7 +13,7 @@ const SearchForm = ({APIkey, onlySkyEng = false}) => {
     const [exact, setExact] = useState(true);
     const classes = useStyles();
 
-    const isTestData = !skyEng && !onlySkyEng && (APIkey === TEST_KEY);
+    const isTestData = !skyEng && !onlySkyEng && (apiKey === TEST_KEY);
 
     const onSearch = () => {
         setSearchResult(null);

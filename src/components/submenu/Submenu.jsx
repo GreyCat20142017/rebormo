@@ -8,11 +8,19 @@ import {NavLink} from 'react-router-dom';
 import {MenuItem} from '@material-ui/core';
 import {DARKPINK_COLOR, PINK_COLOR} from '../../theme';
 
-const Submenu = ({submenuItems = [], withNavLink = true, onLight = true, callback = null, switchIcon = 'More'}) => {
+const Submenu = ({
+                     submenuItems = [], withNavLink = true, onLight = true, callback = null,
+                     switchIcon = 'More', text = ''
+                 }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const classes = useStyles();
     const linkClass = onLight ? classes.linkDark : classes.link;
     const activeColor = onLight ? DARKPINK_COLOR : PINK_COLOR;
+    const convertedItems = submenuItems.map(item => (typeof(item) === 'object' ? item : ({
+        'href': item,
+        'text': item,
+        'key': item
+    })));
 
     const handleClick = event => {
         setAnchorEl(event.currentTarget);
@@ -26,11 +34,12 @@ const Submenu = ({submenuItems = [], withNavLink = true, onLight = true, callbac
     };
 
     return (
-        <div>
+        <>
             <Button color={'inherit'}
                     aria-controls='submenu' aria-haspopup='true' onClick={handleClick}
                     disabled={submenuItems.length === 0}>
                 <BormoIcon icon={switchIcon}/>
+
             </Button>
             <Menu className={classes.submenu}
                   id='submenu'
@@ -39,9 +48,10 @@ const Submenu = ({submenuItems = [], withNavLink = true, onLight = true, callbac
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
             >
-                {submenuItems.map((link, ind) =>
+                {convertedItems.map((link, ind) =>
                     (withNavLink ?
-                            <NavLink className={linkClass} key={ind} exact={link.exact} to={link.href} activeStyle={{color: activeColor}}>
+                            <NavLink className={linkClass} key={ind} exact={link.exact} to={link.href}
+                                     activeStyle={{color: activeColor}}>
                                 <MenuItem key={ind} title={link.text} onClick={() => handleClose(link.key)}>
                                     <BormoIcon icon={link.icon}/>
                                     <span>&nbsp;</span>
@@ -56,7 +66,7 @@ const Submenu = ({submenuItems = [], withNavLink = true, onLight = true, callbac
                     ))}
 
             </Menu>
-        </div>
+        </>
     );
 };
 

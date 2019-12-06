@@ -1,13 +1,15 @@
 import {combineReducers} from 'redux';
 
-import {default as common} from './commonReducer';
+import {default as data} from './dataReducer';
 import {default as config} from './configReducer';
 import {default as ui} from './uiReducer';
+import {default as search} from './searchReducer';
 
 const reducer = combineReducers({
-    common,
+    data,
     config,
-    ui
+    ui,
+    search
 });
 
 export default reducer;
