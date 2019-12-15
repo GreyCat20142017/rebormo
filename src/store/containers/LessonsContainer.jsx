@@ -11,6 +11,7 @@ import Lessons from '../../appparts/content/Lessons';
 const mapStateToProps = (state) => ({
     apiKey: state.data.apiKey,
     currentCourse: state.data.currentCourse,
+    currentLesson: state.data.currentLesson,
     currentPage: state.data.currentPage,
     totalPages: state.data.totalPages,
     lessonsCount: state.data.lessons.length

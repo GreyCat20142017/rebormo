@@ -5,7 +5,9 @@ import Body from '../../appparts/body/Body';
 const mapStateToProps = (state) => ({
     isSideNavOpen: state.ui.isSideNavOpen,
     content: state.data.content,
-    apiKey: state.config.apiKey
+    apiKey: state.config.apiKey,
+    currentCourse: state.data.currentCourse,
+    currentLesson: state.data.currentLesson,
 });
 
 const mapDispatchToProps = (dispatch) => ({

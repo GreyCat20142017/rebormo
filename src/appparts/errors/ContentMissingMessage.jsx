@@ -10,7 +10,7 @@ const ContentMissingMessage = () => {
         <div className={classes.messageeWrapper}>
             <Typography variant='body2' component='p'>Необходимо выбрать курс и урок...</Typography>
             <Typography variant='caption' component='p'>
-                Для открытия панели выбора используется этот пункт меню:
+                Для открытия панели выбора используется пункт меню:
             </Typography>
             <Apps/>
         </div>

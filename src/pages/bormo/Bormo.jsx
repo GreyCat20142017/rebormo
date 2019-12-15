@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState, useRef} from 'react';
 
 import VoiceContext from '../../VoiceContext';
 import ListPart from './ListPart';
@@ -13,9 +13,8 @@ const Bormo = ({content}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [memorized, setMemorized] = useState([]);
     const [timerStatus, setTimerStatus] = useState(BORMO_STATUS.STOPPED);
-    const [timer, setTimer] = useState(null);
+    const timerRef = useRef();
     const {bormoSpeaker} = useContext(VoiceContext);
-
     const classes = useStyles(theme);
 
     useEffect(() => {
@@ -39,7 +38,7 @@ const Bormo = ({content}) => {
 
     const ticks = () => {
         if (memorized) {
-            setCurrentIndex(() => {
+            setCurrentIndex((currentIndex) => {
                 const current = memorized.filter((item) => (!item.inactive && item.index === currentIndex));
                 const before = memorized.filter((item) => (!item.inactive && item.index < currentIndex));
                 const after = memorized.filter((item) => (!item.inactive && item.index > currentIndex));
@@ -58,8 +57,8 @@ const Bormo = ({content}) => {
 
     const timerStart = () => {
         if (timerStatus !== BORMO_STATUS.STARTED) {
-            // clearInterval(timer);
-            setTimer(setInterval(ticks, TIMER_INTERVAL));
+            clearInterval(timerRef.current);
+            timerRef.current = setInterval(ticks, TIMER_INTERVAL);
             setTimerStatus(BORMO_STATUS.STARTED);
             if (content) {
                 sayEnglish(currentIndex, content);
@@ -70,13 +69,13 @@ const Bormo = ({content}) => {
 
     const timerPause = () => {
         if (timerStatus === BORMO_STATUS.STARTED) {
-            clearInterval(timer);
+            clearInterval(timerRef.current);
             setTimerStatus(BORMO_STATUS.PAUSED);
         }
 
     };
     const timerStop = () => {
-        clearInterval(timer);
+        clearInterval(timerRef.current);
         setTimerStatus(BORMO_STATUS.STOPPED);
         setCurrentIndex(0);
     };

@@ -5,7 +5,7 @@ import Loader from '../../components/loader/Loader';
 const Content = ({content, apiKey, currentCourse, currentLesson, isLoading, error, onContentLoading}) => {
     useEffect(() => {
         if (currentCourse && currentLesson && apiKey) {
-            onContentLoading(currentCourse, currentLesson, apiKey);
+            onContentLoading(currentCourse.id, currentLesson, apiKey);
         }
     }, [onContentLoading, currentCourse, currentLesson, apiKey]);
 

@@ -40,6 +40,7 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
 
         case ACTIONS.DATA_SOURCE_SELECT:
+
             return ({
                 ...state,
                 apiKey: action.payload
@@ -51,7 +52,7 @@ const reducer = (state = initialState, action) => {
             const totalPages = currentCourse ? getTotalPages(currentCourse.lastlesson) : 1;
             return {
                 ...state,
-                currentCourse: parseInt(action.payload),
+                currentCourse: currentCourse ? {...currentCourse} : null,
                 lessons: lessons,
                 currentPage: 1,
                 totalPages: totalPages,

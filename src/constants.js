@@ -159,5 +159,5 @@ export const SUBMENU_CONTENT = {
     ITEM: 'MenuItem'
 };
 
-export const SNACK_OPEN_TIME =  7000;
+export const SNACK_OPEN_TIME =  5000;
 export  const  AXIOS_TIMEOUT = 7000;

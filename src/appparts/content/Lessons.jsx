@@ -15,7 +15,7 @@ const getLessonsPage = (currentPage, lessonsCount) => {
     return list;
 };
 
-const Lessons = ({apiKey, currentCourse, currentPage, totalPages, lessonsCount, onLessonSelect, onPrevPage, onNextPage}) => {
+const Lessons = ({apiKey, currentCourse, currentLesson, currentPage, totalPages, lessonsCount, onLessonSelect, onPrevPage, onNextPage}) => {
     const classes = useStyles();
     const isFirst = currentPage === 1;
     const isLast = currentPage === totalPages;
@@ -26,13 +26,13 @@ const Lessons = ({apiKey, currentCourse, currentPage, totalPages, lessonsCount, 
                 <Container className={classes.paper}>
                     {getLessonsPage(currentPage, lessonsCount).map(el =>
                         <Fab className={classes.lessonBtn} size={'small'} key={el}
+                             color={el === currentLesson ? 'primary' : 'secondary'}
                              onClick={() => onLessonSelect(el)}
                              title={'Загрузить контент урока № ' + el + ' курс ' + currentCourse + '  - ' + apiKey}>
                             {el}
                         </Fab>
                     )}
                 </Container>
-
                 <ButtonGroup>
                     <Button color={'inherit'} onClick={onPrevPage}
                             disabled={isFirst} title={'Предыдущая страница'}>

@@ -96,7 +96,7 @@ export const useStyles = makeStyles(theme => ({
     },
     messageWrapper: {
         textAlign: 'center',
-        marginTop: theme.spacing.unit * 2
+        marginTop: theme.spacing(1) * 2
     }
 }));
 
@@ -132,7 +132,7 @@ export const useControlModeStyles = makeStyles(theme => ({
         }
     },
     card: {
-        padding: theme.spacing.unit,
+        padding: theme.spacing(1),
         [theme.breakpoints.down('sm')]: {
             padding: '2px',
             marginTop: '0',
@@ -197,7 +197,7 @@ export const useControlModeStyles = makeStyles(theme => ({
         }
     },
     badge: {
-        padding: `0 ${theme.spacing.unit}px`,
+        padding: `0 ${theme.spacing(1)}px`,
         textTransform: 'uppercase'
     },
     snack: {
