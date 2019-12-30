@@ -1,5 +1,6 @@
 import {ACTIONS} from '../actions/dataActions';
 import {PAGE_LIMIT, TEST_KEY} from '../../constants';
+import {getIsBormo} from '../../functions';
 
 const getLessonsArray = (lastLesson) => {
     let courseLessons = [];
@@ -11,25 +12,25 @@ const getLessonsArray = (lastLesson) => {
 
 const getTotalPages = (lastLesson) => (Math.ceil(lastLesson / PAGE_LIMIT));
 
-export const initialState = {
+export const rebormoMode = {
+    isBormo: getIsBormo(),
     apiKey: TEST_KEY,
+    currentCourse: null,
+    currentLesson: null
+};
+
+export const initialState = {
+    ...rebormoMode,
     courses: [
-        {
-            id: 1,
-            name: 'abc',
-            lastlesson: 3
-        },
         {
             id: 2,
             name: 'test',
             lastlesson: 10
         }
     ],
-    currentCourse: null,
     lessons: [],
     currentPage: 1,
     totalPages: 1,
-    currentLesson: null,
     content: [],
     isLoading: false,
     error: null
@@ -39,8 +40,13 @@ const reducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case ACTIONS.DATA_SOURCE_SELECT:
+        case ACTIONS.IS_BORMO_CHANGE:
+            return ({
+                ...state,
+                isBormo: action.payload
+            });
 
+            case ACTIONS.DATA_SOURCE_SELECT:
             return ({
                 ...state,
                 apiKey: action.payload

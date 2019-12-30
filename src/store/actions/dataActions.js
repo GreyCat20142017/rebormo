@@ -3,6 +3,7 @@ import axios from 'axios';
 import {DATA_SOURCES, WORDS_PER_LESSON, TEST_KEY, AXIOS_TIMEOUT} from '../../constants';
 
 export const ACTIONS = {
+    IS_BORMO_CHANGE: 'IS_BORMO_CHANGE',
     DATA_SOURCE_SELECT: 'DATA_SOURCE_SELECT',
     COURSES_LOADING: 'COURSES_LOADING',
     COURSES_LOADING_START: 'COURSES_LOADING_START',
@@ -22,6 +23,11 @@ export const ACTIONS = {
     CONTENT_LOADING_ERROR: 'CONTENT_LOADING_ERROR',
     SET_ERROR_MESSAGE: 'SET_ERROR_MESSAGE'
 };
+
+export const changeIsBormo = (isBormo) => ({
+    type: ACTIONS.IS_BORMO_CHANGE,
+    payload: isBormo
+});
 
 export const changeDataSource = (key) => ({
     type: ACTIONS.DATA_SOURCE_SELECT,

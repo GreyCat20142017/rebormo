@@ -1,4 +1,5 @@
 import {BORMO_STATUS, CONTROL_MODES, LANGUAGES, FIELDS} from './constants';
+import {ROUTES, SWITCHABLE_MODES} from './routes';
 
 export const isValidIndex = (index, testedArray) => (((index >= 0) && (index < testedArray.length)));
 
@@ -109,3 +110,13 @@ export const getSpellInitialState = ({content, controlMode}) => {
 }
 
 //from PagesCommon - end
+
+export const getIsBormo = () => (!(window.location.pathname === ROUTES.phrases.href));
+
+export const getIsBormoByLocation = (path) => (!(path === ROUTES.phrases.href));
+
+export const switchIfNeed = (history, isBormo) => {
+    if(SWITCHABLE_MODES.indexOf(window.location.pathname) !== -1) {
+        history.push( isBormo ? ROUTES.bormo.href : ROUTES.phrases.href);
+    }
+};

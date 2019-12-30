@@ -62,10 +62,9 @@ const ROUTES = {
 };
 
 const SWITCHABLE_MODES = [
-    ROUTES.main,
-    ROUTES.search,
-    ROUTES.phrases,
-    ROUTES.skyeng,
+    ROUTES.main.href,
+    ROUTES.search.href,
+    ROUTES.skyeng.href
 ];
 
 const BORMO_MODES = [

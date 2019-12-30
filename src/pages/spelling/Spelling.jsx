@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import classNames from 'classnames';
 import {Typography, Badge, Paper, TextField} from '@material-ui/core';
 import {Error as ErrorIcon, CheckCircle} from '@material-ui/icons';
@@ -9,6 +9,11 @@ import {theme} from '../../theme';
 import {useStyles} from './Spelling.css.js';
 import SimpleToolbar from '../../components/toolbar/SimpleToolbar';
 import {isValidIndex} from '../../functions';
+import {useHotKey} from '../../hooks/hooks';
+import VoiceContext from '../../VoiceContext';
+import SimpleSnackbar from '../../components/snackbar/SimpleSnackbar';
+
+let currentContext = {};
 
 const Spelling = ({content, currentCourse, currentLesson}) => {
     const [okCount, setOkCount] = useState(0);
@@ -16,20 +21,65 @@ const Spelling = ({content, currentCourse, currentLesson}) => {
     const [timerStatus, setTimerStatus] = useState(BORMO_STATUS.STARTED);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [translate, setTranslate] = useState('');
+    const [showHint, setShowHint] = useState(false);
+    const {bormoSpeaker} = useContext(VoiceContext);
+
+    const hotkey = useHotKey();
 
     const classes = useStyles(theme);
-    const currentTranslate = content && isValidIndex(currentIndex, content) ? content[currentIndex][LANGUAGES.RU] : '';
 
-    const onTranslateValidate = () => {
+    useEffect(() => {
+        if (hotkey && currentContext[hotkey]) {
+            currentContext[hotkey]();
+        }
+    }, [hotkey]);
+
+    const maxIndex = content ? content.length : 0;
+    const currentTranslate = content && isValidIndex(currentIndex, content) ? content[currentIndex][LANGUAGES.RU] : '';
+    const currentOrigin = content && isValidIndex(currentIndex, content) ? content[currentIndex][LANGUAGES.EN] : '';
+
+    const refineSpellingOkStatus = () => {
+        setTranslate('');
+        setShowHint(false);
+        setOkCount(okCount + 1);
+        setCurrentIndex((currentIndex === maxIndex) ? 0 : currentIndex + 1);
+        setTimerStatus((timerStatus) => ((currentIndex === maxIndex) ? BORMO_STATUS.STOPPED : timerStatus));
     };
-    const onTranslateChange = () => {
+
+    const onTranslateValidate = (evt) => {
+        evt.preventDefault();
+        if (content[currentIndex][LANGUAGES.EN].trim() === translate.trim()) {
+            bormoSpeaker.speak(translate);
+            refineSpellingOkStatus();
+        } else {
+            setErrorCount(errorCount + 1);
+            setShowHint(false);
+        }
     };
-    const onSkip = () => {
+
+    const onTranslateChange = (evt) => {
+        setTranslate(evt.target.value);
     };
-    const onHint = () => {
-    };
+
     const onRestart = () => {
     };
+
+    const hideHint = () => {
+        setShowHint(false);
+    };
+
+    // eslint-disable-next-line
+    currentContext['onSkip'] = () => {
+        // setRandomOrder(randomOrder => getReorderedRandom(currentIndex, randomOrder));
+    };
+
+    // eslint-disable-next-line
+    currentContext['onHint'] = () => {
+        console.log('ww');
+        setErrorCount(errorCount + 1);
+        setShowHint(true);
+    };
+
 
     return (
         content && content.length > 0 ?
@@ -77,14 +127,15 @@ const Spelling = ({content, currentCourse, currentLesson}) => {
                                     onChange={onTranslateChange}
                                 />
                                 <SimpleToolbar toolbar={TOOLBAR_TYPES.SPELLING_STARTED} className={classes.toolbar}
-                                               onSkip={onSkip}
-                                               onHint={onHint}/>
+                                               onSkip={currentContext['onSkip']}
+                                               onHint={currentContext['onHint']}/>
                             </>
                             :
                             <SimpleToolbar toolbar={TOOLBAR_TYPES.SPELLING_STOPPED} className={classes.toolbar}
                                            onRestart={onRestart}/>
                         }
                     </form>
+                    <SimpleSnackbar open={showHint} message={currentOrigin} onSnackClose={hideHint}/>
                 </div>
             </> :
             <ContentMissingMessage/>

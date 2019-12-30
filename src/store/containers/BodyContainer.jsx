@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {switchSidenavState} from '../actions/actions';
+import {switchSidenavState, changeIsBormo} from '../actions/actions';
 import Body from '../../appparts/body/Body';
 
 const mapStateToProps = (state) => ({
@@ -8,10 +8,12 @@ const mapStateToProps = (state) => ({
     apiKey: state.config.apiKey,
     currentCourse: state.data.currentCourse,
     currentLesson: state.data.currentLesson,
+    isIntersecting: state.data.isBormo
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    switchSidenav: (sidenavState) =>  dispatch(switchSidenavState(sidenavState))
+    switchSidenav: (sidenavState) =>  dispatch(switchSidenavState(sidenavState)),
+    changeIsBormo: (isBormo) => dispatch(changeIsBormo(isBormo))
 });
 
 const BodyContainer = connect(mapStateToProps, mapDispatchToProps)(Body);

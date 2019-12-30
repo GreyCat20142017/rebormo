@@ -13,6 +13,7 @@ import {useControlModeStyles} from '../../App.css';
 import ControlView from './ControlView';
 import VoiceContext from '../../VoiceContext';
 import SimpleSnackbar from '../../components/snackbar/SimpleSnackbar';
+import {useHotKey} from '../../hooks/hooks';
 
 const getReorderedRandom = (currentIndex, randomOrder) => (
     [
@@ -21,6 +22,8 @@ const getReorderedRandom = (currentIndex, randomOrder) => (
         randomOrder[currentIndex]
     ]
 );
+
+let currentContext = {};
 
 const Control = ({originalContent, currentLesson, currentCourse, controlMode = CONTROL_MODES.CONTROL}) => {
 
@@ -35,49 +38,13 @@ const Control = ({originalContent, currentLesson, currentCourse, controlMode = C
         const {bormoSpeaker} = useContext(VoiceContext);
         const classes = useControlModeStyles();
 
+        const hotkey = useHotKey();
+
         useEffect(() => {
-            const onSkip = () => {
-                setRandomOrder(randomOrder => getReorderedRandom(currentIndex, randomOrder));
-            };
-
-            const onHint = () => {
-                setErrorCount((errorCount) => errorCount + 1);
-                setShowHint(true);
-                return () => hideHint();
-            };
-
-            const onKeyPress = (evt) => {
-                const charCode = String.fromCharCode(evt.which).toLowerCase();
-                if (evt.altKey) {
-                    switch (charCode) {
-                        case 's':
-                        case 'ы': {
-                            evt.preventDefault();
-                            onSkip();
-                            break;
-                        }
-                        case 'h':
-                        case 'р': {
-                            evt.preventDefault();
-                            onHint();
-                            break;
-                        }
-                        default:
-                    }
-                }
-            };
-            /**
-             * MyTodo исправить как-то это хукобезобразие
-             */
-
-            console.log('add');
-            document.addEventListener('keydown', onKeyPress);
-
-            return () => {
-                document.removeEventListener('keydown', onKeyPress);
-                console.log('remove');
-            };
-        }, [currentIndex, randomOrder]);
+            if (hotkey && currentContext[hotkey]) {
+                currentContext[hotkey]();
+            }
+        }, [hotkey]);
 
         useEffect(() => {
             setRandomOrder(getRandomOrder(originalContent.length));
@@ -89,6 +56,7 @@ const Control = ({originalContent, currentLesson, currentCourse, controlMode = C
             setCurrentIndex(0);
             setShowHint(false);
         }, [originalContent, controlMode]);
+
 
         const onDebouncedSwitch = (index) => {
             switchDisableOne(index);
@@ -141,6 +109,17 @@ const Control = ({originalContent, currentLesson, currentCourse, controlMode = C
                     originLanguage === LANGUAGES.RU ? FIELDS.TRANSLATE : FIELDS.ORIGIN);
                 bormoSpeaker.speak(text);
             }
+        };
+
+        // eslint-disable-next-line
+        currentContext.onSkip = () => {
+            setRandomOrder(randomOrder => getReorderedRandom(currentIndex, randomOrder));
+        };
+
+        // eslint-disable-next-line
+        currentContext.onHint = () => {
+            setErrorCount((errorCount) => errorCount + 1);
+            setShowHint(true);
         };
 
         const maxIndex = content ? content.length : 0;

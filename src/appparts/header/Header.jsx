@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {IconButton, Toolbar, Typography, Divider, Hidden} from '@material-ui/core';
-
 import AppsIcon from '@material-ui/icons/Apps';
 
 import {NavItem} from './NavItem';

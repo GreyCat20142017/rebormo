@@ -160,4 +160,6 @@ export const SUBMENU_CONTENT = {
 };
 
 export const SNACK_OPEN_TIME =  5000;
-export  const  AXIOS_TIMEOUT = 7000;
+export const AXIOS_TIMEOUT = 7000;
+
+export const REBORMO_LS = 'Rebormo';

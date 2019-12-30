@@ -1,9 +1,11 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 import {PAGE_LIMIT} from '../../constants';
-import {Fab, Button, ButtonGroup, Paper, Container} from '@material-ui/core';
 
+import {Fab, Button, ButtonGroup, Paper, Container} from '@material-ui/core';
 import {useStyles} from '../../App.css';
 import BormoIcon from '../../components/icon/BormoIcon';
+import {switchIfNeed} from '../../functions';
 
 const getLessonsPage = (currentPage, lessonsCount) => {
     let list = [];
@@ -15,10 +17,18 @@ const getLessonsPage = (currentPage, lessonsCount) => {
     return list;
 };
 
-const Lessons = ({apiKey, currentCourse, currentLesson, currentPage, totalPages, lessonsCount, onLessonSelect, onPrevPage, onNextPage}) => {
+const Lessons = ({
+                     apiKey, currentCourse, currentLesson, currentPage, totalPages, lessonsCount, onLessonSelect,
+                     isBormo, onPrevPage, onNextPage, history
+                 }) => {
     const classes = useStyles();
     const isFirst = currentPage === 1;
     const isLast = currentPage === totalPages;
+
+    const onLessonClick = (el) => {
+        onLessonSelect(el);
+        switchIfNeed(history, isBormo);
+    }
     return (
         currentCourse ?
 
@@ -27,7 +37,7 @@ const Lessons = ({apiKey, currentCourse, currentLesson, currentPage, totalPages,
                     {getLessonsPage(currentPage, lessonsCount).map(el =>
                         <Fab className={classes.lessonBtn} size={'small'} key={el}
                              color={el === currentLesson ? 'primary' : 'secondary'}
-                             onClick={() => onLessonSelect(el)}
+                             onClick={() => onLessonClick(el)}
                              title={'Загрузить контент урока № ' + el + ' курс ' + currentCourse + '  - ' + apiKey}>
                             {el}
                         </Fab>
@@ -48,5 +58,5 @@ const Lessons = ({apiKey, currentCourse, currentLesson, currentPage, totalPages,
     );
 };
 
-export default Lessons;
+export default withRouter(Lessons);
 

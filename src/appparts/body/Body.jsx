@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Switch, Route, withRouter} from 'react-router-dom';
 import {Drawer, Paper} from '@material-ui/core';
 
@@ -6,8 +6,26 @@ import {Bormo, Control, Search, Spelling, Phrases, Main, NotFound} from '../../p
 import Sidenav from '../sidenav/Sidenav';
 import {CONTROL_MODES} from '../../constants';
 import {ROUTES} from '../../routes';
+import {getIsBormoByLocation} from '../../functions';
 
-const Body = ({classes, content, currentCourse, currentLesson, isSideNavOpen, switchSidenav, apiKey}) => {
+const Body = ({
+                  classes, content, currentCourse, currentLesson, isSideNavOpen, switchSidenav, apiKey,
+                  history, changeIsBormo
+              }) => {
+
+    const unlisten = useRef(null);
+
+    useEffect(() => {
+        unlisten.current = history.listen((location) => {
+            changeIsBormo(getIsBormoByLocation(location.pathname));
+        });
+
+        return () => {
+            if (unlisten['current']) {
+                unlisten.current();
+            }
+        };
+    }, [changeIsBormo, history]);
 
     return (
         <Paper className={window.location.pathname === ROUTES.main.href ? classes.paperMain : classes.paperWhite}>

@@ -3,7 +3,7 @@ import {
     selectLesson,
     selectLessonPage,
     prevLessonPage,
-    nextLessonPage
+    nextLessonPage, switchSidenavState
 } from '../actions/actions';
 
 import Lessons from '../../appparts/content/Lessons';
@@ -14,11 +14,15 @@ const mapStateToProps = (state) => ({
     currentLesson: state.data.currentLesson,
     currentPage: state.data.currentPage,
     totalPages: state.data.totalPages,
-    lessonsCount: state.data.lessons.length
+    lessonsCount: state.data.lessons.length,
+    isBormo: state.data.isBormo
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    onLessonSelect: (lesson) => dispatch(selectLesson(lesson)),
+    onLessonSelect: (lesson) => {
+        dispatch(switchSidenavState(false));
+        dispatch(selectLesson(lesson));
+    },
     onPageSelect: (page) => {
         dispatch(selectLessonPage(page));
     },
