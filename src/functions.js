@@ -4,7 +4,7 @@ import {ROUTES, SWITCHABLE_MODES} from './routes';
 export const isValidIndex = (index, testedArray) => (((index >= 0) && (index < testedArray.length)));
 
 export const getInitialMemorized = (length) => {
-    return "?".repeat(length).split("").map((item, ind) => (({index: ind, inactive: false})))
+    return '?'.repeat(length).split('').map((item, ind) => (({index: ind, inactive: false})));
 };
 
 export const getActiveAmount = (stateArray) => (
@@ -56,7 +56,7 @@ export const getShuffledContent = (content, controlMode) => (shuffleArray(conten
 }));
 
 export const getRandomOrder = (length) => {
-    return shuffleArray("?".repeat(length).split("").map((item, ind) => (ind)))
+    return shuffleArray('?'.repeat(length).split('').map((item, ind) => (ind)));
 };
 
 const getLanguageVariant = (controlMode) => {
@@ -107,16 +107,56 @@ export const getSpellInitialState = ({content, controlMode}) => {
         translate: '',
         wasError: false
     });
-}
+};
 
 //from PagesCommon - end
 
 export const getIsBormo = () => (!(window.location.pathname === ROUTES.phrases.href));
 
-export const getIsBormoByLocation = (path) => (!(path === ROUTES.phrases.href));
-
 export const switchIfNeed = (history, isBormo) => {
-    if(SWITCHABLE_MODES.indexOf(window.location.pathname) !== -1) {
-        history.push( isBormo ? ROUTES.bormo.href : ROUTES.phrases.href);
+    if (SWITCHABLE_MODES.indexOf(window.location.pathname) !== -1) {
+        history.push(isBormo ? ROUTES.bormo.href : ROUTES.phrases.href);
     }
+};
+
+export const getReorderedArray = (currentIndex, previousOrder) => (
+    [
+        ...previousOrder.slice(0, currentIndex),
+        ...previousOrder.slice(currentIndex + 1),
+        previousOrder[currentIndex]
+    ]
+);
+
+export const getObjectValuesByKeyArray = (sourceObject, keysArray) => (
+    keysArray.map(key => sourceObject.hasOwnProperty(key) ? sourceObject[key] : 0)
+);
+
+export const getTranslatedPhrase = (dataArray, currentIndex) => (
+    Array.isArray(dataArray) ? dataArray[currentIndex].russian : 'Ошибка: не удалось получить данные');
+
+const getStringCompareResult = (left, right) => {
+    if (left > right) {
+        return 1;
+    } else if (left < right) {
+        return -1;
+    } else {
+        return 0;
+    }
+};
+
+export const getSortedWords = (entities) =>
+    (entities.slice().sort((firstItem, secondItem) => (getStringCompareResult(firstItem, secondItem))));
+
+export const getSortedKeys = (entities) =>
+    (Object.keys(entities).slice().sort((firstItem, secondItem) => (getStringCompareResult(firstItem, secondItem))));
+
+export const dataTransform = (data) => {
+    const wordsPresence = {};
+    data.forEach((el) => {
+        const wordsArray = el.english.trim().toLowerCase().split(' ');
+        wordsArray.forEach((word) => {
+            wordsPresence[word] = (wordsPresence.hasOwnProperty(word)) ? wordsPresence[word] + 1 : 1;
+        });
+    });
+    return wordsPresence;
 };

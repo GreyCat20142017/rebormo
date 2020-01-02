@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Snackbar, IconButton, makeStyles} from '@material-ui/core';
 import {Close} from '@material-ui/icons';
-import {SNACK_OPEN_TIME} from '../../constants';
+import {KEY_CODES, SNACK_OPEN_TIME} from '../../constants';
 
 const useStyles = makeStyles(theme => ({
     close: {
@@ -17,6 +17,20 @@ const useStyles = makeStyles(theme => ({
 
 const SimpleSnackbar = ({open, message, onSnackClose}) => {
     const classes = useStyles();
+    useEffect(() => {
+        document.addEventListener('keydown', onKeyPress);
+        return () => {
+            document.removeEventListener('keydown', onKeyPress);
+        };
+    });
+
+    const onKeyPress = (evt) => {
+        if (evt.keyCode === KEY_CODES.ESC) {
+            evt.preventDefault();
+            onSnackClose();
+        }
+    };
+
     return (
         <Snackbar
             anchorOrigin={{

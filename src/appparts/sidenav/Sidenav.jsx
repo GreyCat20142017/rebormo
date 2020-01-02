@@ -8,7 +8,7 @@ import LessonsContainer from '../../store/containers/LessonsContainer';
 
 const Sidenav = ({classes, switchSidenav}) => (
     <Paper className={classes.sidenav}>
-        <Fab color='inherit' aria-label='close'
+        <Fab color='secondary' aria-label='close'
             title='Закрыть панель выбора' size={'small'}
             onClick={() => switchSidenav(false)}>
             <Close/>

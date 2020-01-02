@@ -1,11 +1,9 @@
-import React, {useContext, useEffect, useState, useRef} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 
+import {BormoView} from './BormoView';
 import VoiceContext from '../../VoiceContext';
-import ListPart from './ListPart';
-import BasePart from './BasePart';
-import {isValidIndex, getInitialMemorized, getActiveAmount} from '../../functions';
-import {BORMO_STATUS, TIMER_INTERVAL, WORDS_PER_LESSON} from '../../constants';
-
+import {getActiveAmount, getInitialMemorized, isValidIndex} from '../../functions';
+import {BORMO_STATUS, TIMER_INTERVAL} from '../../constants';
 import {theme} from '../../theme';
 import {useStyles} from './Bormo.css';
 
@@ -32,8 +30,6 @@ const Bormo = ({content}) => {
     const activeAmount = getActiveAmount(memorized);
 
     const onDebouncedSwitch = () => {
-    };
-    const onDebouncedSwitchCurrent = () => {
     };
 
     const ticks = () => {
@@ -80,24 +76,14 @@ const Bormo = ({content}) => {
         setCurrentIndex(0);
     };
 
+    const props = {
+        classes, currentIndex, currentWord, currentTranslate,
+        memorized, activeAmount, timerStatus, timerStart, timerPause, timerStop,
+        onDebouncedSwitch
+    };
+
     return (
-        <div className='bormo__wrapper'>
-            <div className={classes.parts}>
-
-                <ListPart content={content} classes={classes} currentIndex={currentIndex} startIndex={0}
-                          memorized={memorized} switchDisableOne={onDebouncedSwitch}/>
-
-                <BasePart classes={classes} currentWord={currentWord} currentTranslate={currentTranslate}
-                          activeAmount={activeAmount} timerStatus={timerStatus} content={content}
-                          onDebouncedSwitchCurrent={onDebouncedSwitchCurrent}
-                          timerStart={timerStart} timerPause={timerPause} timerStop={timerStop}/>
-
-                <ListPart content={content} classes={classes} currentIndex={currentIndex}
-                          startIndex={Math.floor(WORDS_PER_LESSON / 2)} memorized={memorized}
-                          switchDisableOne={onDebouncedSwitch}/>
-
-            </div>
-        </div>
+        <BormoView {...props} content={content}/>
     );
 };
 

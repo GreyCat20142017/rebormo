@@ -46,7 +46,7 @@ const reducer = (state = initialState, action) => {
                 isBormo: action.payload
             });
 
-            case ACTIONS.DATA_SOURCE_SELECT:
+        case ACTIONS.DATA_SOURCE_SELECT:
             return ({
                 ...state,
                 apiKey: action.payload
@@ -106,6 +106,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 currentPage: state.currentPage - 1
             } : state;
+
+        case ACTIONS.SELECT_LESSON_PAGE:
+            return {
+                ...state,
+                currentPage: action.payload
+            };
 
         case ACTIONS.NEXT_LESSON_PAGE:
             return state.currentPage < state.totalPages ? {

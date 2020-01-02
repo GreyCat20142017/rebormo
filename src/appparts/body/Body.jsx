@@ -1,31 +1,34 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 import {Switch, Route, withRouter} from 'react-router-dom';
 import {Drawer, Paper} from '@material-ui/core';
 
 import {Bormo, Control, Search, Spelling, Phrases, Main, NotFound} from '../../pages/pages';
 import Sidenav from '../sidenav/Sidenav';
 import {CONTROL_MODES} from '../../constants';
-import {ROUTES} from '../../routes';
-import {getIsBormoByLocation} from '../../functions';
+import {BORMO_MODES, ROUTES} from '../../routes';
 
 const Body = ({
                   classes, content, currentCourse, currentLesson, isSideNavOpen, switchSidenav, apiKey,
                   history, changeIsBormo
               }) => {
 
-    const unlisten = useRef(null);
-
     useEffect(() => {
-        unlisten.current = history.listen((location) => {
-            changeIsBormo(getIsBormoByLocation(location.pathname));
+        history.listen((location) => {
+            if (location.pathname === ROUTES.phrases.href) {
+                changeIsBormo(false);
+            }
+            if (BORMO_MODES.find(el => location.pathname === el.href)) {
+                changeIsBormo(true);
+            }
         });
 
         return () => {
-            if (unlisten['current']) {
-                unlisten.current();
+            if (history && history['unlisten']) {
+                history.unlisten();
             }
         };
     }, [changeIsBormo, history]);
+
 
     return (
         <Paper className={window.location.pathname === ROUTES.main.href ? classes.paperMain : classes.paperWhite}>
@@ -54,7 +57,7 @@ const Body = ({
                 />
 
                 <Route path={ROUTES.spelling.href} render={(props) =>
-                    <Spelling content={content}
+                    <Spelling originalContent={content}
                               currentCourse={currentCourse}
                               currentLesson={currentLesson}/>}
                 />
@@ -66,8 +69,10 @@ const Body = ({
                              currentLesson={currentLesson}/>}
                 />
 
+                <Route path={ROUTES.phrases.href} render={(props) => <Phrases content={content}/>}
+                />
+
                 <Route path={ROUTES.search.href} render={(props) => <Search apiKey={apiKey}/>}/>
-                <Route path={ROUTES.phrases.href} render={(props) => <Phrases apiKey={apiKey}/>}/>
                 <Route path={ROUTES.skyeng.href} render={(props) => <Search apiKey={apiKey} onlySkyEng={true}/>}/>
 
                 <NotFound/>

@@ -5,13 +5,15 @@ import {Badge, Paper, Typography} from '@material-ui/core';
 import {Error as ErrorIcon, CheckCircle} from '@material-ui/icons';
 
 const CurrentBudge = ({classes, currentCourse, currentLesson}) => (
-    currentCourse ? <Badge className={classes.badge} color="primary" badgeContent={currentLesson}
-                           title={'Курс: ' + currentCourse.name + ', урок: ' + currentLesson}>
-        {currentCourse.name}
-    </Badge> : null
+    currentCourse ?
+        <Badge className={classes.badge} color="primary" badgeContent={currentLesson}
+               title={'Курс: ' + currentCourse.name + ', урок: ' + currentLesson}>
+            {currentCourse.name}
+        </Badge> :
+        null
 );
 
-export const ControlTopPart = ({classes, content, currentCourse, currentLesson, okCount, errorCount, currentTranslate, isHint = false}) => (
+export const InfoPart = ({classes, content, currentCourse, currentLesson, okCount, errorCount, currentTranslate, isHint = false}) => (
     <div className={classes.wrapper}>
         <CurrentBudge classes={classes} currentCourse={currentCourse} currentLesson={currentLesson}/>
 
@@ -25,16 +27,16 @@ export const ControlTopPart = ({classes, content, currentCourse, currentLesson, 
                     currentTranslate}
             </Typography>
         </Paper>
+        <div style={{marginTop: '20px'}}>
+            <Badge className={classes.badge} color='primary' badgeContent={errorCount}
+                   title={'Количество ошибок: ' + errorCount}>
+                <ErrorIcon fontSize='large' color='error'/>
+            </Badge>
 
-        <Badge className={classes.badge} color='primary' badgeContent={errorCount}
-               title={'Количество ошибок: ' + errorCount}>
-            <ErrorIcon fontSize='large' color='error'/>
-        </Badge>
-
-        <Badge className={classes.badge} color='primary' badgeContent={okCount}
-               title={'Количество правильно отмеченных: ' + okCount}>
-            <CheckCircle fontSize='large' color='disabled'/>
-        </Badge>
-
+            <Badge className={classes.badge} color='primary' badgeContent={okCount}
+                   title={'Количество правильно отмеченных: ' + okCount}>
+                <CheckCircle fontSize='large' color='disabled'/>
+            </Badge>
+        </div>
     </div>
 );

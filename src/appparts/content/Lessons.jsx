@@ -1,16 +1,17 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
-import {PAGE_LIMIT} from '../../constants';
+import {Button, ButtonGroup, Container, Fab, Paper} from '@material-ui/core';
 
-import {Fab, Button, ButtonGroup, Paper, Container} from '@material-ui/core';
-import {useStyles} from '../../App.css';
+import {PAGE_LIMIT} from '../../constants';
 import BormoIcon from '../../components/icon/BormoIcon';
 import {switchIfNeed} from '../../functions';
+import {useStyles} from '../../App.css';
+import {PageSelector} from './PageSelector';
 
 const getLessonsPage = (currentPage, lessonsCount) => {
     let list = [];
     const start = (currentPage - 1) * PAGE_LIMIT + 1;
-    const finish = (start + PAGE_LIMIT >= lessonsCount) ? lessonsCount : currentPage * PAGE_LIMIT;
+    const finish = (start + PAGE_LIMIT - 1  >= lessonsCount) ? lessonsCount : currentPage * PAGE_LIMIT;
     for (let i = start; i <= finish; i++) {
         list.push(i);
     }
@@ -18,7 +19,8 @@ const getLessonsPage = (currentPage, lessonsCount) => {
 };
 
 const Lessons = ({
-                     apiKey, currentCourse, currentLesson, currentPage, totalPages, lessonsCount, onLessonSelect,
+                     apiKey, currentCourse, currentLesson, currentPage, totalPages, lessonsCount,
+                     onLessonSelect, onPageSelect,
                      isBormo, onPrevPage, onNextPage, history
                  }) => {
     const classes = useStyles();
@@ -28,7 +30,8 @@ const Lessons = ({
     const onLessonClick = (el) => {
         onLessonSelect(el);
         switchIfNeed(history, isBormo);
-    }
+    };
+
     return (
         currentCourse ?
 
@@ -53,6 +56,7 @@ const Lessons = ({
                         <BormoIcon icon={'Next'}/>
                     </Button>
                 </ButtonGroup>
+                <PageSelector currentPage={currentPage} totalPages={totalPages} onPageSelect={onPageSelect}/>
             </Paper>
             : null
     );

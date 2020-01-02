@@ -4,26 +4,15 @@ import {BORMO_STATUS, CONTROL_MODES, FIELDS, LANGUAGES} from '../../constants';
 import {
     getCurrentInfo,
     getInitialMemorized,
-    getRandomOrder,
+    getRandomOrder, getReorderedArray,
     getShuffledContent,
     getTranslateLanguage
 } from '../../functions';
 
-import {useControlModeStyles} from '../../App.css';
 import ControlView from './ControlView';
 import VoiceContext from '../../VoiceContext';
 import SimpleSnackbar from '../../components/snackbar/SimpleSnackbar';
-import {useHotKey} from '../../hooks/hooks';
-
-const getReorderedRandom = (currentIndex, randomOrder) => (
-    [
-        ...randomOrder.slice(0, currentIndex),
-        ...randomOrder.slice(currentIndex + 1),
-        randomOrder[currentIndex]
-    ]
-);
-
-let currentContext = {};
+import {useControlModeStyles} from '../Control.css';
 
 const Control = ({originalContent, currentLesson, currentCourse, controlMode = CONTROL_MODES.CONTROL}) => {
 
@@ -37,14 +26,6 @@ const Control = ({originalContent, currentLesson, currentCourse, controlMode = C
         const [showHint, setShowHint] = useState(false);
         const {bormoSpeaker} = useContext(VoiceContext);
         const classes = useControlModeStyles();
-
-        const hotkey = useHotKey();
-
-        useEffect(() => {
-            if (hotkey && currentContext[hotkey]) {
-                currentContext[hotkey]();
-            }
-        }, [hotkey]);
 
         useEffect(() => {
             setRandomOrder(getRandomOrder(originalContent.length));
@@ -111,25 +92,23 @@ const Control = ({originalContent, currentLesson, currentCourse, controlMode = C
             }
         };
 
-        // eslint-disable-next-line
-        currentContext.onSkip = () => {
-            setRandomOrder(randomOrder => getReorderedRandom(currentIndex, randomOrder));
-        };
+    const onSkip = () => {
+        setRandomOrder(randomOrder => getReorderedArray(currentIndex, randomOrder));
+    };
 
-        // eslint-disable-next-line
-        currentContext.onHint = () => {
-            setErrorCount((errorCount) => errorCount + 1);
-            setShowHint(true);
-        };
+    const onHint = () => {
+        setErrorCount((errorCount) => errorCount + 1);
+        setShowHint(true);
+    };
 
-        const maxIndex = content ? content.length : 0;
+    const maxIndex = content ? content.length : 0;
         const currentTranslate = getCurrentInfo(currentIndex, maxIndex, randomOrder, controlMode, content, FIELDS.TRANSLATE);
         const currentOrigin = getCurrentInfo(currentIndex, maxIndex, randomOrder, controlMode, content, FIELDS.ORIGIN);
 
         return (
             <>
                 <ControlView classes={classes} currentCourse={currentCourse} currentLesson={currentLesson}
-                             maxIndex={maxIndex}
+                             maxIndex={maxIndex} onSkip={onSkip} onHint={onHint}
                              currentIndex={currentIndex} content={content} currentTranslate={currentTranslate}
                              okCount={okCount} errorCount={errorCount} memorized={memorized} controlMode={controlMode}
                              onDebouncedSwitch={onDebouncedSwitch}/>

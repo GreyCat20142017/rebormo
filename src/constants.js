@@ -149,17 +149,17 @@ export const MODAL_TYPES = {
 export const MENU_ICON_SIZE = 18;
 export const MENU_ICON_COLOR = 'white';
 
-export const KEYCODES = {
-    ENTER: 13,
-    ESC: 27
-};
-
 export const SUBMENU_CONTENT = {
     NAVLINK: 'NavLink',
     ITEM: 'MenuItem'
 };
 
-export const SNACK_OPEN_TIME =  5000;
+export const SNACK_OPEN_TIME =  3000;
 export const AXIOS_TIMEOUT = 7000;
 
 export const REBORMO_LS = 'Rebormo';
+
+export const HOTKEYS = {
+    S: ['s', 'ы'],
+    H: ['h', 'р']
+};

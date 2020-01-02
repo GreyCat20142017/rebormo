@@ -18,8 +18,6 @@ const App = (props) => {
 
     const classes = useStyles();
 
-    console.log(props);
-
     return (
         <VoiceContext.Provider value={{bormoSpeaker}}>
 
