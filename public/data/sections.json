@@ -1,12 +1,7 @@
 [
   {
-  "id": 1,
-  "name": "own",
-  "lastlesson": 0
-},
-  {
     "id": 2,
-    "name": "test",
+    "name": "phrases",
     "lastlesson": 10
   }
 ]

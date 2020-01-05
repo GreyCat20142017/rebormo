@@ -8,7 +8,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     onDataSourceChange: (key) =>  dispatch(changeDataSource(key)),
-    onCoursesLoading: (key) => dispatch(coursesLoading(key)),
+    onCoursesLoading: (key) => {
+        dispatch(coursesLoading(key, true));
+        dispatch(coursesLoading(key, false));
+    },
 });
 
 const FooterContainer = connect(mapStateToProps, mapDispatchToProps)(Footer);

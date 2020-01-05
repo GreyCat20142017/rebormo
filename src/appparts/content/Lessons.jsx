@@ -41,7 +41,7 @@ const Lessons = ({
                         <Fab className={classes.lessonBtn} size={'small'} key={el}
                              color={el === currentLesson ? 'primary' : 'secondary'}
                              onClick={() => onLessonClick(el)}
-                             title={'Загрузить контент урока № ' + el + ' курс ' + currentCourse + '  - ' + apiKey}>
+                             title={'Загрузить контент урока № ' + el + ' (курс "' + currentCourse['name'] + '")  - ' + apiKey}>
                             {el}
                         </Fab>
                     )}

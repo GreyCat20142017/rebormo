@@ -21,13 +21,8 @@ export const rebormoMode = {
 
 export const initialState = {
     ...rebormoMode,
-    courses: [
-        {
-            id: 2,
-            name: 'test',
-            lastlesson: 10
-        }
-    ],
+    courses: [],
+    sections: [],
     lessons: [],
     currentPage: 1,
     totalPages: 1,
@@ -41,9 +36,11 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
 
         case ACTIONS.IS_BORMO_CHANGE:
+            const needChange =  (state.isBormo === action.payload) ? {} : {content: [], currentLesson: null};
             return ({
                 ...state,
-                isBormo: action.payload
+                isBormo: action.payload,
+                ...needChange
             });
 
         case ACTIONS.DATA_SOURCE_SELECT:
@@ -53,7 +50,10 @@ const reducer = (state = initialState, action) => {
             });
 
         case ACTIONS.SELECT_COURSE: {
-            const currentCourse = state.courses.find(course => course.id === action.payload);
+            const currentCourse = state.isBormo ?
+                state.courses.find(course => course.id === action.payload) :
+                state.sections.find(section => section.id === action.payload);
+
             const lessons = currentCourse ? getLessonsArray(currentCourse.lastlesson) : [];
             const totalPages = currentCourse ? getTotalPages(currentCourse.lastlesson) : 1;
             return {
@@ -65,22 +65,19 @@ const reducer = (state = initialState, action) => {
                 currentLesson: null,
                 content: []
             };
-        }
+        };
 
-        case ACTIONS.COURSES_LOADING:
-            return {
-                ...state,
-                isLoading: true
-            };
+        case ACTIONS.LOADING:
+            return state;
 
-        case ACTIONS.COURSES_LOADING_START:
+        case ACTIONS.LOADING_START:
             return {
                 ...state,
                 isLoading: true,
                 error: null
             };
 
-        case ACTIONS.COURSES_LOADING_FINISH:
+        case ACTIONS.LOADING_FINISH:
             return {
                 ...state,
                 isLoading: false
@@ -89,9 +86,15 @@ const reducer = (state = initialState, action) => {
         case ACTIONS.COURSES_LOADING_SUCCESS:
             return {
                 ...state,
-                courses: [...action.payload],
+                [action.storeProperty]: [...action.payload],
                 currentCourse: null,
                 error: null
+            };
+
+        case ACTIONS.CONTENT_LOADING_SUCCESS:
+            return {
+                ...state,
+                content: [...action.payload]
             };
 
         case ACTIONS.SET_ERROR_MESSAGE:
@@ -126,29 +129,6 @@ const reducer = (state = initialState, action) => {
                 currentLesson: action.payload
             };
 
-        case ACTIONS.CONTENT_LOADING:
-            return {
-                ...state,
-                isLoading: true
-            };
-
-        case ACTIONS.CONTENT_LOADING_START:
-            return {
-                ...state,
-                isLoading: true
-            };
-
-        case ACTIONS.CONTENT_LOADING_FINISH:
-            return {
-                ...state,
-                isLoading: false
-            };
-
-        case ACTIONS.CONTENT_LOADING_SUCCESS:
-            return {
-                ...state,
-                content: [...action.payload]
-            };
 
         default:
             return state;

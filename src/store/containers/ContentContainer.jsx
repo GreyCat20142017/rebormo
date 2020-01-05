@@ -9,11 +9,12 @@ const mapStateToProps = (state) => ({
     currentCourse: state.data.currentCourse,
     currentLesson: state.data.currentLesson,
     error: state.data.error,
-    isLoading: state.data.isLoading
+    isLoading: state.data.isLoading,
+    isBormo: state.data.isBormo
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    onContentLoading: (course, lesson, apiKey) => dispatch(contentLoading(course, lesson, apiKey))
+    onContentLoading: (course, lesson, apiKey, isBormo) => dispatch(contentLoading(course, lesson, apiKey, isBormo))
 });
 
 const ContentContainer = connect(mapStateToProps, mapDispatchToProps)(Content);

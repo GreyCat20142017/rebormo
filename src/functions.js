@@ -132,7 +132,7 @@ export const getObjectValuesByKeyArray = (sourceObject, keysArray) => (
 );
 
 export const getTranslatedPhrase = (dataArray, currentIndex) => (
-    Array.isArray(dataArray) ? dataArray[currentIndex].russian : 'Ошибка: не удалось получить данные');
+    Array.isArray(dataArray) && isValidIndex(currentIndex, dataArray) ? dataArray[currentIndex][LANGUAGES.RU] : 'Ошибка: не удалось получить данные');
 
 const getStringCompareResult = (left, right) => {
     if (left > right) {

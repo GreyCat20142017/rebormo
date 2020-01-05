@@ -13,6 +13,7 @@ import ContentContainer from './store/containers/ContentContainer';
 import ErrorMessageContainer from './store/containers/ErrorMessageContainer';
 import VoiceContext, {getBormoSpeaker} from './VoiceContext';
 
+
 const App = (props) => {
     const [bormoSpeaker] = useState(getBormoSpeaker());
 
@@ -24,6 +25,7 @@ const App = (props) => {
                 <ThemeProvider theme={theme}>
                     <CssBaseline/>
                     <Container className={classes.app}>
+                        {/*<InitialContainer/>*/}
                         <AppBar position='static'>
                             <HeaderContainer classes={classes}/>
                         </AppBar>

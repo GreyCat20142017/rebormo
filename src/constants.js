@@ -91,7 +91,8 @@ export const DATA_SOURCES = {
         COURSES: 'http://bormophpl.local:8080/courses.php',
         CONTENT: 'http://bormophpl.local:8080/courses.php',
         SEARCH: 'http://bormophpl.local:8080/search.php',
-        PHRASES: 'http://bormophpl.local:8080/phrases.php',
+        SECTIONS: 'http://bormophpl.local:8080/sections.php',
+        PHRASES: 'http://bormophpl.local:8080/sections.php',
         TEST: 'http://bormophpl.local:8080/test.php',
         disabled: false,
         COMMENT: 'PHP (loсalhost)'
@@ -100,6 +101,7 @@ export const DATA_SOURCES = {
         COURSES: COURSES_PATH,
         CONTENT: BORMO_PATH,
         SEARCH: BORMO_PATH,
+        SECTIONS: SECTIONS_PATH,
         PHRASES: PHRASES_PATH,
         disabled: false,
         COMMENT: 'Тестовые данные'
