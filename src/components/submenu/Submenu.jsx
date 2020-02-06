@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import BormoIcon from '../icon/BormoIcon';
@@ -12,8 +12,9 @@ const Submenu = ({
                      submenuItems = [], withNavLink = true, onLight = true, callback = null,
                      switchIcon = 'More', text = ''
                  }) => {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
+
     const linkClass = onLight ? classes.linkDark : classes.link;
     const activeColor = onLight ? DARKPINK_COLOR : PINK_COLOR;
     const convertedItems = submenuItems.map(item => (typeof(item) === 'object' ? item : ({
@@ -22,11 +23,12 @@ const Submenu = ({
         'key': item
     })));
 
-    const handleClick = event => {
-        setAnchorEl(event.currentTarget);
+    const handleClick = evt => {
+        evt.preventDefault();
+        setAnchorEl(evt.currentTarget);
     };
 
-    const handleClose = (key) => {
+    const handleClose = (evt, key) => {
         setAnchorEl(null);
         if (callback && key) {
             callback(key);
@@ -58,7 +60,7 @@ const Submenu = ({
                                     <span>{link.text}</span>
                                 </MenuItem>
                             </NavLink> :
-                            <MenuItem key={ind} title={link.text} onClick={() => handleClose(link.key)}>
+                            <MenuItem key={ind} title={link.text} onClick={(evt) => handleClose(evt, link.key)}>
                                 <BormoIcon icon={link.icon}/>
                                 <span>&nbsp;</span>
                                 <span>{link.text}</span>

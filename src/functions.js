@@ -160,3 +160,7 @@ export const dataTransform = (data) => {
     });
     return wordsPresence;
 };
+
+export const strContainSubstr = (str, substr) => (str.toLowerCase().trim().indexOf(substr.toLowerCase().trim()) >= 0);
+
+export const strEqualSubstr = (str, substr) => (str.toLowerCase().trim() === substr.toLowerCase().trim());

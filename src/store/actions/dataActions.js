@@ -17,11 +17,7 @@ export const ACTIONS = {
     SET_ERROR_MESSAGE: 'SET_ERROR_MESSAGE',
     LOADING_START: 'LOADING_START',
     LOADING_FINISH: 'LOADING_FINISH',
-    LOADING_ERROR: 'LOADING_ERROR',
-    SEARCH_DB_START: 'SEARCH_DB_START',
-    SEARCH_DB_SUCCESS: 'SEARCH_DB_SUCCESS',
-    SEARCH_SKYENG_START: 'SEARCH_SKYENG_START',
-    SEARCH_SKYENG_SUCCESS: 'SEARCH_SKYENG_SUCCESS'
+    LOADING_ERROR: 'LOADING_ERROR'
 };
 
 export const changeIsBormo = (isBormo) => ({
@@ -55,9 +51,7 @@ const getCoursesData = async (dispatch, dataPath, fromJson, storeProperty, param
     dispatch(loadingStart());
     try {
         const result = fromJson ? await getFromJson(dataPath, params) : await getFromDB(dataPath, params, fromJson);
-        dispatch(loadingSuccess((
-            result
-        ), storeProperty));
+        dispatch(loadingSuccess(result, storeProperty));
         dispatch(loadingFinish());
     } catch (err) {
         dispatch(loadingError(err.message));
@@ -87,7 +81,7 @@ export const coursesLoading = (key = TEST_KEY, isBormo = true) => {
 };
 
 export const contentLoading = (course, lesson, key = TEST_KEY, isBormo = true) => {
-    const contentType = isBormo ? 'CONTENT' : 'PHRASES';
+    const contentType = isBormo ? 'CONTENT' : 'SECTIONS';
     const params = isBormo ? {course, lesson} : {section: course, lesson};
     const unitsPerLesson = isBormo ? WORDS_PER_LESSON : PHRASES_PER_LESSON;
     const dataPath = DATA_SOURCES[key] ? DATA_SOURCES[key][contentType] : DATA_SOURCES.TEST[contentType];

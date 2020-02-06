@@ -8,13 +8,8 @@ import VoiceContext from '../../VoiceContext';
 
 import {useStyles} from '../../App.css';
 
-const dataSources = Object.keys(DATA_SOURCES).filter(key => !DATA_SOURCES[key].disabled).map((item, ind) => (
-    {
-        text: DATA_SOURCES[item]['COMMENT'],
-        key: item,
-        href: item
-    }
-));
+const dataSources = Object.keys(DATA_SOURCES).filter(key => !DATA_SOURCES[key].disabled)
+    .map((item, ind) => ({text: DATA_SOURCES[item]['COMMENT'], key: item, href: item}));
 
 const Footer = ({apiKey, onDataSourceChange, onCoursesLoading}) => {
     const {bormoSpeaker} = useContext(VoiceContext);
@@ -22,17 +17,11 @@ const Footer = ({apiKey, onDataSourceChange, onCoursesLoading}) => {
     const classes = useStyles();
     const currentDataSource = apiKey && DATA_SOURCES[apiKey] && DATA_SOURCES[apiKey]['COMMENT'] ? DATA_SOURCES[apiKey]['COMMENT'] : '';
 
-    const voices = window.speechSynthesis.getVoices().filter((item) => item.lang.slice(0, 2) === 'en').map(
-        el => ({
-            voice: el,
-            href: el.name,
-            key: el.name,
-            text: el.name
-        })
-    );
+    const voices = window.speechSynthesis.getVoices().filter((item) => item.lang.slice(0, 2) === 'en')
+        .map(el => ({voice: el, href: el.name, key: el.name, text: el.name}));
 
     const onSelectDataSource = (key) => {
-        if (key !== apiKey) {
+        if (key !== 'escapeKeyDown' && key !== apiKey) {
             onDataSourceChange(key);
             onCoursesLoading(key);
         }
@@ -64,7 +53,7 @@ const Footer = ({apiKey, onDataSourceChange, onCoursesLoading}) => {
                         onClick={onMuteSwitch}>
                     <BormoIcon icon={muted ? 'VolumeOn' : 'VolumeOff'}/>
                 </Button>
-                <Button color={'inherit'} title={'Тест'} onClick={() => bormoSpeaker.speak(VOICE_TEST_PHRASE)}>
+                <Button color={'inherit'} title={'Тест звука'} onClick={() => bormoSpeaker.speak(VOICE_TEST_PHRASE)}>
                     Test
                 </Button>
                 <Submenu submenuItems={voices} withNavLink={false} callback={onSelectVoice}
