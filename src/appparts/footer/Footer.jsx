@@ -4,14 +4,14 @@ import {Toolbar, Button, Typography} from '@material-ui/core';
 import {DATA_SOURCES, VOICE_TEST_PHRASE} from '../../constants';
 import Submenu from '../../components/submenu/Submenu';
 import BormoIcon from '../../components/icon/BormoIcon';
-import VoiceContext from '../../VoiceContext';
+import VoiceContext from '../../context/voice/VoiceContext';
 
 import {useStyles} from '../../App.css';
 
 const dataSources = Object.keys(DATA_SOURCES).filter(key => !DATA_SOURCES[key].disabled)
     .map((item, ind) => ({text: DATA_SOURCES[item]['COMMENT'], key: item, href: item}));
 
-const Footer = ({apiKey, onDataSourceChange, onCoursesLoading}) => {
+const Footer = ({apiKey, changeDataSource, getData}) => {
     const {bormoSpeaker} = useContext(VoiceContext);
     const [muted, setMuted] = useState(bormoSpeaker.muted);
     const classes = useStyles();
@@ -22,8 +22,8 @@ const Footer = ({apiKey, onDataSourceChange, onCoursesLoading}) => {
 
     const onSelectDataSource = (key) => {
         if (key !== 'escapeKeyDown' && key !== apiKey) {
-            onDataSourceChange(key);
-            onCoursesLoading(key);
+           changeDataSource(key);
+           getData(key);
         }
     };
 
@@ -44,7 +44,7 @@ const Footer = ({apiKey, onDataSourceChange, onCoursesLoading}) => {
         <Toolbar className={classes.spaceBetween}>
             <div className={classes.paperFlex}>
                 <Submenu submenuItems={dataSources} withNavLink={false} callback={onSelectDataSource}
-                         switchIcon={'Settings'}/>
+                         text={'Выбор источника данных'} switchIcon={'Settings'}/>
                 <Typography variant={'caption'}>{currentDataSource}</Typography>
             </div>
 
@@ -57,7 +57,7 @@ const Footer = ({apiKey, onDataSourceChange, onCoursesLoading}) => {
                     Test
                 </Button>
                 <Submenu submenuItems={voices} withNavLink={false} callback={onSelectVoice}
-                         switchIcon={'VoiceSettings'}/>
+                         text={'Выбор голоса из доступных вариантов'} switchIcon={'VoiceSettings'}/>
             </div>
         </Toolbar>
     );

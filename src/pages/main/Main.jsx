@@ -17,10 +17,10 @@ const Main = () => {
 
             <CardContent>
                 <Typography variant='h5'>
-                    Бормотунчик - 2019 (Rebormo)
+                    Бормотунчик - 2020 (Rebormo)
                 </Typography>
                 <Typography variant='caption'>
-                    <p>React, Redux, React Router, Material-UI</p>
+                    <p>React, React Router, Material-UI</p>
                     <p>Рекомендуемый браузер - Google Chrome</p>
                 </Typography>
             </CardContent>

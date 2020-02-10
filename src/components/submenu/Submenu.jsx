@@ -37,7 +37,7 @@ const Submenu = ({
 
     return (
         <>
-            <Button color={'inherit'}
+            <Button color={'inherit'} title={text}
                     aria-controls='submenu' aria-haspopup='true' onClick={handleClick}
                     disabled={submenuItems.length === 0}>
                 <BormoIcon icon={switchIcon}/>

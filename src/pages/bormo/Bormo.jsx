@@ -1,11 +1,12 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 
 import {BormoView} from './BormoView';
-import VoiceContext from '../../VoiceContext';
+import VoiceContext from '../../context/voice/VoiceContext';
 import {getActiveAmount, getInitialMemorized, isValidIndex} from '../../functions';
 import {BORMO_STATUS, TIMER_INTERVAL} from '../../constants';
 import {theme} from '../../theme';
 import {useStyles} from './Bormo.css';
+import ContentMissingMessage from '../../appparts/errors/ContentMissingMessage';
 
 const Bormo = ({content}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -83,7 +84,9 @@ const Bormo = ({content}) => {
     };
 
     return (
-        <BormoView {...props} content={content}/>
+        content ?
+            <BormoView {...props} content={content}/> :
+            <ContentMissingMessage/>
     );
 };
 

@@ -19,9 +19,9 @@ const getLessonsPage = (currentPage, lessonsCount) => {
 };
 
 const Lessons = ({
-                     apiKey, currentCourse, currentLesson, currentPage, totalPages, lessonsCount,
-                     onLessonSelect, onPageSelect,
-                     isBormo, onPrevPage, onNextPage, history
+                     apiKey, current, currentLesson, currentPage, totalPages, lessonsCount,
+                     onLessonSelect, onPageSelect, onPrevPage, onNextPage,
+                     isBormo, history
                  }) => {
     const classes = useStyles();
     const isFirst = currentPage === 1;
@@ -33,7 +33,7 @@ const Lessons = ({
     };
 
     return (
-        currentCourse ?
+        current ?
 
             <Paper className={classes.courses}>
                 <Container className={classes.paper}>
@@ -41,7 +41,7 @@ const Lessons = ({
                         <Fab className={classes.lessonBtn} size={'small'} key={el}
                              color={el === currentLesson ? 'primary' : 'secondary'}
                              onClick={() => onLessonClick(el)}
-                             title={'Загрузить контент урока № ' + el + ' (курс "' + currentCourse['name'] + '")  - ' + apiKey}>
+                             title={'Загрузить контент урока № ' + el + ' (курс "' + current['name'] + '")  - ' + apiKey}>
                             {el}
                         </Fab>
                     )}

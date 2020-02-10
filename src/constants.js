@@ -89,7 +89,7 @@ export const TEST_STATUSES = {
 export const DATA_SOURCES = {
     PHP_LOCAL: {
         COURSES: 'http://bormophpl.local:8080/courses.php',
-        CONTENT: 'http://bormophpl.local:8080/courses.php',
+        WORDS: 'http://bormophpl.local:8080/courses.php',
         SEARCH: 'http://bormophpl.local:8080/search.php',
         SECTIONS: 'http://bormophpl.local:8080/sections.php',
         PHRASES: 'http://bormophpl.local:8080/sections.php',
@@ -99,10 +99,10 @@ export const DATA_SOURCES = {
     },
     TEST: {
         COURSES: COURSES_PATH,
-        CONTENT: BORMO_PATH,
-        SEARCH: BORMO_PATH,
+        WORDS: BORMO_PATH,
         SECTIONS: SECTIONS_PATH,
         PHRASES: PHRASES_PATH,
+        SEARCH: BORMO_PATH,
         disabled: false,
         COMMENT: 'Тестовые данные'
     }
@@ -165,3 +165,6 @@ export const HOTKEYS = {
     S: ['s', 'ы'],
     H: ['h', 'р']
 };
+
+
+export const LS_TOKEN = 'REBORMO_TOKEN';

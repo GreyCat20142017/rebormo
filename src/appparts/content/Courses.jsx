@@ -9,18 +9,18 @@ const isCurrent = (currentCourse, course) => (
     (currentCourse && (parseInt(course['id']) === parseInt(currentCourse['id'])))
 );
 
-const Courses = ({apiKey, courses, currentCourse, isLoading, error, onCourseSelect}) => {
+const Courses = ({apiKey, items, current, isLoading, error, onCourseSelect}) => {
 
     const classes = useStyles();
     return (
         <>
             {isLoading ? <Loader/> :
                 <Paper className={classes.courses}>
-                    {courses.map((course, ind) =>
+                    {items.map((course, ind) =>
                         <Button key={course['id']} onClick={() => onCourseSelect(course['id'], apiKey)}
                                 className={classes.courseBtn}
-                                color={isCurrent(currentCourse, course) ? 'primary' : 'secondary'}>
-                            {isCurrent(currentCourse, course) ? <ArrowRight/> : null}
+                                color={isCurrent(current, course) ? 'primary' : 'secondary'}>
+                            {isCurrent(current, course) ? <ArrowRight/> : null}
                             {course['name']}&nbsp;({course['lastlesson']})
                         </Button>
                     )}

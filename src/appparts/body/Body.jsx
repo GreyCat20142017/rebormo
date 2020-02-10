@@ -1,79 +1,50 @@
-import React, {useEffect} from 'react';
-import {Switch, Route, withRouter} from 'react-router-dom';
+import React from 'react';
+import {Route, Switch, withRouter} from 'react-router-dom';
 import {Drawer, Paper} from '@material-ui/core';
 
-import {Bormo, Control, Search, Spelling, Phrases, Main, NotFound} from '../../pages/pages';
+import {Bormo, Control, Main, NotFound, Phrases, Search, Spelling} from '../../pages/pages';
 import Sidenav from '../sidenav/Sidenav';
 import {CONTROL_MODES} from '../../constants';
-import {BORMO_MODES, ROUTES} from '../../routes';
+import {ROUTES} from '../../routes';
 
 const Body = ({
-                  classes, content, currentCourse, currentLesson, isSideNavOpen, switchSidenav, apiKey,
-                  history, changeIsBormo
+                  classes, originalContent, currentCourse, currentLesson, sidenav, sidenavSwitch, apiKey
               }) => {
-
-    useEffect(() => {
-        history.listen((location) => {
-            if (location.pathname === ROUTES.phrases.href) {
-                changeIsBormo(false);
-            }
-            if (BORMO_MODES.find(el => location.pathname === el.href)) {
-                changeIsBormo(true);
-            }
-        });
-
-        return () => {
-            if (history && history['unlisten']) {
-                history.unlisten();
-            }
-        };
-    }, [changeIsBormo, history]);
-
+    const bormoProps = {originalContent, currentCourse, currentLesson};
 
     return (
         <Paper className={window.location.pathname === ROUTES.main.href ? classes.paperMain : classes.paperWhite}>
-
-            <Drawer open={isSideNavOpen} onClose={() => switchSidenav(false)}>
-                <Sidenav classes={classes} switchSidenav={switchSidenav} apiKey={apiKey}/>
+            <Drawer open={sidenav} onClose={() => sidenavSwitch(false)}>
+                <Sidenav classes={classes} sidenavSwitch={sidenavSwitch} apiKey={apiKey}/>
             </Drawer>
 
             <Switch>
+                <Route exact path={ROUTES.main.href}
+                       render={(props) => <Main/>}/>
 
-                <Route exact path={ROUTES.main.href} render={(props) => <Main/>}/>
+                <Route path={ROUTES.bormo.href}
+                       render={(props) => <Bormo classes={classes} content={originalContent}/>}/>
 
-                <Route path={ROUTES.bormo.href} render={(props) => <Bormo classes={classes} content={content}/>}/>
+                <Route path={ROUTES.control.href}
+                       render={(props) => <Control controlMode={CONTROL_MODES.CONTROL} {...bormoProps}/>}/>
 
-                <Route path={ROUTES.control.href} render={(props) =>
-                    <Control controlMode={CONTROL_MODES.CONTROL}
-                             originalContent={content}
-                             currentCourse={currentCourse} currentLesson={currentLesson}/>}
-                />
+                <Route path={ROUTES.reverse.href}
+                       render={(props) => <Control controlMode={CONTROL_MODES.REVERSE} {...bormoProps}/>}/>
 
-                <Route path={ROUTES.reverse.href} render={(props) =>
-                    <Control controlMode={CONTROL_MODES.REVERSE}
-                             originalContent={content}
-                             currentCourse={currentCourse}
-                             currentLesson={currentLesson}/>}
-                />
+                <Route path={ROUTES.spelling.href}
+                       render={(props) => <Spelling {...bormoProps}/>}/>
 
-                <Route path={ROUTES.spelling.href} render={(props) =>
-                    <Spelling originalContent={content}
-                              currentCourse={currentCourse}
-                              currentLesson={currentLesson}/>}
-                />
+                <Route path={ROUTES.check.href}
+                       render={(props) => <Control controlMode={CONTROL_MODES.MIXED} {...bormoProps}/>}/>
 
-                <Route path={ROUTES.check.href} render={(props) =>
-                    <Control controlMode={CONTROL_MODES.MIXED}
-                             originalContent={content}
-                             currentCourse={currentCourse}
-                             currentLesson={currentLesson}/>}
-                />
+                <Route path={ROUTES.phrases.href}
+                       render={(props) => <Phrases content={originalContent}/>}/>
 
-                <Route path={ROUTES.phrases.href} render={(props) => <Phrases content={content}/>}
-                />
+                <Route path={ROUTES.search.href}
+                       render={(props) => <Search apiKey={apiKey}/>}/>
 
-                <Route path={ROUTES.search.href} render={(props) => <Search apiKey={apiKey}/>}/>
-                <Route path={ROUTES.skyeng.href} render={(props) => <Search apiKey={apiKey} onlySkyEng={true}/>}/>
+                <Route path={ROUTES.skyeng.href}
+                       render={(props) => <Search apiKey={apiKey} onlySkyEng={true}/>}/>
 
                 <NotFound/>
             </Switch>

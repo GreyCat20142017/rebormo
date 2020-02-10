@@ -1,9 +1,8 @@
 import {SERVER_ROOT} from './constants';
 
+export const BORMO_COMMON = SERVER_ROOT + 'bormocom';
 
-const BORMO_COMMON = SERVER_ROOT + 'bormocom';
-
-const ROUTES = {
+export const ROUTES = {
     main: {
         href: SERVER_ROOT,
         title: 'Главная',
@@ -61,13 +60,13 @@ const ROUTES = {
     }
 };
 
-const SWITCHABLE_MODES = [
+export const SWITCHABLE_MODES = [
     ROUTES.main.href,
     ROUTES.search.href,
     ROUTES.skyeng.href
 ];
 
-const BORMO_MODES = [
+export const BORMO_MODES = [
     ROUTES.bormo,
     ROUTES.control,
     ROUTES.reverse,
@@ -75,7 +74,7 @@ const BORMO_MODES = [
     ROUTES.check
 ];
 
-const HOTKEY_REDIRECTS = {
+export const HOTKEY_REDIRECTS = {
     'm': ROUTES.bormo.href,
     'ь': ROUTES.bormo.href,
     'c': ROUTES.control.href,
@@ -88,10 +87,10 @@ const HOTKEY_REDIRECTS = {
     'м': ROUTES.check.href
 };
 
-export {
-    ROUTES,
-    BORMO_MODES,
-    SWITCHABLE_MODES,
-    HOTKEY_REDIRECTS,
-    BORMO_COMMON
-};
+// export {
+//     ROUTES,
+//     BORMO_MODES,
+//     SWITCHABLE_MODES,
+//     HOTKEY_REDIRECTS,
+//     BORMO_COMMON
+// };

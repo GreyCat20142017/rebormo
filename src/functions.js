@@ -1,7 +1,16 @@
-import {BORMO_STATUS, CONTROL_MODES, LANGUAGES, FIELDS} from './constants';
+import {
+    BORMO_STATUS,
+    CONTROL_MODES,
+    LANGUAGES,
+    FIELDS,
+    PAGE_LIMIT,
+    TEST_KEY,
+    PHRASES_PER_LESSON,
+    WORDS_PER_LESSON, DATA_SOURCES
+} from './constants';
 import {ROUTES, SWITCHABLE_MODES} from './routes';
 
-export const isValidIndex = (index, testedArray) => (((index >= 0) && (index < testedArray.length)));
+export const isValidIndex = (index, testedArray) => (Array.isArray(testedArray) && (index >= 0) && (index < testedArray.length));
 
 export const getInitialMemorized = (length) => {
     return '?'.repeat(length).split('').map((item, ind) => (({index: ind, inactive: false})));
@@ -164,3 +173,31 @@ export const dataTransform = (data) => {
 export const strContainSubstr = (str, substr) => (str.toLowerCase().trim().indexOf(substr.toLowerCase().trim()) >= 0);
 
 export const strEqualSubstr = (str, substr) => (str.toLowerCase().trim() === substr.toLowerCase().trim());
+
+export const getTotalPages = (lastLesson, limit = PAGE_LIMIT) => (Math.ceil(lastLesson / limit));
+
+export const getSelectedCourse = (coursesItems, id) =>  (coursesItems.find(course => course.id === id));
+
+export const getRefinedResponse = (responseData, apiKey, currentLesson, isBormo) => {
+    let result = responseData;
+    if (apiKey === TEST_KEY) {
+        const unitsPerLesson = isBormo ? WORDS_PER_LESSON : PHRASES_PER_LESSON;
+        result = result.filter((el, ind) => {
+            const startInd = currentLesson * unitsPerLesson || 0;
+            return (ind >= startInd && ind < (startInd + unitsPerLesson));
+        });
+    }
+    return result;
+};
+
+export const getCurrentUrl = (key, currentType) => {
+    return DATA_SOURCES[key] ? DATA_SOURCES[key][currentType] : DATA_SOURCES.TEST[currentType];
+};
+
+export const getCurrentType = (key, path) => {
+    let currentType = path.toUpperCase();
+    if (key === TEST_KEY) {
+        currentType = (currentType === 'COURSES') ? 'WORDS' : 'PHRASES';
+    };
+    return currentType;
+}

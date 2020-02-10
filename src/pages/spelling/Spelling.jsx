@@ -2,11 +2,12 @@ import React, {useContext, useEffect, useState} from 'react';
 
 import SpellingView from './SpellingView';
 import SimpleSnackbar from '../../components/snackbar/SimpleSnackbar';
-import VoiceContext from '../../VoiceContext';
+import VoiceContext from '../../context/voice/VoiceContext';
 import {LANGUAGES} from '../../constants';
 import {getReorderedArray, isValidIndex, shuffleArray} from '../../functions';
 import {theme} from '../../theme';
 import {useStyles} from './Spelling.css.js';
+import ContentMissingMessage from '../../appparts/errors/ContentMissingMessage';
 
 const Spelling = ({originalContent, currentCourse, currentLesson}) => {
     const [okCount, setOkCount] = useState(0);
@@ -19,7 +20,9 @@ const Spelling = ({originalContent, currentCourse, currentLesson}) => {
     const classes = useStyles(theme);
 
     useEffect(() => {
-        setContent(shuffleArray(originalContent));
+        if (originalContent) {
+            setContent(shuffleArray(originalContent));
+        }
     }, [originalContent]);
 
 
@@ -64,14 +67,16 @@ const Spelling = ({originalContent, currentCourse, currentLesson}) => {
     };
 
     return (
-        <>
-            <SpellingView classes={classes} okCount={okCount} errorCount={errorCount}
-                          content={content} currentCourse={currentCourse} currentLesson={currentLesson}
-                          currentTranslate={currentTranslate} showHint={showHint} setShowHint={setShowHint}
-                          onRestart={onRestart} onSkip={onSkip} onHint={onHint}
-                          onTranslateValidate={onTranslateValidate}/>
-            <SimpleSnackbar open={showHint} message={currentOrigin} onSnackClose={hideHint}/>
-        </>
+        content ?
+            <>
+                <SpellingView classes={classes} okCount={okCount} errorCount={errorCount}
+                              content={content} currentCourse={currentCourse} currentLesson={currentLesson}
+                              currentTranslate={currentTranslate} showHint={showHint} setShowHint={setShowHint}
+                              onRestart={onRestart} onSkip={onSkip} onHint={onHint}
+                              onTranslateValidate={onTranslateValidate}/>
+                <SimpleSnackbar open={showHint} message={currentOrigin} onSnackClose={hideHint}/>
+            </> :
+            <ContentMissingMessage/>
     );
 };
 

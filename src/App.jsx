@@ -1,46 +1,51 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {ThemeProvider} from '@material-ui/styles';
-import {AppBar, Container, CssBaseline} from '@material-ui/core';
+import {AppBar, CssBaseline} from '@material-ui/core';
 
 import {theme} from './theme';
 import {useStyles} from './App.css';
 
-import FooterContainer from './store/containers/FooterContainer';
-import HeaderContainer from './store/containers/HeaderContainer';
-import BodyContainer from './store/containers/BodyContainer';
-import ContentContainer from './store/containers/ContentContainer';
-import ErrorMessageContainer from './store/containers/ErrorMessageContainer';
-import VoiceContext, {getBormoSpeaker} from './VoiceContext';
+import FooterContainer from './containers/FooterContainer';
+import HeaderContainer from './containers/HeaderContainer';
 
+import BodyContainer from './containers/BodyContainer';
+import ErrorMessageContainer from './containers/ErrorMessageContainer';
+
+import {VoiceContextProvider} from './context/voice/VoiceContext';
+import {UIContextProvider} from './context/ui/UIContext';
+import {RebormoContextProvider} from './context/rebormo/RebormoContext';
+import ContentContainer from './containers/ContentContainer';
+import {Alert} from './components/alert/Alert';
 
 const App = (props) => {
-    const [bormoSpeaker] = useState(getBormoSpeaker());
-
     const classes = useStyles();
-
     return (
-        <VoiceContext.Provider value={{bormoSpeaker}}>
+        <VoiceContextProvider>
+            <RebormoContextProvider>
+                <UIContextProvider>
+                    <ThemeProvider theme={theme}>
+                        <CssBaseline/>
+                        <div className={classes.app}>
+                            <AppBar position='static'>
+                                <HeaderContainer classes={classes}/>
+                            </AppBar>
 
-                <ThemeProvider theme={theme}>
-                    <CssBaseline/>
-                    <Container className={classes.app}>
-                        {/*<InitialContainer/>*/}
-                        <AppBar position='static'>
-                            <HeaderContainer classes={classes}/>
-                        </AppBar>
-                        <>
-                            <BodyContainer classes={classes}/>
-                            <ContentContainer/>
-                            <ErrorMessageContainer/>
-                        </>
-                        <AppBar position='static'>
-                            <FooterContainer/>
-                        </AppBar>
-                    </Container>
-                </ThemeProvider>
+                            <div style={{display: 'flex', flexDirection: 'column', flexGrow: 1}}>
+                                <BodyContainer classes={classes}/>
+                                <ContentContainer/>
+                                <ErrorMessageContainer/>
+                                <Alert/>
+                            </div>
 
-        </VoiceContext.Provider>
+                            <AppBar position='static'>
+                                <FooterContainer/>
+                            </AppBar>
+                        </div>
+                    </ThemeProvider>
+                </UIContextProvider>
+            </RebormoContextProvider>
+        </VoiceContextProvider>
     );
 };
 

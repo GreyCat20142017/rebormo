@@ -6,10 +6,10 @@ import AppsIcon from '@material-ui/icons/Apps';
 import {NavItem} from './NavItem';
 import Submenu from '../../components/submenu/Submenu';
 
-const Header = ({classes, menuItems, submenuItems, switchSidenav}) => (
+const Header = ({classes, menuItems, submenuItems, sidenavSwitch}) => (
 
     <Toolbar>
-        <IconButton edge='start' color='inherit' aria-label='menu' onClick={() => switchSidenav(true)}>
+        <IconButton edge='start' color='inherit' aria-label='menu' onClick={() => sidenavSwitch(true)}>
             <AppsIcon/>
         </IconButton>
         <Typography variant='h6' className={classes.title} title={'Бормотунчик c Redux (Remake Bormo with Redux)'}>
