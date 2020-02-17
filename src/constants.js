@@ -97,6 +97,16 @@ export const DATA_SOURCES = {
         disabled: false,
         COMMENT: 'PHP (loсalhost)'
     },
+    LARAVEL_LOCAL: {
+        COURSES: 'http://bormolara.local:8080/api/courses',
+        WORDS: 'http://bormolara.local:8080/api/courses',
+        SEARCH: 'http://bormolara.local:8080/api/search/words',
+        SECTIONS: 'http://bormolara.local:8080/api/sections',
+        PHRASES: 'http://bormolara.local:8080/api/sections',
+        TEST: 'http://bormolara.local:8080/test',
+        disabled: false,
+        COMMENT: 'Laravel (loсalhost)'
+    },
     TEST: {
         COURSES: COURSES_PATH,
         WORDS: BORMO_PATH,
@@ -114,7 +124,8 @@ export const STATUS_OK = 200;
 
 export const TRANSLATE_SOURCES = {
     SKYENG: 'SkyEng',
-    DB: 'Database'
+    DB: 'БД',
+    JSON: 'JSON'
 };
 
 export const TOOLBAR_TYPES = {

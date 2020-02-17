@@ -17,7 +17,7 @@ export const PageSelector = ({currentPage, totalPages, onPageSelect}) => {
                     step={1}
                     min={1}
                     max={totalPages}/>
-                <Button color='primary' onClick={() => onPageSelect(value)} size='small'
+                <Button color='primary' onClick={() => onPageSelect(value)} size='small'  variant={'outlined'}
                         title={'Перейти к странице №' + value}>к странице № {value}</Button>
             </> : null
     );

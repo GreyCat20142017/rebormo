@@ -1,12 +1,6 @@
 import {
-    BORMO_STATUS,
-    CONTROL_MODES,
-    LANGUAGES,
-    FIELDS,
-    PAGE_LIMIT,
-    TEST_KEY,
-    PHRASES_PER_LESSON,
-    WORDS_PER_LESSON, DATA_SOURCES
+    BORMO_STATUS, CONTROL_MODES, DATA_SOURCES, FIELDS, LANGUAGES, PAGE_LIMIT, PHRASES_PER_LESSON, SKYENG_URL,
+    TEST_KEY, TRANSLATE_SOURCES, WORDS_PER_LESSON
 } from './constants';
 import {ROUTES, SWITCHABLE_MODES} from './routes';
 
@@ -141,7 +135,7 @@ export const getObjectValuesByKeyArray = (sourceObject, keysArray) => (
 );
 
 export const getTranslatedPhrase = (dataArray, currentIndex) => (
-    Array.isArray(dataArray) && isValidIndex(currentIndex, dataArray) ? dataArray[currentIndex][LANGUAGES.RU] : 'Ошибка: не удалось получить данные');
+    isValidIndex(currentIndex, dataArray) ? dataArray[currentIndex][LANGUAGES.RU] : 'Ошибка: не удалось получить данные');
 
 const getStringCompareResult = (left, right) => {
     if (left > right) {
@@ -176,7 +170,7 @@ export const strEqualSubstr = (str, substr) => (str.toLowerCase().trim() === sub
 
 export const getTotalPages = (lastLesson, limit = PAGE_LIMIT) => (Math.ceil(lastLesson / limit));
 
-export const getSelectedCourse = (coursesItems, id) =>  (coursesItems.find(course => course.id === id));
+export const getSelectedCourse = (coursesItems, id) => (coursesItems.find(course => course.id === id));
 
 export const getRefinedResponse = (responseData, apiKey, currentLesson, isBormo) => {
     let result = responseData;
@@ -198,6 +192,67 @@ export const getCurrentType = (key, path) => {
     let currentType = path.toUpperCase();
     if (key === TEST_KEY) {
         currentType = (currentType === 'COURSES') ? 'WORDS' : 'PHRASES';
-    };
+    }
     return currentType;
-}
+};
+
+const inRussian = (el, pattern) => (el['russian'] && el['russian'].indexOf(pattern) !== -1);
+const inEnglish = (el, pattern) => (el['english'] && el['english'].indexOf(pattern) !== -1);
+
+const exactRussian = (el, pattern = '') => (el['russian'] && (el['russian'].trim() === pattern.trim()));
+const exactEnglish = (el, pattern) => (el['english'] && (el['english'].trim() === pattern.trim()));
+
+const getCompareResult = (el, pattern, exact) => (
+    exact ? (exactRussian(el, pattern) || exactEnglish(el, pattern)) :
+        (inRussian(el, pattern) || inEnglish(el, pattern))
+);
+
+const getWord = (el, pattern) => (inRussian(el, pattern) ? el['russian'] : el['english']);
+const getTranslate = (el, pattern) => (inRussian(el, pattern) ? el['english'] : el['russian']);
+
+//данные из php возвращаются уже в формате word-translate, в отличие от laravel & json
+export const mapDbData = (responseData, translateSource, text, exact = false) => {
+    let result = [...responseData];
+    if (translateSource === TRANSLATE_SOURCES.JSON) {
+        result = responseData.filter(el => (getCompareResult(el, text, exact)));
+    }
+    return result.map(el => (el['translate'] || el['word'] ? el :
+            {word: getWord(el, text), translate: getTranslate(el, text)}
+    ));
+};
+
+export const mapSkyEngData = (data, onlySkyEng, text) => {
+    if (onlySkyEng) {
+        return [...data];
+    }
+    let result = [];
+    if (data && data[0] && data[0]['meanings']) {
+        const words = data[0]['meanings'];
+        result = [...new Set(words.map(item => item.translation.text))];
+    }
+    return result.map(item => ({word: text, translate: item}));
+};
+
+export const mapApiData = (data, translateSource, onlySkyeng = false, apiKey, text = '', exact = false) =>
+    ((translateSource === TRANSLATE_SOURCES.SKYENG) ?
+        mapSkyEngData(data, onlySkyeng, text) :
+        mapDbData(data, translateSource, text, exact));
+
+export const isSelected = (selected, ind) => (Array.isArray(selected) && selected.indexOf(ind) !== -1);
+
+export const getSearchParams = (currentTranslateSource, apiKey, trimmedText, exact) => {
+    if (currentTranslateSource === TRANSLATE_SOURCES.SKYENG) {
+        return ({search: trimmedText});
+    }
+    // return (apiKey === TEST_KEY) ? {} : {word: trimmedText, exact: (+exact)};
+     return {word: trimmedText, exact: (+exact)};
+};
+
+export const getSearchUrl = (currentTranslateSource, apiKey) => (
+    (currentTranslateSource === TRANSLATE_SOURCES.SKYENG) ? SKYENG_URL : DATA_SOURCES[apiKey]['SEARCH']
+);
+
+
+
+
+

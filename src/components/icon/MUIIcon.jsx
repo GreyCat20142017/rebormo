@@ -2,13 +2,13 @@ import React from 'react';
 
 import {
     Headset, Done, DoneAll, PlaylistAddCheck as Spelling, ListAlt as Check,
-    Home, Settings, Search, CloudQueue as Sky, Info, Extension,
+    Home, Settings, Search, CloudQueue as Sky, Info, Extension, FilterNone, Add, Edit,
     MoreVert as More, HelpOutline as Help, MenuBook as Book, PriorityHigh as Error, Menu,
     ArrowLeft, ArrowRight, VolumeOff, VolumeDown as VolumeOn, PermDataSetting as VoiceSettings
 } from '@material-ui/icons';
 
 
-const BormoIcon = ({icon, iconSize = 'small'}) => {
+const MUIIcon = ({icon, iconSize = 'small'}) => {
     switch (icon) {
         case 'Menu':
             return <Menu fontSize={iconSize}/>;
@@ -30,6 +30,8 @@ const BormoIcon = ({icon, iconSize = 'small'}) => {
             return <Search fontSize={iconSize}/>;
         case 'Sky':
             return <Sky fontSize={iconSize}/>;
+        case 'ClearAll':
+            return <FilterNone fontSize={iconSize}/>;
         case 'Info':
             return <Info fontSize={iconSize}/>;
         case 'More':
@@ -52,9 +54,13 @@ const BormoIcon = ({icon, iconSize = 'small'}) => {
             return <VolumeOn fontSize={iconSize}/>;
         case 'VolumeOff':
             return <VolumeOff fontSize={iconSize}/>;
+        case 'Add':
+            return <Add fontSize={iconSize}/>;
+        case 'Edit':
+            return <Edit fontSize={iconSize}/>;
         default:
     }
     return null;
 };
 
-export default BormoIcon;
+export default MUIIcon;

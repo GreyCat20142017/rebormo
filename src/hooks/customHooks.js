@@ -1,7 +1,7 @@
 import {useCallback, useEffect, useState} from 'react';
 import axios from 'axios';
 
-import {LS_TOKEN} from '../constants';
+import {AXIOS_TIMEOUT, LS_TOKEN} from '../constants';
 
 export const useLocalStorage = (key, initialValue = '') => {
     const [value, setValue] = useState(() => {
@@ -10,6 +10,19 @@ export const useLocalStorage = (key, initialValue = '') => {
 
     useEffect(() => {
         localStorage.setItem(key, value);
+    }, [value, key]);
+
+    return [value, setValue];
+};
+
+export const useLocalStorageObject = (key, initialValue = {}) => {
+    const [value, setValue] = useState(() => {
+        const lsValue = localStorage.getItem(key);
+        return lsValue ? JSON.parse(lsValue) : initialValue;
+    });
+
+    useEffect(() => {
+        localStorage.setItem(key, JSON.stringify(value));
     }, [value, key]);
 
     return [value, setValue];
@@ -27,13 +40,17 @@ export const useFetch = (url) => {
         setIsLoading(true);
     }, []);
 
+    const clearFetchResults = useCallback(() => {
+        setResponse(null);
+    }, []);
+
     useEffect(() => {
         let unmounted = false;
         if (!isLoading) {
             return;
         }
 
-        axios({...options, timeout: 7777})
+        axios({...options, timeout: AXIOS_TIMEOUT})
             .then(res => {
                 if (!unmounted) {
                     setResponse(res.data);
@@ -51,5 +68,5 @@ export const useFetch = (url) => {
         };
     }, [isLoading, url, options, token]);
 
-    return [{isLoading, response, error}, doFetch];
+    return [{isLoading, response, error}, {doFetch, clearFetchResults}];
 };

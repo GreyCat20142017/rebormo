@@ -1,801 +1,1001 @@
 [
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "nod",
     "russian": "кивать"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "moreover",
     "russian": "кроме того"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "shaky",
     "russian": "шаткий"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "role",
     "russian": "роль"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "responsible",
     "russian": "ответственный"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "readily",
     "russian": "с готовностью"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "violent",
     "russian": "неистовый"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "voluntary",
     "russian": "добровольный"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "vote",
     "russian": "голосовать"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "way",
     "russian": "путь, образ"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "woman",
     "russian": "женщина"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "therapy",
     "russian": "терапия"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "temperature",
     "russian": "температура"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "subway",
     "russian": "метро"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "turf",
     "russian": "торф"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "wage",
     "russian": "заработная плата"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "resolve",
     "russian": "решать, растворять"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "sheer",
     "russian": "явный, сущий, отвесный"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "ship",
     "russian": "корабль"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "spur",
     "russian": "шпора"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "soup",
     "russian": "суп"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "solution",
     "russian": "раствор, решение"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "music",
     "russian": "музыка"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "pig",
     "russian": "свинья"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "forgive",
     "russian": "прощать"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "individual",
     "russian": "индивидуальный"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "identification",
     "russian": "опознавание"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "hillside",
     "russian": "склон холма"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "justice",
     "russian": "правосудие"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "july",
     "russian": "июль"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "century",
     "russian": "век"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "broadcast",
     "russian": "радиовещание"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "decrease",
     "russian": "уменьшать"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "except",
     "russian": "исключать"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "exercise",
     "russian": "упражнение"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "environment",
     "russian": "окружение"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "error",
     "russian": "ошибка"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "dividend",
     "russian": "дивиденд"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "elderly",
     "russian": "пожилой"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "contest",
     "russian": "оспаривать"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "book",
     "russian": "книга"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "accuse",
     "russian": "обвинять"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "know",
     "russian": "знать"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "kiss",
     "russian": "поцелуй"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "inclusion",
     "russian": "включение"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "flower",
     "russian": "цветок"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "game",
     "russian": "игра"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "gesture",
     "russian": "жест"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "heavily",
     "russian": "тяжело"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "heart",
     "russian": "сердце"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "plate",
     "russian": "тарелка"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "overseas",
     "russian": "за морем"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "stare",
     "russian": "пристальный взгляд"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "strike",
     "russian": "ударять"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "shelf",
     "russian": "полка, отмель"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "van",
     "russian": "фургон"
   },
- {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "waitress",
     "russian": "официантка"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "worthy",
     "russian": "достойный"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "take",
     "russian": "брать"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "throughout",
     "russian": "везде, во всех отношениях"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "swan",
     "russian": "лебедь"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "unlikely",
     "russian": "неправодоподобный, маловероятный"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "without",
     "russian": "без"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "wildlife",
     "russian": "живая природа"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "stake",
     "russian": "ставка"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "source",
     "russian": "источник"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "paint",
     "russian": "писать красками"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "mutual",
     "russian": "взаимный"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "near",
     "russian": "около"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "nice",
     "russian": "милый"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "mill",
     "russian": "мельница, фабрика"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "mid",
     "russian": "средний"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "luxurious",
     "russian": "роскошный"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "hard",
     "russian": "жесткий, напряженно"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "ground",
     "russian": "земля, молотый"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "innocence",
     "russian": "невинность"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "iron",
     "russian": "железо, утюг"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "actress",
     "russian": "актриса"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "as",
     "russian": "как"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "aware",
     "russian": "сознавать"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "convene",
     "russian": "созывать"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "dance",
     "russian": "танец"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "financial",
     "russian": "финансовый"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "expire",
     "russian": "выдыхать"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "disable",
     "russian": "делать неспособным"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "destiny",
     "russian": "судьба"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "convert",
     "russian": "превращать"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "concede",
     "russian": "уступать"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "chapel",
     "russian": "часовня"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "cargo",
     "russian": "груз"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "clutch",
     "russian": "ухватиться"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "guard",
     "russian": "охрана"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "handout",
     "russian": "милостыня"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "hazard",
     "russian": "риск"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "gigantic",
     "russian": "гигантский"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "liner",
     "russian": "лайнер"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "overthrow",
     "russian": "свергать"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "original",
     "russian": "первоначальный"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "september",
     "russian": "сентябрь"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "remedy",
     "russian": "лекарство"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "quantity",
     "russian": "количество"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "university",
     "russian": "университет"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "unity",
     "russian": "единство"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "thief",
     "russian": "вор"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "thought",
     "russian": "мысль"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "terminal",
     "russian": "вокзал"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "suspension",
     "russian": "приостановка"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "transfer",
     "russian": "переносить"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "unsatisfactory",
     "russian": "неудовлетворительный"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "purpose",
     "russian": "цель"
   },
- {"course_id":1,
+  {
+    "course_id": 1,
     "english": "publish",
     "russian": "публиковать"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "register",
     "russian": "регистрировать"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "running",
     "russian": "бегущий"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "plead",
     "russian": "призывать, умолять"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "post",
     "russian": "почта, столб,пост"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "loot",
     "russian": "трофеи, грабить"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "more",
     "russian": "больше"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "novice",
     "russian": "новичок"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "guilt",
     "russian": "виновность"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "insult",
     "russian": "оскорбление, обида"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "implant",
     "russian": "насаждать"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "besides",
     "russian": "кроме того"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "brother",
     "russian": "брат"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "business",
     "russian": "дело"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "awkward",
     "russian": "неуклюжий, неловкий"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "authorize",
     "russian": "санкционировать"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "attain",
     "russian": "достигать"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "actor",
     "russian": "актер"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "comply",
     "russian": "соглашаться"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "deal",
     "russian": "количество, раздавать"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "course",
     "russian": "курс"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "especially",
     "russian": "особенно"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "fairy",
     "russian": "фея"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "effect",
     "russian": "эффект"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "accusation",
     "russian": "обвинение"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "bow",
     "russian": "кланяться"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "carpenter",
     "russian": "плотник"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "improve",
     "russian": "улучшать"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "image",
     "russian": "образ"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "immense",
     "russian": "необъятный"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "infantry",
     "russian": "пехота"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "hospital",
     "russian": "больница"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "junction",
     "russian": "соединение"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "nest",
     "russian": "гнездо"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "missile",
     "russian": "ракета"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "precaution",
     "russian": "предосторожность"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "permission",
     "russian": "разрешение"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "sail",
     "russian": "парус, плыть по морю"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "rifle",
     "russian": "винтовка"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "region",
     "russian": "район"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "rain",
     "russian": "дождь"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "settlement",
     "russian": "заселение"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "wave",
     "russian": "волна"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "weaken",
     "russian": "ослаблять"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "winning",
     "russian": "выигрыш"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "spoon",
     "russian": "ложка"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "quarter",
     "russian": "четверть"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "routine",
     "russian": "определенный режим"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "ocean",
     "russian": "океан"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "paper",
     "russian": "бумага"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "mystery",
     "russian": "тайна"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "link",
     "russian": "звено, связывать"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "juice",
     "russian": "сок"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "joyful",
     "russian": "радостный"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "ladder",
     "russian": "лестница"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "himself",
     "russian": "себя"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "hat",
     "russian": "шляпа"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "gallery",
     "russian": "галерея"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "cape",
     "russian": "мыс"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "cheer",
     "russian": "ободрение"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "become",
     "russian": "становиться"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "barely",
     "russian": "только, просто, едва"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "disperse",
     "russian": "рассеиваться"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "enjoy",
     "russian": "наслаждаться"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "exclude",
     "russian": "исключать"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "devote",
     "russian": "посвящать"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "die",
     "russian": "умирать"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "complication",
     "russian": "усложнение"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "clause",
     "russian": "условие"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "cast",
     "russian": "бросок"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "breath",
     "russian": "дыхание"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "bowl",
     "russian": "катить шары"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "head",
     "russian": "голова"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "grade",
     "russian": "степень, сорт,класс"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "injure",
     "russian": "ушибать, повреждать"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "lapse",
     "russian": "падание, впадать"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "library",
     "russian": "библиотека"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "otherwise",
     "russian": "иначе"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "replace",
     "russian": "переставлять"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "recent",
     "russian": "недавний"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "street",
     "russian": "улица"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "shirt",
     "russian": "рубашка"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "wife",
     "russian": "жена"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "watch",
     "russian": "наблюдать"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "wonder",
     "russian": "удивляться"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "unlucky",
     "russian": "неудачный"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "summer",
     "russian": "лето"
   },
-  {"course_id": 1,
+  {
+    "course_id": 1,
     "english": "telecast",
     "russian": "передача"
   },
-  {"course_id":1,
+  {
+    "course_id": 1,
     "english": "sweep",
     "russian": "проноситься, пробегать"
   },
-  {"course_id":1,
+  {
+    "course_id": 1,
     "english": "youth",
     "russian": "молодость"
   }

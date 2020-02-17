@@ -84,11 +84,10 @@ export const RebormoContext = createContext(null);
 
 export const RebormoContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(rebormoReducer, initialState);
-    const [{isLoading: coursesIsLoading, response: coursesResponse, error: coursesError}, fetchCourses] = useFetch();
-    const [{isLoading: sectionsIsLoading, response: sectionsResponse, error: sectionsError}, fetchSections] = useFetch();
-    const [{isLoading: contentIsLoading, response: contentResponse, error: contentError}, fetchContent] = useFetch();
+    const [{isLoading: coursesIsLoading, response: coursesResponse, error: coursesError}, {doFetch: fetchCourses}] = useFetch();
+    const [{isLoading: sectionsIsLoading, response: sectionsResponse, error: sectionsError}, {doFetch: fetchSections}] = useFetch();
+    const [{isLoading: contentIsLoading, response: contentResponse, error: contentError}, {doFetch: fetchContent}] = useFetch();
     const currentKey = state.apiKey;
-
 
     const getContent = (path, params) => {
         const key = state.apiKey;
@@ -176,20 +175,20 @@ export const RebormoContextProvider = ({children}) => {
 
     const clearError = () =>  dispatch({type: ACTIONS.SET_ERROR, payload: null});
 
-    const changeDataSource = (key) => {
+    const changeDataSource = useCallback((key) => {
         dispatch({type: ACTIONS.CHANGE_API, payload: key});
         getData(key);
-    };
+    }, [getData]);
 
     const {
-        isBormo, courses, sections, currentCourse, currentSection, content, error,
+        apiKey, isBormo, courses, sections, currentCourse, currentSection, content, error,
         currentPage, totalPages, lessonsCount
     } = state;
     const isLoading = (coursesIsLoading || sectionsIsLoading || contentIsLoading);
 
     return (
         <RebormoContext.Provider value={{
-            isBormo, courses, sections, isLoading, error, currentCourse, currentSection, content,
+            apiKey, isBormo, courses, sections, isLoading, error, currentCourse, currentSection, content,
             currentPage, totalPages, lessonsCount, changeIsBormo, clearError, changeDataSource, getData,
             selectCurrent, selectLesson, selectPage, nextPage, prevPage
         }}>

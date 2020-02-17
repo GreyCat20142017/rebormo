@@ -18,7 +18,7 @@ const Courses = ({apiKey, items, current, isLoading, error, onCourseSelect}) => 
                 <Paper className={classes.courses}>
                     {items.map((course, ind) =>
                         <Button key={course['id']} onClick={() => onCourseSelect(course['id'], apiKey)}
-                                className={classes.courseBtn}
+                                className={classes.courseBtn} variant={'outlined'}
                                 color={isCurrent(current, course) ? 'primary' : 'secondary'}>
                             {isCurrent(current, course) ? <ArrowRight/> : null}
                             {course['name']}&nbsp;({course['lastlesson']})

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
-import BormoIcon from '../icon/BormoIcon';
+import MUIIcon from '../icon/MUIIcon';
 
 import {useStyles} from '../../App.css';
 import {NavLink} from 'react-router-dom';
@@ -40,7 +40,7 @@ const Submenu = ({
             <Button color={'inherit'} title={text}
                     aria-controls='submenu' aria-haspopup='true' onClick={handleClick}
                     disabled={submenuItems.length === 0}>
-                <BormoIcon icon={switchIcon}/>
+                <MUIIcon icon={switchIcon}/>
 
             </Button>
             <Menu className={classes.submenu}
@@ -55,13 +55,13 @@ const Submenu = ({
                             <NavLink className={linkClass} key={ind} exact={link.exact} to={link.href}
                                      activeStyle={{color: activeColor}}>
                                 <MenuItem key={ind} title={link.text} onClick={() => handleClose(link.key)}>
-                                    <BormoIcon icon={link.icon}/>
+                                    <MUIIcon icon={link.icon}/>
                                     <span>&nbsp;</span>
                                     <span>{link.text}</span>
                                 </MenuItem>
                             </NavLink> :
                             <MenuItem key={ind} title={link.text} onClick={(evt) => handleClose(evt, link.key)}>
-                                <BormoIcon icon={link.icon}/>
+                                <MUIIcon icon={link.icon}/>
                                 <span>&nbsp;</span>
                                 <span>{link.text}</span>
                             </MenuItem>

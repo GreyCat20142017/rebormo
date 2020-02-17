@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom';
 import {Button, ButtonGroup, Container, Fab, Paper} from '@material-ui/core';
 
 import {PAGE_LIMIT} from '../../constants';
-import BormoIcon from '../../components/icon/BormoIcon';
+import MUIIcon from '../../components/icon/MUIIcon';
 import {switchIfNeed} from '../../functions';
 import {useStyles} from '../../App.css';
 import {PageSelector} from './PageSelector';
@@ -49,11 +49,11 @@ const Lessons = ({
                 <ButtonGroup>
                     <Button color={'inherit'} onClick={onPrevPage}
                             disabled={isFirst} title={'Предыдущая страница'}>
-                        <BormoIcon icon={'Prev'}/>
+                        <MUIIcon icon={'Prev'}/>
                     </Button>
                     <Button color={'inherit'} onClick={onNextPage}
                             disabled={isLast} title={'Следующая страница'}>
-                        <BormoIcon icon={'Next'}/>
+                        <MUIIcon icon={'Next'}/>
                     </Button>
                 </ButtonGroup>
                 <PageSelector currentPage={currentPage} totalPages={totalPages} onPageSelect={onPageSelect}/>

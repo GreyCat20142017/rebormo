@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import {useStyles} from '../../App.css';
-import BormoIcon from '../../components/icon/BormoIcon';
+import MUIIcon from '../../components/icon/MUIIcon';
 import {DARKPINK_COLOR, PINK_COLOR} from '../../theme';
 
 export const NavItem = ({href, text, icon, exact = false, onLight = false}) => {
@@ -13,7 +13,7 @@ export const NavItem = ({href, text, icon, exact = false, onLight = false}) => {
     return (
         <NavLink className={linkClass} exact={exact} to={href} activeStyle={{color: activeColor}}>
             <Button style={{textTransform: 'none'}} color={'inherit'}>
-                <BormoIcon icon={icon}/>
+                <MUIIcon icon={icon}/>
                 <span>&nbsp;</span>
                 <span>{text}</span>
             </Button>

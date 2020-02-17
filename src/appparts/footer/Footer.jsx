@@ -3,7 +3,7 @@ import {Toolbar, Button, Typography} from '@material-ui/core';
 
 import {DATA_SOURCES, VOICE_TEST_PHRASE} from '../../constants';
 import Submenu from '../../components/submenu/Submenu';
-import BormoIcon from '../../components/icon/BormoIcon';
+import MUIIcon from '../../components/icon/MUIIcon';
 import VoiceContext from '../../context/voice/VoiceContext';
 
 import {useStyles} from '../../App.css';
@@ -51,7 +51,7 @@ const Footer = ({apiKey, changeDataSource, getData}) => {
             <div className={classes.paperFlex}>
                 <Button color={'inherit'} title={muted ? 'Включить звук' : 'Отключить звук'}
                         onClick={onMuteSwitch}>
-                    <BormoIcon icon={muted ? 'VolumeOn' : 'VolumeOff'}/>
+                    <MUIIcon icon={muted ? 'VolumeOn' : 'VolumeOff'}/>
                 </Button>
                 <Button color={'inherit'} title={'Тест звука'} onClick={() => bormoSpeaker.speak(VOICE_TEST_PHRASE)}>
                     Test
@@ -61,7 +61,6 @@ const Footer = ({apiKey, changeDataSource, getData}) => {
             </div>
         </Toolbar>
     );
-
 };
 
-export default Footer;
+export default React.memo(Footer);
