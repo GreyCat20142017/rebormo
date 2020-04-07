@@ -1,9 +1,17 @@
 import React, {createContext, useCallback, useEffect, useReducer} from 'react';
 
 import {useFetch} from '../../hooks/customHooks';
-import {getCurrentType, getCurrentUrl, getRefinedResponse, getSelectedCourse, getTotalPages} from '../../functions';
+import {
+    getCurrentType,
+    getCurrentUrl,
+    getRefinedResponse,
+    getSelectedCourse,
+    getToken,
+    getTotalPages, getUrlForLoggedUser
+} from '../../functions';
 import {ROUTES} from '../../routes';
-import {TEST_KEY} from '../../constants';
+import {LARA_KEY, TEST_KEY} from '../../constants';
+import {getHeaders} from '../../hooks/userHooks';
 
 /**
  *  actions & reducers
@@ -25,7 +33,7 @@ const ACTIONS = {
 
 const initialState = {
     isBormo: (window.location !== ROUTES.phrases.href),
-    apiKey: TEST_KEY,
+    apiKey: LARA_KEY,
     courses: [],
     sections: [],
     currentCourse: null,
@@ -101,21 +109,23 @@ export const RebormoContextProvider = ({children}) => {
     };
 
     const getData = useCallback((key = TEST_KEY) => {
-        const getCourses = (url) => {
-            fetchCourses({method: 'get', url: url});
+        const getCourses = (url, params) => {
+            fetchCourses({method: 'get', url: url, ...params});
         };
 
-        const getSections = (url) => {
-            fetchSections({method: 'get', url: url});
+        const getSections = (url, params) => {
+            fetchSections({method: 'get', url: url, ...params});
         };
 
-        const types = ['COURSES','SECTIONS'];
+        const types = ['COURSES', 'SECTIONS'];
         types.forEach((currentType => {
-            const url = getCurrentUrl(key, currentType);
+            const token = getToken();
+            const params = token ? {headers: getHeaders(token)} : {};
+            const url = token ? getUrlForLoggedUser(currentType) : getCurrentUrl(key, currentType);
             if (currentType === 'COURSES') {
-                getCourses(url);
+                getCourses(url, params);
             } else {
-                getSections(url);
+                getSections(url, params);
             }
         }));
     }, [fetchCourses, fetchSections]);
@@ -140,8 +150,9 @@ export const RebormoContextProvider = ({children}) => {
         }
         dispatch({
             type: ACTIONS.CONTENT,
-            payload: getRefinedResponse(contentResponse, state.apiKey, state.currentLesson, state.isBormo)});
-    }, [contentResponse,  state.apiKey, state.currentLesson, state.isBormo]);
+            payload: getRefinedResponse(contentResponse, state.apiKey, state.currentLesson, state.isBormo)
+        });
+    }, [contentResponse, state.apiKey, state.currentLesson, state.isBormo]);
 
     useEffect(() => {
         const err = (coursesError || sectionsError || contentError);
@@ -153,7 +164,8 @@ export const RebormoContextProvider = ({children}) => {
     useEffect(() => {
         if (currentKey) {
             getData(currentKey)
-        };
+        }
+        ;
     }, [currentKey, getData]);
 
     const changeIsBormo = (bormoState) => (dispatch({type: ACTIONS.CHANGE_IS_BORMO, payload: bormoState}));
@@ -168,12 +180,12 @@ export const RebormoContextProvider = ({children}) => {
         const propertyName = state.isBormo ? 'currentCourse' : 'currentSection';
 
         if (state[propertyName]) {
-             getContent(path, {[paramName]: state[propertyName]['id'], lesson: parseInt(lesson)});
+            getContent(path, {[paramName]: state[propertyName]['id'], lesson: parseInt(lesson)});
         }
         dispatch({type: ACTIONS.SELECT_LESSON, payload: lesson});
     };
 
-    const clearError = () =>  dispatch({type: ACTIONS.SET_ERROR, payload: null});
+    const clearError = () => dispatch({type: ACTIONS.SET_ERROR, payload: null});
 
     const changeDataSource = useCallback((key) => {
         dispatch({type: ACTIONS.CHANGE_API, payload: key});

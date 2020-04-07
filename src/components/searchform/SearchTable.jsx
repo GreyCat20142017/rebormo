@@ -6,9 +6,14 @@ import SkyResults from './results/SkyResults';
 import {MUITable} from '../muitable/MUITable';
 import {SelectedViewer} from './SelectedViewer';
 
+
+const DBresults = ({data}) => (
+    <MUITable data={data} columns={['word', 'translate']} withCheckbox={true} SelectedViewer={SelectedViewer}/>);
+
+
 const CurrentTable = ({onlySkyEng, data}) => (onlySkyEng ?
         <SkyResults data={data}/> :
-        <MUITable data={data} columns={['word', 'translate']} withCheckbox={true} SelectedViewer={SelectedViewer}/>
+        <DBresults data={data}/>
 );
 
 export const SearchTable = ({isLoading, error, onlySkyEng, searchResult, currentTranslateSource}) => {

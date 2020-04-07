@@ -11,6 +11,11 @@ export const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         minHeight: '100vh',
     },
+    body: {
+        display: 'flex',
+        flexDirection: 'column',
+        flexGrow: 1
+    },
     paper: {
         padding: theme.spacing(1),
         width: 'auto'

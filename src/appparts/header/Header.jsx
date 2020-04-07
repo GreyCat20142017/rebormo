@@ -5,6 +5,7 @@ import AppsIcon from '@material-ui/icons/Apps';
 
 import {NavItem} from './NavItem';
 import Submenu from '../../components/submenu/Submenu';
+import {UserMenu} from '../../components/usermenu/UserMenu';
 
 const Header = ({classes, menuItems, submenuItems, sidenavSwitch}) => (
 
@@ -12,9 +13,11 @@ const Header = ({classes, menuItems, submenuItems, sidenavSwitch}) => (
         <IconButton edge='start' color='inherit' aria-label='menu' onClick={() => sidenavSwitch(true)}>
             <AppsIcon/>
         </IconButton>
-        <Typography variant='h6' className={classes.title} title={'Бормотунчик c Redux (Remake Bormo with Redux)'}>
-            Rebormo
-        </Typography>
+        <Hidden>
+            <Typography variant='h6' className={classes.title} title={'Бормотунчик (Remake Bormo)'}>
+                Rebormo
+            </Typography>
+        </Hidden>
         <Divider className={classes.mLeft}/>
         <Hidden smDown={true}>
             {menuItems.map(link =>
@@ -24,7 +27,9 @@ const Header = ({classes, menuItems, submenuItems, sidenavSwitch}) => (
             <Submenu submenuItems={menuItems} withNavLink={true} switchIcon={'Menu'}/>
         </Hidden>
         {/*Здесь выпадающее меню*/}
+        <UserMenu/>
         <Submenu submenuItems={submenuItems}/>
+
     </Toolbar>
 );
 

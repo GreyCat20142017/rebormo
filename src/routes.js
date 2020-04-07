@@ -57,7 +57,20 @@ export const ROUTES = {
         title: 'Настройка',
         icon: 'Settings',
         'submenu': true
+    },
+    help: {
+        href: SERVER_ROOT + 'help',
+        title: 'Подсказка',
+        icon: 'Help',
+        'submenu': true
+    },
+    about: {
+        href: SERVER_ROOT + 'about',
+        title: 'О программе',
+        icon: '',
+        'submenu': true
     }
+
 };
 
 export const SWITCHABLE_MODES = [
@@ -87,10 +100,43 @@ export const HOTKEY_REDIRECTS = {
     'м': ROUTES.check.href
 };
 
-// export {
-//     ROUTES,
-//     BORMO_MODES,
-//     SWITCHABLE_MODES,
-//     HOTKEY_REDIRECTS,
-//     BORMO_COMMON
-// };
+export const HIDE_WHEN = {
+    AUTH: 'authenticated',
+    NOT_AUTH:  'not authenticated',
+    NEVER: 'never'
+};
+
+export const AUTH_ROUTES = {
+    SIGN_IN: {
+        href: '/login',
+        title: 'Вход',
+        label: '',
+        icon: '',
+        userSubmenu: true,
+        hide: HIDE_WHEN.AUTH
+    },
+    SIGN_UP: {
+        href: '/register',
+        title: 'Регистрация',
+        label: '',
+        icon: '',
+        userSubmenu: true,
+        hide: HIDE_WHEN.AUTH
+    },
+    LOGOUT: {
+        href: '/logout',
+        title: 'Выход',
+        label: '',
+        icon: '',
+        userSubmenu: true,
+        hide: HIDE_WHEN.NOT_AUTH
+    },
+    PROFILE: {
+        href: '/profile',
+        title: 'Профиль',
+        label: '',
+        icon: '',
+        userSubmenu: true,
+        hide: HIDE_WHEN.NOT_AUTH
+    }
+};

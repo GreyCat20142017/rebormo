@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Loader = ({message = 'Загрузка...'}) => {
+const Loader = ({message = 'Подождите...'}) => {
     const classes = useStyles();
 
     return (

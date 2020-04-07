@@ -15,34 +15,40 @@ import {VoiceContextProvider} from './context/voice/VoiceContext';
 import {UIContextProvider} from './context/ui/UIContext';
 import {RebormoContextProvider} from './context/rebormo/RebormoContext';
 import {Alert} from './components/alert/Alert';
+import {UserContextProvider} from './context/user/UserContext';
+import {UserChecker} from './services/UserChecker';
 
 const App = (props) => {
     const classes = useStyles();
     return (
         <VoiceContextProvider>
-            <RebormoContextProvider>
-                <UIContextProvider>
-                    <ThemeProvider theme={theme}>
-                        <CssBaseline/>
-                        <div className={classes.app}>
-                            <AppBar position='static'>
-                                <HeaderContainer classes={classes}/>
-                            </AppBar>
+            <UserContextProvider>
+                <UserChecker>
+                    <RebormoContextProvider>
+                        <UIContextProvider>
+                            <ThemeProvider theme={theme}>
+                                <CssBaseline/>
+                                <div className={classes.app}>
+                                    <AppBar position='static'>
+                                        <HeaderContainer classes={classes}/>
+                                    </AppBar>
 
-                            <div style={{display: 'flex', flexDirection: 'column', flexGrow: 1}}>
-                                <BodyContainer classes={classes}/>
-                                <ContentContainer/>
-                                <ErrorMessageContainer/>
-                                <Alert/>
-                            </div>
+                                    <div className={classes.body}>
+                                        <BodyContainer classes={classes}/>
+                                        <ContentContainer/>
+                                        <ErrorMessageContainer/>
+                                        <Alert/>
+                                    </div>
 
-                            <AppBar position='static'>
-                                <FooterContainer/>
-                            </AppBar>
-                        </div>
-                    </ThemeProvider>
-                </UIContextProvider>
-            </RebormoContextProvider>
+                                    <AppBar position='static'>
+                                        <FooterContainer/>
+                                    </AppBar>
+                                </div>
+                            </ThemeProvider>
+                        </UIContextProvider>
+                    </RebormoContextProvider>
+                </UserChecker>
+            </UserContextProvider>
         </VoiceContextProvider>
     );
 };

@@ -2,10 +2,10 @@ import React from 'react';
 import {Route, Switch, withRouter} from 'react-router-dom';
 import {Drawer, Paper} from '@material-ui/core';
 
-import {Bormo, Control, Main, NotFound, Phrases, Search, Spelling} from '../../pages/pages';
+import {Bormo, Control, Main, NotFound, Phrases, Search, Spelling, SignIn, SignUp, Profile, Logout, Help} from '../../pages/pages';
 import Sidenav from '../sidenav/Sidenav';
 import {CONTROL_MODES} from '../../constants';
-import {ROUTES} from '../../routes';
+import {AUTH_ROUTES, ROUTES} from '../../routes';
 
 const Body = ({
                   classes, originalContent, currentCourse, currentLesson, sidenav, sidenavSwitch, apiKey
@@ -45,6 +45,14 @@ const Body = ({
 
                 <Route path={ROUTES.skyeng.href}
                        render={(props) => <Search apiKey={apiKey} onlySkyEng={true}/>}/>
+
+                <Route path={ROUTES.help.href} component={Help}/>
+                <Route path={ROUTES.about.href} component={Help}/>
+
+                <Route path={AUTH_ROUTES.SIGN_IN.href} component={SignIn}/>
+                <Route path={AUTH_ROUTES.SIGN_UP.href} component={SignUp}/>
+                <Route path={AUTH_ROUTES.PROFILE.href} component={Profile}/>
+                <Route path={AUTH_ROUTES.LOGOUT.href} component={Logout}/>
 
                 <NotFound/>
             </Switch>

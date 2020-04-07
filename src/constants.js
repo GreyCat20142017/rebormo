@@ -119,6 +119,26 @@ export const DATA_SOURCES = {
 };
 
 export const TEST_KEY = 'TEST';
+export const LARA_KEY = 'LARAVEL_LOCAL';
+
+
+export const API_PATH = {
+    LOGIN: 'http://bormolara.local:8080/api/login',
+    REGISTER: 'http://bormolara.local:8080/api/register',
+    GET_USER: 'http://bormolara.local:8080/api/user',
+    UPDATE_USER: 'http://bormolara.local:8080/api/user/update',
+    LOGOUT: 'http://bormolara.local:8080/api/user/logout',
+    COURSES: 'http://bormolara.local:8080/api/user/courses',
+    SECTIONS: 'http://bormolara.local:8080/api/sections'
+};
+
+export const LS_TOKEN = 'rebormo_token';
+export const LS_TOKEN_EXPIRATION = 'rebormo_token_expiration';
+export const LS_TOKEN_REFRESH = 'rebormo_token_refresh';
+export const DATA_SOURCE_TOKEN_NAME = 'token';
+export const DATA_SOURCE_TOKEN_REFRESH = 'refresh_token';
+export const DATA_SOURCE_TOKEN_REFRESH_NAME = 'refreshToken';
+export const DATA_SOURCE_TOKEN_EXPIRATION = 'expiresIn';
 
 export const STATUS_OK = 200;
 
@@ -178,4 +198,4 @@ export const HOTKEYS = {
 };
 
 
-export const LS_TOKEN = 'REBORMO_TOKEN';
+export const BASE_URL = '';

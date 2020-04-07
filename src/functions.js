@@ -1,6 +1,17 @@
 import {
-    BORMO_STATUS, CONTROL_MODES, DATA_SOURCES, FIELDS, LANGUAGES, PAGE_LIMIT, PHRASES_PER_LESSON, SKYENG_URL,
-    TEST_KEY, TRANSLATE_SOURCES, WORDS_PER_LESSON
+    API_PATH,
+    BORMO_STATUS,
+    CONTROL_MODES,
+    DATA_SOURCES,
+    FIELDS,
+    LANGUAGES,
+    LS_TOKEN,
+    PAGE_LIMIT,
+    PHRASES_PER_LESSON,
+    SKYENG_URL,
+    TEST_KEY,
+    TRANSLATE_SOURCES,
+    WORDS_PER_LESSON
 } from './constants';
 import {ROUTES, SWITCHABLE_MODES} from './routes';
 
@@ -188,6 +199,10 @@ export const getCurrentUrl = (key, currentType) => {
     return DATA_SOURCES[key] ? DATA_SOURCES[key][currentType] : DATA_SOURCES.TEST[currentType];
 };
 
+export const getUrlForLoggedUser = (currentType) => {
+    return currentType === 'COURSES' ? API_PATH.COURSES : API_PATH.SECTIONS;
+};
+
 export const getCurrentType = (key, path) => {
     let currentType = path.toUpperCase();
     if (key === TEST_KEY) {
@@ -252,7 +267,8 @@ export const getSearchUrl = (currentTranslateSource, apiKey) => (
     (currentTranslateSource === TRANSLATE_SOURCES.SKYENG) ? SKYENG_URL : DATA_SOURCES[apiKey]['SEARCH']
 );
 
+export const getUserFromResponse = (response) => {
+    return response['currentUser'];
+};
 
-
-
-
+export const getToken = () => (localStorage.getItem(LS_TOKEN) || '');

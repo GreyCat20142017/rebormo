@@ -4,60 +4,65 @@ import {
     Headset, Done, DoneAll, PlaylistAddCheck as Spelling, ListAlt as Check,
     Home, Settings, Search, CloudQueue as Sky, Info, Extension, FilterNone, Add, Edit,
     MoreVert as More, HelpOutline as Help, MenuBook as Book, PriorityHigh as Error, Menu,
-    ArrowLeft, ArrowRight, VolumeOff, VolumeDown as VolumeOn, PermDataSetting as VoiceSettings
+    ArrowLeft, ArrowRight, VolumeOff, VolumeDown as VolumeOn, PermDataSetting as VoiceSettings,
+    Person as User, Face as LoggedUser
 } from '@material-ui/icons';
 
 
-const MUIIcon = ({icon, iconSize = 'small'}) => {
+const MUIIcon = ({icon, iconSize = 'small', color = 'inherit'}) => {
     switch (icon) {
         case 'Menu':
-            return <Menu fontSize={iconSize}/>;
+            return <Menu fontSize={iconSize} color={color}/>;
         case 'Bormo':
-            return <Headset fontSize={iconSize}/>;
+            return <Headset fontSize={iconSize} color={color}/>;
         case 'Control':
-            return <Done fontSize={iconSize}/>;
+            return <Done fontSize={iconSize} color={color}/>;
         case 'Reverse':
-            return <DoneAll fontSize={iconSize}/>;
+            return <DoneAll fontSize={iconSize} color={color}/>;
         case 'Spelling':
-            return <Spelling fontSize={iconSize}/>;
+            return <Spelling fontSize={iconSize} color={color}/>;
         case 'Check':
-            return <Check fontSize={iconSize}/>;
+            return <Check fontSize={iconSize} color={color}/>;
         case 'Home':
-            return <Home fontSize={iconSize}/>;
+            return <Home fontSize={iconSize} color={color}/>;
         case 'Settings':
-            return <Settings fontSize={iconSize}/>;
+            return <Settings fontSize={iconSize} color={color}/>;
         case 'Search':
-            return <Search fontSize={iconSize}/>;
+            return <Search fontSize={iconSize} color={color}/>;
         case 'Sky':
-            return <Sky fontSize={iconSize}/>;
+            return <Sky fontSize={iconSize} color={color}/>;
         case 'ClearAll':
-            return <FilterNone fontSize={iconSize}/>;
+            return <FilterNone fontSize={iconSize} color={color}/>;
         case 'Info':
-            return <Info fontSize={iconSize}/>;
+            return <Info fontSize={iconSize} color={color}/>;
         case 'More':
-            return <More fontSize={iconSize}/>;
+            return <More fontSize={iconSize} color={color}/>;
         case 'Help':
-            return <Help fontSize={iconSize}/>;
+            return <Help fontSize={iconSize} color={color}/>;
         case 'Book':
-            return <Book fontSize={iconSize}/>;
+            return <Book fontSize={iconSize} color={color}/>;
         case 'Error':
-            return <Error fontSize={iconSize}/>;
+            return <Error fontSize={iconSize} color={color}/>;
         case 'Extension':
-            return <Extension fontSize={iconSize}/>;
+            return <Extension fontSize={iconSize} color={color}/>;
         case 'Prev':
-            return <ArrowLeft fontSize={iconSize}/>;
+            return <ArrowLeft fontSize={iconSize} color={color}/>;
         case 'Next':
-            return <ArrowRight fontSize={iconSize}/>;
+            return <ArrowRight fontSize={iconSize} color={color}/>;
         case 'VoiceSettings':
-            return <VoiceSettings fontSize={iconSize}/>;
+            return <VoiceSettings fontSize={iconSize} color={color}/>;
         case 'VolumeOn':
-            return <VolumeOn fontSize={iconSize}/>;
+            return <VolumeOn fontSize={iconSize} color={color}/>;
         case 'VolumeOff':
-            return <VolumeOff fontSize={iconSize}/>;
+            return <VolumeOff fontSize={iconSize} color={color}/>;
         case 'Add':
-            return <Add fontSize={iconSize}/>;
+            return <Add fontSize={iconSize} color={color}/>;
         case 'Edit':
-            return <Edit fontSize={iconSize}/>;
+            return <Edit fontSize={iconSize} color={color}/>;
+        case 'User':
+            return <User fontSize={iconSize} color={color}/>;
+        case 'LoggedUser':
+            return <LoggedUser fontSize={iconSize} color={color}/>;
         default:
     }
     return null;
