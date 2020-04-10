@@ -26,8 +26,6 @@ export const Logout = () => {
 
     useEffect(() => {
         if (response) {
-            setToken('');
-            setTokenExpiration('');
             dispatch({type: 'LOGOUT'});
             setRedirect(true);
         }

@@ -4,7 +4,7 @@ import {
     CONTROL_MODES,
     DATA_SOURCES,
     FIELDS,
-    LANGUAGES,
+    LANGUAGES, LARA_KEY,
     LS_TOKEN,
     PAGE_LIMIT,
     PHRASES_PER_LESSON,
@@ -259,8 +259,7 @@ export const getSearchParams = (currentTranslateSource, apiKey, trimmedText, exa
     if (currentTranslateSource === TRANSLATE_SOURCES.SKYENG) {
         return ({search: trimmedText});
     }
-    // return (apiKey === TEST_KEY) ? {} : {word: trimmedText, exact: (+exact)};
-     return {word: trimmedText, exact: (+exact)};
+    return exact ? {word: trimmedText, exact: (+exact)} : {word: trimmedText};
 };
 
 export const getSearchUrl = (currentTranslateSource, apiKey) => (
@@ -272,3 +271,5 @@ export const getUserFromResponse = (response) => {
 };
 
 export const getToken = () => (localStorage.getItem(LS_TOKEN) || '');
+
+export const isLara = (key) => (key === LARA_KEY);

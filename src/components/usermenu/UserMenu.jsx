@@ -5,15 +5,15 @@ import Submenu from '../submenu/Submenu';
 import MUIIcon from '../icon/MUIIcon';
 import {RebormoContext} from '../../context/rebormo/RebormoContext';
 import {UserContext} from '../../context/user/UserContext';
-import {LARA_KEY} from '../../constants';
+import {isLara} from '../../functions';
 import {AUTH_ROUTES, HIDE_WHEN} from '../../routes';
 
 const NONAME = 'Аноним';
 
-export const getUserInfo = (user) => {
+export const getUserInfo = (user, apiKey) => {
     let result = 'Вход не выполнен';
-    if (user) {
-        result = user['name'] ? user['name'] : `${NONAME} ${user['email']}`;
+    if (isLara(apiKey) && user) {
+        result = user['name'] ? user['name'] : `${NONAME} ${user['email'] || ''}`;
     }
     return result;
 };
@@ -35,7 +35,7 @@ export const UserMenu = () => {
     const [userMenu, setUserMenu] = useState([]);
 
     useEffect(() => {
-        const items = (apiKey === LARA_KEY) ? getMenuByRoutes(true, isLoggedIn) : [];
+        const items = isLara(apiKey) ? getMenuByRoutes(true, isLoggedIn) : [];
         setUserMenu(items);
     }, [isLoggedIn, apiKey]);
 
@@ -44,8 +44,8 @@ export const UserMenu = () => {
         <div style={{marginLeft: 'auto'}}>
             <Submenu submenuItems={userMenu} switchIcon={'User'}/>
             <Chip variant={'outlined'} style={{color: 'white'}}
-                  avatar={isLoggedIn ? <MUIIcon icon={'LoggedUser'}/> : null}
-                  label={getUserInfo(currentUser)}/>
+                  avatar={isLoggedIn && isLara(apiKey)? <MUIIcon icon={'LoggedUser'}/> : null}
+                  label={getUserInfo(currentUser, apiKey)}/>
         </div>
     )
 };

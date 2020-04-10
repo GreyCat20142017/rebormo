@@ -129,7 +129,8 @@ export const API_PATH = {
     UPDATE_USER: 'http://bormolara.local:8080/api/user/update',
     LOGOUT: 'http://bormolara.local:8080/api/user/logout',
     COURSES: 'http://bormolara.local:8080/api/user/courses',
-    SECTIONS: 'http://bormolara.local:8080/api/sections'
+    SECTIONS: 'http://bormolara.local:8080/api/sections',
+    WORD_CREATE: 'http://bormolara.local:8080/api/user/word/create'
 };
 
 export const LS_TOKEN = 'rebormo_token';

@@ -11,5 +11,8 @@ export const useStyles = makeStyles(theme => ({
         paddingRight: theme.spacing(4),
         border: '1px solid rgb(211, 211, 211)',
         display: 'flex'
+    },
+    comment: {
+        display: 'flex'
     }
 }));

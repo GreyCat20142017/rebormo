@@ -1,30 +1,37 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {IconButton, TextField, Select, MenuItem} from '@material-ui/core';
+import {IconButton, TextField, Select, MenuItem, Typography} from '@material-ui/core';
 
 import MUIIcon from '../icon/MUIIcon';
 import {RebormoContext} from '../../context/rebormo/RebormoContext';
+import {UserContext} from '../../context/user/UserContext';
+import {UIContext} from '../../context/ui/UIContext';
+import Word from '../../classes/Word';
 import {isValidIndex} from '../../functions';
 import {useStyles} from './SelectedViewer.css';
 
 export const SelectedViewer = ({data, selected}) => {
     const [joinedTranslate, setJoinedTraslate] = useState('');
+    const [origin, setOrigin] = useState('');
     const [editMode, setEditMode] = useState(false);
-    const classes = useStyles();
-
     const [own, setOwn] = useState([]);
     const [selectedOwn, setSelectedOwn] = useState(null);
     const {courses, sections, isBormo} = useContext(RebormoContext);
+    const {messageShow} = useContext(UIContext);
+    const [{currentUser}] = useContext(UserContext);
+    const classes = useStyles();
+
+    const userId = currentUser['id'] || 1;
 
     useEffect(() => {
-        const userId = 3;
         const ownCourses = isBormo ? courses.filter(item => item.user_id === userId) : sections.filter(item => item.user_id === userId);
         setOwn(ownCourses);
         setSelectedOwn(ownCourses && ownCourses.length > 0 ? ownCourses[0].id : null);
-    }, [courses, sections, isBormo]);
+    }, [courses, sections, isBormo, userId]);
 
     useEffect(() => {
         const translate = selected.reduce((acc, item, ind) =>
             acc + (isValidIndex(item, data) ? (ind > 0 ? ', ' : '') + data[item]['translate'] : ''), '');
+        setOrigin(new Set(selected.map(item => data[item]['word'])));
         setJoinedTraslate(translate);
     }, [data, selected]);
 
@@ -38,15 +45,19 @@ export const SelectedViewer = ({data, selected}) => {
 
     const onOwnChange = (evt) => {
         setSelectedOwn(evt.target.value);
-    }
+    };
 
     const onAdd = () => {
-        console.log(selectedOwn);
-    }
+        const onResult = (result) => messageShow(result);
+        const values = Array.from(origin);
+        const first = values.length > 0 ? values[0] : '';
+        const word = new Word(first, joinedTranslate, selectedOwn, onResult);
+        word.create();
+    };
 
-    const disabledAdd = false; // !selectedOwn || (joinedTranslate.trim() === '');
 
-    //MyTodo disabled Add if words are different
+    const disabledAdd = !selectedOwn || (joinedTranslate.trim() === '') || (origin.size > 1);
+
 
     return (
         <>
@@ -84,7 +95,12 @@ export const SelectedViewer = ({data, selected}) => {
                         {own.map(item =>
                             <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>)}
                     </Select>
+
                     }
+                    <Typography className={classes.comment} variant={'caption'} color={'secondary'}>
+                        Для добавления данных в БД должен быть выбран один из Ваших собственных курсов, выбранные английские слова должны быть одинаковы,
+                        перевод не должен быть пустой строкой
+                    </Typography>
                 </>
                 : null
             }

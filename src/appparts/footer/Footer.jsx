@@ -14,14 +14,15 @@ const dataSources = Object.keys(DATA_SOURCES).filter(key => !DATA_SOURCES[key].d
 const Footer = ({apiKey, changeDataSource, getData}) => {
     const {bormoSpeaker} = useContext(VoiceContext);
     const [muted, setMuted] = useState(bormoSpeaker.muted);
-    const classes = useStyles();
     const currentDataSource = apiKey && DATA_SOURCES[apiKey] && DATA_SOURCES[apiKey]['COMMENT'] ? DATA_SOURCES[apiKey]['COMMENT'] : '';
+    const classes = useStyles();
 
-    const voices = window.speechSynthesis.getVoices().filter((item) => item.lang.slice(0, 2) === 'en')
+    const voices = window.speechSynthesis.getVoices()
+        .filter((item) => item.lang.slice(0, 2) === 'en')
         .map(el => ({voice: el, href: el.name, key: el.name, text: el.name}));
 
     const onSelectDataSource = (key) => {
-        if (key !== 'escapeKeyDown' && key !== apiKey) {
+        if ((key !== 'escapeKeyDown') && (key !== apiKey)) {
            changeDataSource(key);
            getData(key);
         }

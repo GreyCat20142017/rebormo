@@ -2,12 +2,8 @@ import React, {createContext, useCallback, useEffect, useReducer} from 'react';
 
 import {useFetch} from '../../hooks/customHooks';
 import {
-    getCurrentType,
-    getCurrentUrl,
-    getRefinedResponse,
-    getSelectedCourse,
-    getToken,
-    getTotalPages, getUrlForLoggedUser
+    getCurrentType, getCurrentUrl, getRefinedResponse, getSelectedCourse, getToken, getTotalPages,
+    getUrlForLoggedUser, isLara
 } from '../../functions';
 import {ROUTES} from '../../routes';
 import {LARA_KEY, TEST_KEY} from '../../constants';
@@ -74,8 +70,8 @@ const handlers = {
     [ACTIONS.SET_ERROR]: (state, {payload}) => ({...state, error: payload}),
     [ACTIONS.CHANGE_IS_BORMO]: (state, {payload}) => ({...state, isBormo: payload}),
     [ACTIONS.CHANGE_API]: (state, {payload}) => (
-        {...initialState, apiKey: payload, content: null, currentLesson: null, currentCourse: null,}
-        ),
+        {...initialState, apiKey: payload, content: null, currentLesson: null, currentCourse: null}
+    ),
     DEFAULT: state => state
 };
 
@@ -120,8 +116,8 @@ export const RebormoContextProvider = ({children}) => {
         const types = ['COURSES', 'SECTIONS'];
         types.forEach((currentType => {
             const token = getToken();
-            const params = token ? {headers: getHeaders(token)} : {};
-            const url = token ? getUrlForLoggedUser(currentType) : getCurrentUrl(key, currentType);
+            const params = token && isLara(key) ? {headers: getHeaders(token)} : {};
+            const url = token && isLara(key) ? getUrlForLoggedUser(currentType) : getCurrentUrl(key, currentType);
             if (currentType === 'COURSES') {
                 getCourses(url, params);
             } else {

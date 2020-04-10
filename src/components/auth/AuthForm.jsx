@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Button, TextField, Typography} from '@material-ui/core';
 import is from 'is_js';
+import {KEY_CODES} from '../../constants';
 
 const PASSWORD_MIN = 2;
 
@@ -28,6 +29,12 @@ export const AuthForm = ({onSuccess, isSignUp = false, old = ''}) => {
         }
     };
 
+    const onKeyPress = (evt, submitOnEnter) => {
+        if (submitOnEnter && evt.keyCode === KEY_CODES.ENTER) {
+            onSubmit(evt);
+        }
+    };
+
     return (
         <form onSubmit={onSubmit}>
             <Typography variant='h6'>{title}</Typography>
@@ -40,13 +47,15 @@ export const AuthForm = ({onSuccess, isSignUp = false, old = ''}) => {
                 required id='password' name='password' label={'пароль'} value={password} fullWidth
                 margin='normal' type={'password'}
                 error={touched && password.trim().length < PASSWORD_MIN}
-                onChange={(evt) => onInputChange(evt.target.value, setPassword)}/>
+                onChange={(evt) => onInputChange(evt.target.value, setPassword)}
+                onKeyDown={(evt) => onKeyPress(evt, !isSignUp)}/>
             {isSignUp &&
             <TextField
                 required id='password' name='passwordRepeat' label={'повтор пароля'} value={passwordRepeat} fullWidth
                 margin='normal' type={'password'}
                 error={touched && (passwordRepeat.trim().length < PASSWORD_MIN || passwordRepeat !== password)}
-                onChange={(evt) => onInputChange(evt.target.value, setPasswordRepeat)}/>
+                onChange={(evt) => onInputChange(evt.target.value, setPasswordRepeat)}
+                onKeyDown={(evt) => onKeyPress(evt, isSignUp)}/>
             }
             <Button variant={'contained'} color={'primary'} onClick={onSubmit} fullWidth title={'title'}>
                 {title}
