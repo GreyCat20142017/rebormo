@@ -21,6 +21,8 @@ const ACTIONS = {
     CONTENT: 'CONTENT',
     SELECT_CURRENT: 'SELECT_CURRENT',
     SELECT_LESSON: 'SELECT_LESSON',
+    PREV_LESSON: 'PREV_LESSON',
+    NEXT_LESSON: 'NEXT_LESSON',
     SELECT_PAGE: 'SELECT_PAGE',
     PREV_PAGE: 'PREV_PAGE',
     NEXT_PAGE: 'NEXT_PAGE',
@@ -66,6 +68,10 @@ const handlers = {
     [ACTIONS.NEXT_PAGE]: (state) => (
         state.currentPage < state.totalPages ? {...state, currentPage: state.currentPage + 1} : state),
     [ACTIONS.SELECT_LESSON]: (state, {payload}) => ({...state, currentLesson: payload}),
+    [ACTIONS.PREV_LESSON]: (state) =>
+        (state.currentLesson > 1 ? {...state, currentLesson: state.currentLesson - 1} : state),
+    [ACTIONS.NEXT_LESSON]: (state) => (
+        state.currentLesson < state.lessonsCount ? {...state, currentLesson: state.currentLesson + 1} : state),
     [ACTIONS.CONTENT]: (state, {payload}) => ({...state, content: payload}),
     [ACTIONS.SET_ERROR]: (state, {payload}) => ({...state, error: payload}),
     [ACTIONS.CHANGE_IS_BORMO]: (state, {payload}) => ({...state, isBormo: payload}),
@@ -161,14 +167,13 @@ export const RebormoContextProvider = ({children}) => {
         if (currentKey) {
             getData(currentKey)
         }
-        ;
     }, [currentKey, getData]);
 
     const changeIsBormo = (bormoState) => (dispatch({type: ACTIONS.CHANGE_IS_BORMO, payload: bormoState}));
     const selectCurrent = (id) => (dispatch({type: ACTIONS.SELECT_CURRENT, payload: id}));
     const selectPage = (page) => (dispatch({type: ACTIONS.SELECT_PAGE, payload: page}));
-    const nextPage = () => (dispatch({type: ACTIONS.NEXT_PAGE}));
     const prevPage = () => (dispatch({type: ACTIONS.PREV_PAGE}));
+    const nextPage = () => (dispatch({type: ACTIONS.NEXT_PAGE}));
 
     const selectLesson = (lesson) => {
         const path = state.isBormo ? 'courses' : 'sections';
@@ -178,7 +183,17 @@ export const RebormoContextProvider = ({children}) => {
         if (state[propertyName]) {
             getContent(path, {[paramName]: state[propertyName]['id'], lesson: parseInt(lesson)});
         }
-        dispatch({type: ACTIONS.SELECT_LESSON, payload: lesson});
+        dispatch({type: ACTIONS.SELECT_LESSON, payload: parseInt(lesson)});
+    };
+
+    const prevLesson = () => {
+        const changedLesson = state.currentLesson > 1 ? state.currentLesson - 1 : state.currentLesson;
+        selectLesson(changedLesson);
+    };
+
+    const nextLesson = () => {
+        const changedLesson = state.currentLesson < state.lessonsCount ? state.currentLesson + 1 : state.currentLesson;
+        selectLesson(changedLesson);
     };
 
     const clearError = () => dispatch({type: ACTIONS.SET_ERROR, payload: null});
@@ -190,17 +205,18 @@ export const RebormoContextProvider = ({children}) => {
 
     const {
         apiKey, isBormo, courses, sections, currentCourse, currentSection, content, error,
-        currentPage, totalPages, lessonsCount
+        currentPage, totalPages, lessonsCount, currentLesson
     } = state;
     const isLoading = (coursesIsLoading || sectionsIsLoading || contentIsLoading);
 
     return (
         <RebormoContext.Provider value={{
-            apiKey, isBormo, courses, sections, isLoading, error, currentCourse, currentSection, content,
+            apiKey, isBormo, courses, sections, isLoading, error, currentCourse, currentSection,
+            currentLesson, content,
             currentPage, totalPages, lessonsCount, changeIsBormo, clearError, changeDataSource, getData,
-            selectCurrent, selectLesson, selectPage, nextPage, prevPage
+            selectCurrent, selectLesson, selectPage, nextPage, prevPage, prevLesson, nextLesson
         }}>
             {children}
         </RebormoContext.Provider>
-    );
+    )
 };

@@ -194,8 +194,15 @@ export const AXIOS_TIMEOUT = 7000;
 export const REBORMO_LS = 'Rebormo';
 
 export const HOTKEYS = {
-    S: ['s', 'ы'],
-    H: ['h', 'р']
+    S: 's',
+    H: 'h',
+    R: 'r',
+    N: 'n',
+    P: 'p',
+    X: 'x',
+    E: 'e',
+    T: 't',
+    I: 'i'
 };
 
 

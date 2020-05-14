@@ -5,7 +5,6 @@ import {SpellingForm} from './SpellingForm';
 import SimpleToolbar from '../../components/toolbar/SimpleToolbar';
 import ContentMissingMessage from '../../appparts/errors/ContentMissingMessage';
 import {TOOLBAR_TYPES} from '../../constants';
-import {useHotkey} from '../../hooks/hooks';
 
 const SpellingView = ({
                           classes, content, currentLesson, currentCourse,
@@ -13,8 +12,6 @@ const SpellingView = ({
                           onSkip, onHint, onRestart, onTranslateValidate
                       }) => {
 
-    useHotkey(['s'], onSkip);
-    useHotkey(['h'], onHint);
 
     return (
         (content && content.length > 0) ?

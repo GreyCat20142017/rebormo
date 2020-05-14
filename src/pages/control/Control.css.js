@@ -12,7 +12,7 @@ export const useControlModeStyles = makeStyles(theme => ({
     cardList: {
         listStyle: 'none',
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: '',
         flexWrap: 'wrap',
         width: '100%',
         paddingLeft: '2.2%',

@@ -22,7 +22,7 @@ export const Help = withRouter(({history, location}) => {
     return (
         <Drawer className={classes.drawer} open={true}>
             <Paper className={classes.paper}>
-                <Typography classname={classes.header} variant={'h5'}>{title}</Typography>
+                <Typography className={classes.header} variant={'h5'}>{title}</Typography>
                 <div className={classes.wrapper}>
                     {text.map((row, ind) =>
                         <Typography className={classes.text} key={ind} component={'p'} variant={'body2'}>

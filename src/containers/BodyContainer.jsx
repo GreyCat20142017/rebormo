@@ -4,10 +4,13 @@ import {RebormoContext} from '../context/rebormo/RebormoContext';
 import {UIContext} from '../context/ui/UIContext';
 import Body from '../appparts/body/Body';
 import {BORMO_MODES, ROUTES} from '../routes';
+import {useHotkeys} from '../hooks/hooks';
+import {HOTKEYS} from '../constants';
 
 const BodyContainer = ({classes, history}) => {
     const {isBormo, changeIsBormo, apiKey, currentCourse, currentLesson, content} = useContext(RebormoContext);
     const {sidenav, sidenavSwitch} = useContext(UIContext);
+    const {nextLesson, prevLesson} = useContext(RebormoContext);
 
     useEffect(() => {
         history.listen((location) => {
@@ -24,6 +27,8 @@ const BodyContainer = ({classes, history}) => {
             }
         };
     }, [changeIsBormo, history]);
+
+    useHotkeys({[HOTKEYS.N]: nextLesson, [HOTKEYS.P]: prevLesson});
 
     const bodyProps = {isBormo, changeIsBormo, apiKey, currentCourse, currentLesson, originalContent: content, sidenav, sidenavSwitch};
     return (

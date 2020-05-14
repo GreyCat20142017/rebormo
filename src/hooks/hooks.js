@@ -1,26 +1,30 @@
 import {useEffect} from 'react';
-import {KEY_CODES} from '../constants';
 
-export const useHotkey = (key, callback) => {
+export const useHotkeys = (hotkeys) => {
+    const en = 'qwertyuiopasdfghjklzxcvbnm';
+    const ru = 'йцукенгшщзфывапролдячсмить';
     useEffect(() => {
         const onKeyPress = (evt) => {
-            const charCode = String.fromCharCode(evt.which).toLowerCase();
-            if (key.indexOf(charCode) >= 0) {
-                callback();
+            if (evt.altKey) {
+                let charCode = String.fromCharCode(evt.which).toLowerCase();
+                const positionRu = ru.indexOf(charCode);
+                charCode = positionRu !== -1 ? en[positionRu] : charCode;
+                if (hotkeys[charCode]) {
+                    hotkeys[charCode]();
+                }
             }
         };
-
         window.addEventListener('keydown', onKeyPress);
         return () => {
             window.removeEventListener('keydown', onKeyPress);
         };
-    }, [key, callback]);
+    }, [hotkeys]);
 };
 
 export const useKeyPress = (key, callback) => {
     useEffect(() => {
         const onKeyPress = (evt) => {
-            if (key === KEY_CODES.ESC) {
+            if (evt.keyCode === key) {
                 callback();
             }
         };
@@ -31,4 +35,5 @@ export const useKeyPress = (key, callback) => {
         };
     }, [key, callback]);
 };
+
 

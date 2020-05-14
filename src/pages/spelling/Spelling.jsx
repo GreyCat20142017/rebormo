@@ -3,11 +3,12 @@ import React, {useContext, useEffect, useState} from 'react';
 import SpellingView from './SpellingView';
 import SimpleSnackbar from '../../components/snackbar/SimpleSnackbar';
 import VoiceContext from '../../context/voice/VoiceContext';
-import {LANGUAGES} from '../../constants';
+import {HOTKEYS, LANGUAGES} from '../../constants';
 import {getReorderedArray, isValidIndex, shuffleArray} from '../../functions';
 import {theme} from '../../theme';
 import {useStyles} from './Spelling.css.js';
 import ContentMissingMessage from '../../appparts/errors/ContentMissingMessage';
+import {useHotkeys} from '../../hooks/hooks';
 
 const Spelling = ({originalContent, currentCourse, currentLesson}) => {
     const [okCount, setOkCount] = useState(0);
@@ -25,6 +26,22 @@ const Spelling = ({originalContent, currentCourse, currentLesson}) => {
         }
     }, [originalContent]);
 
+    const onSkip = () => {
+        setContent(getReorderedArray(currentIndex, content));
+    };
+
+    const onHint = () => {
+        setErrorCount(errorCount + 1);
+        setShowHint(true);
+    };
+
+    const onRestart = () => {
+        if (originalContent) {
+            setContent(shuffleArray(originalContent));
+        }
+    };
+
+    useHotkeys({[HOTKEYS.H]: onHint, [HOTKEYS.S]: onSkip, [HOTKEYS.R]: onRestart});
 
     const maxIndex = content ? content.length : 0;
     const currentTranslate = content && isValidIndex(currentIndex, content) ? content[currentIndex][LANGUAGES.RU] : '';
@@ -50,20 +67,8 @@ const Spelling = ({originalContent, currentCourse, currentLesson}) => {
         return result;
     };
 
-    const onRestart = () => {
-    };
-
     const hideHint = () => {
         setShowHint(false);
-    };
-
-    const onSkip = () => {
-        setContent(getReorderedArray(currentIndex, content));
-    };
-
-    const onHint = () => {
-        setErrorCount(errorCount + 1);
-        setShowHint(true);
     };
 
     return (

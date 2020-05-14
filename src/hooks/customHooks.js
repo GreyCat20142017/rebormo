@@ -70,3 +70,4 @@ export const useFetch = (url) => {
 
     return [{isLoading, response, error}, {doFetch, clearFetchResults}];
 };
+

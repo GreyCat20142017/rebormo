@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 
-import {BORMO_STATUS, CONTROL_MODES, FIELDS, LANGUAGES} from '../../constants';
+import {BORMO_STATUS, CONTROL_MODES, FIELDS, LANGUAGES, HOTKEYS} from '../../constants';
 import {
     getCurrentInfo,
     getInitialMemorized,
@@ -13,8 +13,9 @@ import {
 import ControlView from './ControlView';
 import VoiceContext from '../../context/voice/VoiceContext';
 import SimpleSnackbar from '../../components/snackbar/SimpleSnackbar';
-import {useControlModeStyles} from './Control.css';
 import ContentMissingMessage from '../../appparts/errors/ContentMissingMessage';
+import {useHotkeys} from '../../hooks/hooks';
+import {useControlModeStyles} from './Control.css';
 
 const Control = ({originalContent, currentLesson, currentCourse, controlMode = CONTROL_MODES.CONTROL}) => {
 
@@ -29,6 +30,7 @@ const Control = ({originalContent, currentLesson, currentCourse, controlMode = C
     const {bormoSpeaker} = useContext(VoiceContext);
     const classes = useControlModeStyles();
 
+
     useEffect(() => {
         if (originalContent) {
             setRandomOrder(getRandomOrder(originalContent.length));
@@ -42,6 +44,20 @@ const Control = ({originalContent, currentLesson, currentCourse, controlMode = C
         }
     }, [originalContent, controlMode]);
 
+    const onSkip = () => {
+        setRandomOrder(randomOrder => getReorderedArray(currentIndex, randomOrder));
+    };
+
+    const onHint = () => {
+        setErrorCount((errorCount) => errorCount + 1);
+        setShowHint(true);
+    };
+
+    const onRestart = () => {
+
+    }
+
+    useHotkeys({[HOTKEYS.H]: onHint, [HOTKEYS.S]: onSkip, [HOTKEYS.R]: onRestart});
 
     const onDebouncedSwitch = (index) => {
         switchDisableOne(index);
@@ -96,14 +112,7 @@ const Control = ({originalContent, currentLesson, currentCourse, controlMode = C
         }
     };
 
-    const onSkip = () => {
-        setRandomOrder(randomOrder => getReorderedArray(currentIndex, randomOrder));
-    };
 
-    const onHint = () => {
-        setErrorCount((errorCount) => errorCount + 1);
-        setShowHint(true);
-    };
 
     const maxIndex = content ? content.length : 0;
     const currentTranslate = getCurrentInfo(currentIndex, maxIndex, randomOrder, controlMode, content, FIELDS.TRANSLATE);

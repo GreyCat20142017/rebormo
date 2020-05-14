@@ -3,17 +3,13 @@ import {InfoPart} from './InfoPart';
 import ListPart from '../bormo/ListPart';
 import {WORDS_PER_LESSON} from '../../constants';
 import ContentMissingMessage from '../../appparts/errors/ContentMissingMessage';
-import {useHotkey} from '../../hooks/hooks';
 
 const ControlView = ({
                          classes, content, currentLesson, currentCourse, controlMode,
                          currentIndex, memorized, currentTranslate,
                          okCount, errorCount, showHint = false,
-                         onDebouncedSwitch, onSkip, onHint
+                         onDebouncedSwitch
                      }) => {
-
-    useHotkey(['s'], onSkip);
-    useHotkey(['h'], onHint);
 
     return (
 

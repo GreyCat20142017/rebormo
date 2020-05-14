@@ -3,10 +3,11 @@ import React, {useContext, useEffect, useRef, useState} from 'react';
 import {BormoView} from './BormoView';
 import VoiceContext from '../../context/voice/VoiceContext';
 import {getActiveAmount, getInitialMemorized, isValidIndex} from '../../functions';
-import {BORMO_STATUS, TIMER_INTERVAL} from '../../constants';
+import {BORMO_STATUS, HOTKEYS, KEY_CODES, TIMER_INTERVAL} from '../../constants';
 import {theme} from '../../theme';
 import {useStyles} from './Bormo.css';
 import ContentMissingMessage from '../../appparts/errors/ContentMissingMessage';
+import {useHotkeys, useKeyPress} from '../../hooks/hooks';
 
 const Bormo = ({content}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -30,8 +31,29 @@ const Bormo = ({content}) => {
     const currentTranslate = isValidIndex(currentIndex, content) ? content[currentIndex].russian : '';
     const activeAmount = getActiveAmount(memorized);
 
-    const onDebouncedSwitch = () => {
+
+    const switchDisableOne = (index) => {
+        if (timerStatus === BORMO_STATUS.STARTED) {
+            const newMemorized = [...memorized.slice(0, index), {
+                index: index,
+                inactive: !memorized[index].inactive
+            }, ...memorized.slice(index + 1)];
+            setMemorized(() => newMemorized);
+            // if (this.props.config.instantNextMode && newMemorized.filter(item => !item.inactive).length === 0) {
+            //     this.props.moveOn();
+            // }
+        }
     };
+
+    const onDebouncedSwitch = (index) => {
+        switchDisableOne(index);
+    }
+
+    const onDebouncedSwitchCurrent = () => {
+        switchDisableOne(currentIndex);
+    };
+
+    useKeyPress(KEY_CODES.SPACE, onDebouncedSwitchCurrent);
 
     const ticks = () => {
         if (memorized) {
@@ -52,7 +74,7 @@ const Bormo = ({content}) => {
         }
     };
 
-    const timerStart = () => {
+    const timerRestart = () => {
         if (timerStatus !== BORMO_STATUS.STARTED) {
             clearInterval(timerRef.current);
             timerRef.current = setInterval(ticks, TIMER_INTERVAL);
@@ -69,18 +91,21 @@ const Bormo = ({content}) => {
             clearInterval(timerRef.current);
             setTimerStatus(BORMO_STATUS.PAUSED);
         }
-
     };
+
     const timerStop = () => {
         clearInterval(timerRef.current);
         setTimerStatus(BORMO_STATUS.STOPPED);
         setCurrentIndex(0);
     };
 
+    useHotkeys({[HOTKEYS.R]: timerRestart, [HOTKEYS.I]: timerPause, [HOTKEYS.T]: timerStop});
+
     const props = {
         classes, currentIndex, currentWord, currentTranslate,
-        memorized, activeAmount, timerStatus, timerStart, timerPause, timerStop,
-        onDebouncedSwitch
+        memorized, activeAmount, timerStatus, timerRestart, timerPause, timerStop,
+        onDebouncedSwitch,
+        onDebouncedSwitchCurrent
     };
 
     return (

@@ -8,8 +8,8 @@ const secondStartIndex = Math.floor(WORDS_PER_LESSON / 2);
 
 export const BormoView = ({
                               classes, content, currentIndex, currentWord, currentTranslate,
-                              memorized, activeAmount, timerStatus, timerStart, timerPause, timerStop,
-                              onDebouncedSwitch
+                              memorized, activeAmount, timerStatus, timerRestart, timerPause, timerStop,
+                              onDebouncedSwitch, onDebouncedSwitchCurrent
                           }) => (
     <div className='bormo__wrapper'>
         <div className={classes.parts}>
@@ -19,8 +19,8 @@ export const BormoView = ({
 
             <BasePart classes={classes} currentWord={currentWord} currentTranslate={currentTranslate}
                       activeAmount={activeAmount} timerStatus={timerStatus} content={content}
-                      onDebouncedSwitch={onDebouncedSwitch}
-                      timerStart={timerStart} timerPause={timerPause} timerStop={timerStop}/>
+                      onDebouncedSwitchCurrent={onDebouncedSwitchCurrent}
+                      timerStart={timerRestart} timerPause={timerPause} timerStop={timerStop}/>
 
             <ListPart content={content} classes={classes} currentIndex={currentIndex}
                       startIndex={secondStartIndex} memorized={memorized}

@@ -5,7 +5,7 @@ import {
     Home, Settings, Search, CloudQueue as Sky, Info, Extension, FilterNone, Add, Edit,
     MoreVert as More, HelpOutline as Help, MenuBook as Book, PriorityHigh as Error, Menu,
     ArrowLeft, ArrowRight, VolumeOff, VolumeDown as VolumeOn, PermDataSetting as VoiceSettings,
-    Person as User, Face as LoggedUser
+    Person as User, Face as LoggedUser, InfoOutlined as InfoO
 } from '@material-ui/icons';
 
 
@@ -63,6 +63,8 @@ const MUIIcon = ({icon, iconSize = 'small', color = 'inherit'}) => {
             return <User fontSize={iconSize} color={color}/>;
         case 'LoggedUser':
             return <LoggedUser fontSize={iconSize} color={color}/>;
+        case 'InfoO':
+            return <InfoO fontSize={iconSize} color={color}/>;
         default:
     }
     return null;
