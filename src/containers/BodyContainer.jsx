@@ -6,6 +6,7 @@ import Body from '../appparts/body/Body';
 import {BORMO_MODES, ROUTES} from '../routes';
 import {useHotkeys} from '../hooks/hooks';
 import {HOTKEYS} from '../constants';
+import ContentContainer from './ContentContainer';
 
 const BodyContainer = ({classes, history}) => {
     const {isBormo, changeIsBormo, apiKey, currentCourse, currentLesson, content} = useContext(RebormoContext);
@@ -28,11 +29,24 @@ const BodyContainer = ({classes, history}) => {
         };
     }, [changeIsBormo, history]);
 
+
     useHotkeys({[HOTKEYS.N]: nextLesson, [HOTKEYS.P]: prevLesson});
 
-    const bodyProps = {isBormo, changeIsBormo, apiKey, currentCourse, currentLesson, originalContent: content, sidenav, sidenavSwitch};
+    const bodyProps = {
+        isBormo,
+        changeIsBormo,
+        apiKey,
+        currentCourse,
+        currentLesson,
+        originalContent: currentLesson ? content : [],
+        sidenav,
+        sidenavSwitch
+    };
     return (
-        <Body classes={classes} {...bodyProps}/>
+        <>
+            <Body classes={classes} {...bodyProps}/>
+            <ContentContainer/>
+        </>
     );
 };
 

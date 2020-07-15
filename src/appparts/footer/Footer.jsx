@@ -17,9 +17,9 @@ const Footer = ({apiKey, changeDataSource, getData}) => {
     const currentDataSource = apiKey && DATA_SOURCES[apiKey] && DATA_SOURCES[apiKey]['COMMENT'] ? DATA_SOURCES[apiKey]['COMMENT'] : '';
     const classes = useStyles();
 
-    const voices = window.speechSynthesis.getVoices()
+    const voices = window['speechSynthesis'] ? window.speechSynthesis.getVoices()
         .filter((item) => item.lang.slice(0, 2) === 'en')
-        .map(el => ({voice: el, href: el.name, key: el.name, text: el.name}));
+        .map(el => ({voice: el, href: el.name, key: el.name, text: el.name})) : [];
 
     const onSelectDataSource = (key) => {
         if ((key !== 'escapeKeyDown') && (key !== apiKey)) {

@@ -4,7 +4,7 @@ import React from 'react';
 // import {useStyles} from './Phrases.css';
 // import {theme} from '../../theme';
 // import {dataTransform, getObjectValuesByKeyArray, getSortedWords} from '../../functions';
-// import ContentMissingMessage from '../../appparts/errors/ContentMissingMessage';
+import ContentMissingMessage from '../../appparts/errors/ContentMissingMessage';
 
 const Phrases = ({content}) => {
     // const [wordsContent, setWordContent] = useState({});
@@ -41,8 +41,10 @@ const Phrases = ({content}) => {
 
 
     return (
-        // content ? <PhrasesView {...phrasesProps} content={content}/> : <ContentMissingMessage/>
-        <p>Заглушка</p>
+        <>
+            {(content && content.length > 0) ? content.map((el, ind) => <p key={ind}>{el['english']}</p>) :
+                <ContentMissingMessage/>}
+        </>
     );
 };
 

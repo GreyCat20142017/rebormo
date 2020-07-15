@@ -9,7 +9,7 @@ import {useStyles} from './App.css';
 import FooterContainer from './containers/FooterContainer';
 import HeaderContainer from './containers/HeaderContainer';
 import BodyContainer from './containers/BodyContainer';
-import ContentContainer from './containers/ContentContainer';
+
 import ErrorMessageContainer from './containers/ErrorMessageContainer';
 import {VoiceContextProvider} from './context/voice/VoiceContext';
 import {UIContextProvider} from './context/ui/UIContext';
@@ -35,7 +35,7 @@ const App = (props) => {
 
                                     <div className={classes.body}>
                                         <BodyContainer classes={classes}/>
-                                        <ContentContainer/>
+
                                         <ErrorMessageContainer/>
                                         <Alert/>
                                     </div>

@@ -10,7 +10,9 @@ import {AUTH_ROUTES, ROUTES} from '../../routes';
 const Body = ({
                   classes, originalContent, currentCourse, currentLesson, sidenav, sidenavSwitch, apiKey
               }) => {
+
     const bormoProps = {originalContent, currentCourse, currentLesson};
+
 
     return (
         <Paper className={window.location.pathname === ROUTES.main.href ? classes.paperMain : classes.paperWhite}>

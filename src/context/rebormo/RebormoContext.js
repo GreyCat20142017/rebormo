@@ -9,6 +9,12 @@ import {ROUTES} from '../../routes';
 import {LARA_KEY, TEST_KEY} from '../../constants';
 import {getHeaders} from '../../hooks/userHooks';
 
+const getLessonCount = (state) => (
+    state.isBormo ?
+        (state['currentCourse'] ? state['currentCourse']['lastlesson'] : 0) :
+        (state['currentSection'] ? state['currentSection']['lastlesson'] : 0)
+);
+
 /**
  *  actions & reducers
  */
@@ -26,11 +32,12 @@ const ACTIONS = {
     SELECT_PAGE: 'SELECT_PAGE',
     PREV_PAGE: 'PREV_PAGE',
     NEXT_PAGE: 'NEXT_PAGE',
-    SET_ERROR: 'SET_ERROR'
+    SET_ERROR: 'SET_ERROR',
+    DESELECT: 'DESELECT'
 };
 
 const initialState = {
-    isBormo: (window.location !== ROUTES.phrases.href),
+    isBormo: (window.location.pathname !== ROUTES.phrases.href),
     apiKey: LARA_KEY,
     courses: [],
     sections: [],
@@ -45,6 +52,7 @@ const initialState = {
 };
 
 const currentCourseReducer = (state, payload) => {
+
     const propertyCourses = state.isBormo ? 'currentCourse' : 'currentSection';
     const selectedCourse = getSelectedCourse(state.isBormo ? state.courses : state.sections, payload);
     let totalPages = 1;
@@ -78,6 +86,14 @@ const handlers = {
     [ACTIONS.CHANGE_API]: (state, {payload}) => (
         {...initialState, apiKey: payload, content: null, currentLesson: null, currentCourse: null}
     ),
+    [ACTIONS.DESELECT]: (state) => ({
+        ...state,
+        content: [],
+        currentLesson: null,
+        currentPage: 1,
+        totalPages: 1,
+        lessonsCount: getLessonCount(state)
+    }),
     DEFAULT: state => state
 };
 
@@ -98,6 +114,11 @@ export const RebormoContextProvider = ({children}) => {
     const [{isLoading: sectionsIsLoading, response: sectionsResponse, error: sectionsError}, {doFetch: fetchSections}] = useFetch();
     const [{isLoading: contentIsLoading, response: contentResponse, error: contentError}, {doFetch: fetchContent}] = useFetch();
     const currentKey = state.apiKey;
+
+
+    useEffect(() => {
+        dispatch({type: ACTIONS.CHANGE_IS_BORMO, payload: (window.location.pathname !== ROUTES.phrases.href)});
+    }, []);
 
     const getContent = (path, params) => {
         const key = state.apiKey;
@@ -169,6 +190,11 @@ export const RebormoContextProvider = ({children}) => {
         }
     }, [currentKey, getData]);
 
+    const deselect = useCallback(() => {
+        dispatch({type: ACTIONS.DESELECT});
+    }, []);
+
+
     const changeIsBormo = (bormoState) => (dispatch({type: ACTIONS.CHANGE_IS_BORMO, payload: bormoState}));
     const selectCurrent = (id) => (dispatch({type: ACTIONS.SELECT_CURRENT, payload: id}));
     const selectPage = (page) => (dispatch({type: ACTIONS.SELECT_PAGE, payload: page}));
@@ -180,7 +206,7 @@ export const RebormoContextProvider = ({children}) => {
         const paramName = state.isBormo ? 'course' : 'section';
         const propertyName = state.isBormo ? 'currentCourse' : 'currentSection';
 
-        if (state[propertyName]) {
+        if (state[propertyName] && lesson) {
             getContent(path, {[paramName]: state[propertyName]['id'], lesson: parseInt(lesson)});
         }
         dispatch({type: ACTIONS.SELECT_LESSON, payload: parseInt(lesson)});
@@ -209,10 +235,11 @@ export const RebormoContextProvider = ({children}) => {
     } = state;
     const isLoading = (coursesIsLoading || sectionsIsLoading || contentIsLoading);
 
+
     return (
         <RebormoContext.Provider value={{
             apiKey, isBormo, courses, sections, isLoading, error, currentCourse, currentSection,
-            currentLesson, content,
+            currentLesson, content, deselect,
             currentPage, totalPages, lessonsCount, changeIsBormo, clearError, changeDataSource, getData,
             selectCurrent, selectLesson, selectPage, nextPage, prevPage, prevLesson, nextLesson
         }}>
