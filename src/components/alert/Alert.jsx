@@ -8,7 +8,7 @@ import {useKeyPress} from '../../hooks/hooks';
 
 const useStyles = makeStyles(theme => ({
     close: {
-        padding: theme.spacing(0.5),
+        padding: theme.spacing(0.5)
     },
     snack: {
         backgroundColor: theme.palette.error.main,
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const Alert = () => {
-    const {message, messageHide} = useContext(UIContext);
+    const {message, messageHide, alertTime} = useContext(UIContext);
     const classes = useStyles();
     useKeyPress(KEY_CODES.ESC, messageHide);
 
@@ -29,10 +29,10 @@ export const Alert = () => {
         <Snackbar
             anchorOrigin={{
                 vertical: 'top',
-                horizontal: 'center',
+                horizontal: 'center'
             }}
             open={!!(message)}
-            autoHideDuration={SNACK_OPEN_TIME}
+            autoHideDuration={alertTime || SNACK_OPEN_TIME}
             onClose={messageHide}
             ContentProps={{
                 'aria-describedby': 'message-id',

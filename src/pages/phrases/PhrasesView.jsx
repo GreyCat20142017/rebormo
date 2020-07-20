@@ -1,18 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Badge, Button, Paper, Typography, TextField} from '@material-ui/core';
 
 import SimpleToolbar from '../../components/toolbar/SimpleToolbar';
 import ContentMissingMessage from '../../appparts/errors/ContentMissingMessage';
-import {getSortedKeys, getTranslatedPhrase} from '../../functions';
+import {getTranslatedPhrase} from '../../functions';
 import {TOOLBAR_TYPES} from '../../constants';
 
-const PhraseForm = ({classes, keyboardMode, wasError = false, onCheckCorrectness}) => {
-    const [result, setResult] = useState('');
+const PhraseForm = ({classes, keyboardMode, wasError = false, onCheckCorrectness, result, setResult}) => {
     const onTranslateChange = (evt) => setResult(evt.target.value);
     return (
         <Paper className={classes.paper}>
             {keyboardMode ?
-                <form className={classes.form} onSubmit={onCheckCorrectness}>
+                <form className={classes.form} onSubmit={(evt) => onCheckCorrectness()}>
                     <TextField
                         required
                         autoFocus={true}
@@ -36,13 +35,13 @@ const PhraseForm = ({classes, keyboardMode, wasError = false, onCheckCorrectness
 
 const PhrasesView = ({
                          classes, content, currentIndex, wordsContent, keyboardMode, isFinished,
-                         finalMessage, wasError,
+                         finalMessage, wasError, result, setResult,
                          onWordClick, onRestart, onSwitchMouseKeyboard, onCancel, onCheckCorrectness
                      }) => (
     wordsContent && Object.keys(wordsContent).length > 0 ?
         <div className={classes.wrapper}>
             <ul className={classes.wordsWrapper}>
-                {getSortedKeys(wordsContent).map((item, ind) =>
+                {Object.keys(wordsContent).map((item, ind) =>
                     (
                         <li key={ind}>
                             <>
@@ -70,7 +69,7 @@ const PhrasesView = ({
             </Paper>
 
             <PhraseForm classes={classes} keyboardMode={keyboardMode} wasError={wasError}
-                        onCheckCorrectness={onCheckCorrectness}/>
+                        onCheckCorrectness={onCheckCorrectness} result={result} setResult={setResult}/>
 
             <SimpleToolbar toolbar={TOOLBAR_TYPES.PHRASES} className={classes.toolbar}
                            onRestart={onRestart} onSwitchMouseKeyboard={onSwitchMouseKeyboard}

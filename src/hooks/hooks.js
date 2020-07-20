@@ -6,6 +6,7 @@ export const useHotkeys = (hotkeys) => {
     useEffect(() => {
         const onKeyPress = (evt) => {
             if (evt.altKey) {
+                evt.preventDefault();
                 let charCode = String.fromCharCode(evt.which).toLowerCase();
                 const positionRu = ru.indexOf(charCode);
                 charCode = positionRu !== -1 ? en[positionRu] : charCode;

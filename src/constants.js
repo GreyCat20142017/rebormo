@@ -195,9 +195,11 @@ export const REBORMO_LS = 'Rebormo';
 
 export const HOTKEYS = {
     S: 's',
+    D: 'd',
     H: 'h',
     R: 'r',
     N: 'n',
+    K: 'k',
     P: 'p',
     X: 'x',
     E: 'e',

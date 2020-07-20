@@ -166,11 +166,21 @@ export const getSortedKeys = (entities) =>
 
 export const dataTransform = (data) => {
     const wordsPresence = {};
-    data.forEach((el) => {
-        const wordsArray = el.english.trim().toLowerCase().split(' ');
+    data.forEach((phrase) => {
+        const wordsArray = phrase.english.trim().toLowerCase().split(' ');
         wordsArray.forEach((word) => {
             wordsPresence[word] = (wordsPresence.hasOwnProperty(word)) ? wordsPresence[word] + 1 : 1;
         });
+    });
+    return Object.fromEntries(Object.entries(wordsPresence)
+        .sort(([aKey, aValue] , [bKey, bValue]) => (aKey < bKey ? -1 : 1)));
+};
+
+export const transformOne = (phrase) => {
+    const wordsPresence = {};
+    const wordsArray = phrase.trim().toLowerCase().split(' ');
+    wordsArray.forEach((word) => {
+        wordsPresence[word] = (wordsPresence.hasOwnProperty(word)) ? wordsPresence[word] + 1 : 1;
     });
     return wordsPresence;
 };

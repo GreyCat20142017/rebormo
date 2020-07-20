@@ -1,5 +1,6 @@
 import React, {createContext, useState} from 'react';
 import {ROUTES} from '../../routes';
+import {SNACK_OPEN_TIME} from '../../constants';
 
 export const UIContext = createContext(null);
 
@@ -20,10 +21,14 @@ const submenuItems = getNavigationLinks(ROUTES, true);
 export const UIContextProvider = ({children}) => {
     const [message, setMessage] = useState(null);
     const [sidenav, setSidenav] = useState(false);
+    const [alertTime, setAlertTime] = useState(false);
 
     const messageHide = () => setMessage(null);
-    const messageShow = (msg) => setMessage(msg);
 
+    const messageShow = (msg, time = SNACK_OPEN_TIME) => {
+        setAlertTime(time);
+        setMessage(msg);
+    };
 
     const sidenavHide = () => setSidenav(false);
     const sidenavShow = () => setSidenav(true);
@@ -33,7 +38,7 @@ export const UIContextProvider = ({children}) => {
         <UIContext.Provider value={{
             message, messageShow, messageHide,
             sidenav, sidenavShow, sidenavHide, sidenavSwitch,
-            menuItems, submenuItems
+            menuItems, submenuItems, alertTime
         }}>
             {children}
         </UIContext.Provider>
