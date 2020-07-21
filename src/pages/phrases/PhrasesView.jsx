@@ -6,14 +6,21 @@ import ContentMissingMessage from '../../appparts/errors/ContentMissingMessage';
 import {getTranslatedPhrase} from '../../functions';
 import {TOOLBAR_TYPES} from '../../constants';
 
-const PhraseForm = ({classes, keyboardMode, wasError = false, onCheckCorrectness, result, setResult}) => {
+const PhraseForm = ({classes, keyboardMode, wasError = false, onCheckCorrectness, result, setResult, isFinished}) => {
     const onTranslateChange = (evt) => setResult(evt.target.value);
+    const onSubmit = (evt) => {
+        evt.preventDefault();
+        onCheckCorrectness();
+    };
+
+
     return (
         <Paper className={classes.paper}>
             {keyboardMode ?
-                <form className={classes.form} onSubmit={(evt) => onCheckCorrectness()}>
+                <form className={classes.form} onSubmit={(evt) => onSubmit(evt)}>
                     <TextField
                         required
+                        disabled={isFinished}
                         autoFocus={true}
                         id='result'
                         label={wasError ? 'Нужно исправить ошибку:' : 'Перевод:'}
@@ -54,7 +61,7 @@ const PhrasesView = ({
                                 <Button key={ind} variant='contained' color='primary' className={classes.wordButton}
                                         size={'small'}
                                         disabled={(wordsContent[item] <= 0)}
-                                        onClick={() => onWordClick(item)}>
+                                        onClick={() => (keyboardMode ? {} : onWordClick(item))}>
                                     {item}
                                 </Button>
                             </>
@@ -68,7 +75,7 @@ const PhrasesView = ({
                 </Typography>
             </Paper>
 
-            <PhraseForm classes={classes} keyboardMode={keyboardMode} wasError={wasError}
+            <PhraseForm classes={classes} keyboardMode={keyboardMode} wasError={wasError} isFinished={isFinished}
                         onCheckCorrectness={onCheckCorrectness} result={result} setResult={setResult}/>
 
             <SimpleToolbar toolbar={TOOLBAR_TYPES.PHRASES} className={classes.toolbar}

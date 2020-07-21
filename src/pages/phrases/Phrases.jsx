@@ -1,12 +1,14 @@
 import React, {useState, useEffect, useContext} from 'react';
 
 import PhrasesView from './PhrasesView';
+import {useHotkeys} from '../../hooks/hooks';
+import {UIContext} from '../../context/ui/UIContext';
+import {RebormoContext} from '../../context/rebormo/RebormoContext';
+import {HOTKEYS} from '../../constants';
 import {dataTransform, isValidIndex} from '../../functions';
 import {theme} from '../../theme';
 import {useStyles} from './Phrases.css';
-import {useHotkeys} from '../../hooks/hooks';
-import {HOTKEYS} from '../../constants';
-import {UIContext} from '../../context/ui/UIContext';
+
 
 const Phrases = ({content}) => {
     const [wordsContent, setWordsContent] = useState({});
@@ -18,17 +20,22 @@ const Phrases = ({content}) => {
     const [keyboardMode, setKeyboardMode] = useState(false);
     const [showHint, setShowHint] = useState(false);
     const [hintWasTaken, setHintWasTaken] = useState(false);
+    const [result, setResult] = useState('');
 
     const {messageShow} = useContext(UIContext);
-
-
-    const [result, setResult] = useState('');
+    const {currentCourse, currentLesson} = useContext(RebormoContext);
     const classes = useStyles(theme);
 
 
     useEffect(() => {
         setWordsContent(dataTransform(content));
     }, [content]);
+
+    useEffect(() => {
+        setOkCount(0);
+        setErrorCount(0);
+        setCurrentIndex(0);
+    }, [currentCourse, currentLesson]);
 
 
     const onWordClick = (word) => {
@@ -41,8 +48,11 @@ const Phrases = ({content}) => {
 
     const onRestart = () => {
         setCurrentClicked({});
+        setWordsContent(dataTransform(content));
         setCurrentIndex(0);
         setResult('');
+        setOkCount(0);
+        setErrorCount(0);
     };
 
     const returnBack = () => {
@@ -57,14 +67,16 @@ const Phrases = ({content}) => {
     };
 
     const onSwitchMouseKeyboard = () => {
-        returnBack();
+        if (!keyboardMode) {
+            returnBack();
+        }
         setResult('');
         setKeyboardMode(!keyboardMode);
     };
 
     const onCancel = () => {
-        setResult('');
         returnBack();
+        setResult('');
     };
 
     const onCheckCorrectness = () => {
@@ -76,14 +88,21 @@ const Phrases = ({content}) => {
             setOkCount(okCount + 1);
             setResult('');
             setWasError(false);
+            if (keyboardMode) {
+                const words = {...wordsContent};
+                content[currentIndex]['english'].split(' ').forEach((word) => {
+                    const convertedWord = word.toLowerCase();
+                    words[convertedWord] = words[convertedWord] - 1;
+                });
+                setWordsContent(words);
+            }
+            setCurrentClicked({});
         } else {
-            setErrorCount(setErrorCount + 1);
+            setErrorCount(errorCount + 1);
             setWasError(true);
-            messageShow(
-                'Ошибка: "' + result + '" - это неправильный перевод фразы "' + content[currentIndex]['russian'] + '"',
-                200
-            );
+            messageShow(`Ошибка: " ${result}" - это неправильный перевод фразы " ${content[currentIndex]['russian']}"`, 200);
         }
+
         setCurrentIndex(nextIndex);
     };
 
@@ -103,8 +122,10 @@ const Phrases = ({content}) => {
         [HOTKEYS.E]: onCheckCorrectness
     });
 
-    const isFinished = (Object.keys(wordsContent).filter(item => wordsContent[item] !== 0).length === 0);
+    const isFinished = (okCount === content.length);
+
     const finalMessage = `Статистика. Всего фраз: ${okCount} , число ошибок: ${errorCount}`;
+
     const phrasesProps = {
         classes, currentIndex, content, wordsContent, keyboardMode, isFinished, finalMessage, wasError,
         onWordClick, onRestart, onSwitchMouseKeyboard, onCancel, onCheckCorrectness, result, setResult,
