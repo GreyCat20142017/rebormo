@@ -1,9 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles';
-import {theme} from './theme';
+import {MDB_COLOR, NeutralTheme} from './theme';
 
-const mainColor = theme.palette.primary.main;
-
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme = NeutralTheme) => ({
     app: {
         textAlign: 'center',
         padding: theme.spacing(0),
@@ -23,7 +21,7 @@ export const useStyles = makeStyles(theme => ({
     paperMain: {
         width: '100%',
         flexGrow: 1,
-        backgroundColor: mainColor,
+        backgroundColor: theme.palette ? theme.palette.primary.main : MDB_COLOR,
         backgroundOrigin: 'content-box',
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1),
@@ -46,7 +44,7 @@ export const useStyles = makeStyles(theme => ({
     },
     linkDark: {
         textDecoration: 'none',
-        color: mainColor
+        color:  theme.palette ? theme.palette.primary.main : MDB_COLOR,
     },
     mLeft: {
         marginLeft: 'auto'

@@ -9,7 +9,8 @@ import {
     TableHead,
     TablePagination,
     TableRow,
-    Typography
+    Typography,
+    useTheme
 } from '@material-ui/core';
 
 import ActionsHeaders from './actions/ActionsHeaders';
@@ -47,7 +48,8 @@ export const MUITable = ({
                              tableTitle = null, actionsDisable = null, forceFirst = true,
                              withCheckbox = false, SelectedViewer = null
                          }) => {
-    const classes = useStyles(maxWidth);
+    const theme = useTheme();
+    const classes = useStyles(theme);
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(rowsLimit);

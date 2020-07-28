@@ -283,3 +283,8 @@ export const getUserFromResponse = (response) => {
 export const getToken = () => (localStorage.getItem(LS_TOKEN) || '');
 
 export const isLara = (key) => (key === LARA_KEY);
+
+export const getRound = (number, precision) => {
+    precision = precision || 0;
+    return Math.round(number * Math.pow(10, precision)) / Math.pow(10, precision);
+};

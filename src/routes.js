@@ -67,7 +67,7 @@ export const ROUTES = {
     about: {
         href: SERVER_ROOT + 'about',
         title: 'О программе',
-        icon: 'InfoO',
+        icon: 'Info',
         'submenu': true
     }
 

@@ -10,5 +10,6 @@ export {SignUp} from './signup/SignUp';
 export {Profile} from './profile/Profile';
 export {Logout} from './logout/Logout';
 export {Help} from './help/Help';
+export {BormoConfig} from '../pages/config/BormoConfig';
 
 export {NotFound, Bormo, Control, Spelling, Search, Phrases, Main};

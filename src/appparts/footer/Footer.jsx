@@ -11,15 +11,16 @@ import {useStyles} from '../../App.css';
 const dataSources = Object.keys(DATA_SOURCES).filter(key => !DATA_SOURCES[key].disabled)
     .map((item, ind) => ({text: DATA_SOURCES[item]['COMMENT'], key: item, href: item}));
 
+const voices = window['speechSynthesis'] ? window.speechSynthesis.getVoices()
+    .filter((item) => item.lang.slice(0, 2) === 'en')
+    .map(el => ({voice: el, href: el.name, key: el.name, text: el.name})) : [];
+
+
 const Footer = ({apiKey, changeDataSource, getData}) => {
     const {bormoSpeaker} = useContext(VoiceContext);
     const [muted, setMuted] = useState(bormoSpeaker.muted);
     const currentDataSource = apiKey && DATA_SOURCES[apiKey] && DATA_SOURCES[apiKey]['COMMENT'] ? DATA_SOURCES[apiKey]['COMMENT'] : '';
     const classes = useStyles();
-
-    const voices = window['speechSynthesis'] ? window.speechSynthesis.getVoices()
-        .filter((item) => item.lang.slice(0, 2) === 'en')
-        .map(el => ({voice: el, href: el.name, key: el.name, text: el.name})) : [];
 
     const onSelectDataSource = (key) => {
         if ((key !== 'escapeKeyDown') && (key !== apiKey)) {

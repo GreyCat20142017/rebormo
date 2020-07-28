@@ -1,14 +1,15 @@
 import React, {useContext, useEffect, useState} from 'react';
+import {useTheme} from '@material-ui/core';
 
 import SpellingView from './SpellingView';
 import SimpleSnackbar from '../../components/snackbar/SimpleSnackbar';
 import VoiceContext from '../../context/voice/VoiceContext';
 import {HOTKEYS, LANGUAGES} from '../../constants';
 import {getReorderedArray, isValidIndex, shuffleArray} from '../../functions';
-import {theme} from '../../theme';
-import {useStyles} from './Spelling.css.js';
 import ContentMissingMessage from '../../appparts/errors/ContentMissingMessage';
 import {useHotkeys} from '../../hooks/hooks';
+import {useStyles} from './Spelling.css.js';
+
 
 const Spelling = ({originalContent, currentCourse, currentLesson}) => {
     const [okCount, setOkCount] = useState(0);
@@ -17,7 +18,7 @@ const Spelling = ({originalContent, currentCourse, currentLesson}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [showHint, setShowHint] = useState(false);
     const {bormoSpeaker} = useContext(VoiceContext);
-
+    const theme = useTheme();
     const classes = useStyles(theme);
 
     useEffect(() => {

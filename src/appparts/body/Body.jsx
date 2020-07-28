@@ -2,7 +2,21 @@ import React from 'react';
 import {Route, Switch, withRouter} from 'react-router-dom';
 import {Drawer, Paper} from '@material-ui/core';
 
-import {Bormo, Control, Main, NotFound, Phrases, Search, Spelling, SignIn, SignUp, Profile, Logout, Help} from '../../pages/pages';
+import {
+    Bormo,
+    Control,
+    Main,
+    NotFound,
+    Phrases,
+    Search,
+    Spelling,
+    SignIn,
+    SignUp,
+    Profile,
+    Logout,
+    Help,
+    BormoConfig
+} from '../../pages/pages';
 import Sidenav from '../sidenav/Sidenav';
 import {CONTROL_MODES} from '../../constants';
 import {AUTH_ROUTES, ROUTES} from '../../routes';
@@ -48,6 +62,7 @@ const Body = ({
                 <Route path={ROUTES.skyeng.href}
                        render={(props) => <Search apiKey={apiKey} onlySkyEng={true}/>}/>
 
+                <Route path={ROUTES.config.href} component={BormoConfig}/>
                 <Route path={ROUTES.help.href} component={Help}/>
                 <Route path={ROUTES.about.href} component={Help}/>
 

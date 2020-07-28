@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
+import {useTheme} from '@material-ui/core';
 
 import PhrasesView from './PhrasesView';
 import {useHotkeys} from '../../hooks/hooks';
@@ -6,7 +7,6 @@ import {UIContext} from '../../context/ui/UIContext';
 import {RebormoContext} from '../../context/rebormo/RebormoContext';
 import {HOTKEYS} from '../../constants';
 import {dataTransform, isValidIndex} from '../../functions';
-import {theme} from '../../theme';
 import {useStyles} from './Phrases.css';
 
 
@@ -24,6 +24,7 @@ const Phrases = ({content}) => {
 
     const {messageShow} = useContext(UIContext);
     const {currentCourse, currentLesson} = useContext(RebormoContext);
+    const theme = useTheme();
     const classes = useStyles(theme);
 
 

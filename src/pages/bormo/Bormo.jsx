@@ -1,10 +1,9 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
-
+import { useTheme } from '@material-ui/core/styles'
 import {BormoView} from './BormoView';
 import VoiceContext from '../../context/voice/VoiceContext';
 import {getActiveAmount, getInitialMemorized, isValidIndex} from '../../functions';
 import {BORMO_STATUS, HOTKEYS, KEY_CODES, TIMER_INTERVAL} from '../../constants';
-import {theme} from '../../theme';
 import {useStyles} from './Bormo.css';
 import ContentMissingMessage from '../../appparts/errors/ContentMissingMessage';
 import {useHotkeys, useKeyPress} from '../../hooks/hooks';
@@ -15,6 +14,7 @@ const Bormo = ({content}) => {
     const [timerStatus, setTimerStatus] = useState(BORMO_STATUS.STOPPED);
     const timerRef = useRef();
     const {bormoSpeaker} = useContext(VoiceContext);
+    const theme = useTheme();
     const classes = useStyles(theme);
 
     useEffect(() => {
