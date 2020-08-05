@@ -1,9 +1,13 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 import SpeakerVoice from '../../SpeakerVoice';
-import {PREFFERABLE_VOICE} from '../../constants';
-
+import {LS_VOICE, PREFFERABLE_VOICE} from '../../constants';
+import {useLsObj} from '../../hooks/hooks';
 
 const VoiceContext = createContext(null);
+
+const getSystemVoices = () => (window['speechSynthesis'] ? window.speechSynthesis.getVoices()
+    .filter((item) => item.lang.slice(0, 2) === 'en')
+    .map(el => ({voice: el, href: el.name, key: el.name, text: el.name})) : []);
 
 const voiceInitialState = {
     onlyEnglish: true,
@@ -18,9 +22,9 @@ const initCurrentSpeaker = (voices) => {
     return voices;
 };
 
-export const getBormoSpeaker = () => {
+export const getBormoSpeaker = (voiceParams) => {
     let voices = [];
-    const bormoSpeaker = new SpeakerVoice(false, voiceInitialState);
+    const bormoSpeaker = new SpeakerVoice(false, voiceParams);
     if (bormoSpeaker.supportSound) {
         const voices = bormoSpeaker.getVoiceList(initCurrentSpeaker);
         bormoSpeaker.setSpeaker(voices);
@@ -30,8 +34,16 @@ export const getBormoSpeaker = () => {
 };
 
 export const VoiceContextProvider = ({children}) => {
-    const [{bormoSpeaker, voices}] = useState(getBormoSpeaker());
-    const [currentVoice] = useState(voiceInitialState.currentVoice);
+    const [voiceParams] = useLsObj(LS_VOICE, voiceInitialState);
+    const [{bormoSpeaker}] = useState(getBormoSpeaker(voiceParams));
+
+    const [currentVoice] = useState(voiceParams.currentVoice);
+    const [voices, setVoices] = useState([]);
+
+    useEffect(() => {
+        setVoices(getSystemVoices());
+    }, [setVoices]);
+
     return (
         <VoiceContext.Provider value={{bormoSpeaker, currentVoice, voices}}>
             {children}

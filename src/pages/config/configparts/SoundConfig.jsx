@@ -1,21 +1,25 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {Typography, Paper, FormGroup, FormControlLabel, Button, Switch} from '@material-ui/core';
-import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 
 import SimpleSlider from '../../../components/SimpleSlider';
 import VoiceContext from '../../../context/voice/VoiceContext';
 import Submenu from '../../../components/submenu/Submenu';
+import MUIIcon from '../../../components/icon/MUIIcon';
+import {useLsObj} from '../../../hooks/hooks';
 import {getRound} from '../../../functions';
-import {VOICE_TEST_PHRASE, voiceParams} from '../../../constants';
+import {LS_VOICE, VOICE_TEST_PHRASE, voiceParams} from '../../../constants';
 
 export const SoundConfig = ({classes}) => {
 
     const {bormoSpeaker, voices} = useContext(VoiceContext);
+    const [, setVoiceParams] = useLsObj(LS_VOICE);
 
-    const {onlyEnglish, currentVoice, volume, pitch} = bormoSpeaker.params;
+    const {onlyEnglish, currentVoice, volume, pitch, soundMuted} = bormoSpeaker.params;
 
+    const [muted, setMuted] = useState(soundMuted);
+    const [current, setCurrent] = useState(currentVoice);
 
-    const onOptionChange = () => {
+    const onOptionChange = (optionName) => {
 
     };
 
@@ -24,7 +28,10 @@ export const SoundConfig = ({classes}) => {
         if (typeof bormoSpeaker.speaker.ssu[name] !== 'undefined') {
             bormoSpeaker.speaker.ssu[name] = newValue;
         }
-        // сохранить;
+        const params = {...bormoSpeaker.params, [name]: value};
+        bormoSpeaker.resetParams(bormoSpeaker.speaker.ssu, params);
+        setVoiceParams(params);
+
     };
 
     const checkVoice = () => {
@@ -35,16 +42,19 @@ export const SoundConfig = ({classes}) => {
         const voiceItem = voices.find((item) => item.voice.name === voiceName);
         if (voiceItem) {
             bormoSpeaker.resetVoice(voiceItem.voice);
+            setCurrent(voiceName);
+            setVoiceParams({...bormoSpeaker.params, currentVoice: voiceName});
         }
     };
 
     const onMuteSwitch = () => {
-
-    }
-
+        const newMuted = !muted;
+        bormoSpeaker.mute(newMuted);
+        setMuted(newMuted);
+        setVoiceParams({...bormoSpeaker.params, soundMuted: newMuted});
+    };
 
     return (
-
         <>
             <Typography variant='caption' className={classes.configGroup}>Параметры звука</Typography>
             <Paper className={classes.configPaper}>
@@ -66,6 +76,7 @@ export const SoundConfig = ({classes}) => {
 
                     <SimpleSlider name='volume' params={voiceParams.volume} sliderValue={volume}
                                   onSliderChange={onSliderChange}/>
+
                     <Typography variant='caption' className={classes.configGroup}>Чем больше значение параметра, тем
                         писклявей звук.
                         Норма: 1 </Typography>
@@ -74,35 +85,19 @@ export const SoundConfig = ({classes}) => {
 
                 </FormGroup>
 
-                <Button size='small' variant='contained' color='secondary' onClick={checkVoice}
-                        className={classes.configButton}>
-                    Тест звука
-                    <VolumeUpIcon className={classes.rightIcon} fontSize='small'/>
-                </Button>
-
-                <Typography variant='caption'>{currentVoice}</Typography>
-
-                {/*<Select*/}
-                {/*    value={currentVoice}*/}
-                {/*    onChange={onVoiceChange}*/}
-                {/*    inputProps={{*/}
-                {/*        name: 'choice'*/}
-                {/*    }}*/}
-                {/*    title='Выбор синтезатора речи'>*/}
-                {/*    {voices.length === 0 ? null : voices.map(el =>*/}
-                {/*        <MenuItem className={classes.item} value={el.name} key={el.name}*/}
-                {/*                  title={el.name}>{el.name}</MenuItem>*/}
-                {/*    )}*/}
-                {/*</Select>*/}
-                {/*<Button color={'inherit'} title={muted ? 'Включить звук' : 'Отключить звук'}*/}
-                {/*        onClick={onMuteSwitch}>*/}
-                {/*    <MUIIcon icon={muted ? 'VolumeOn' : 'VolumeOff'}/>*/}
-                {/*</Button>*/}
-                {/*<Button color={'inherit'} title={'Тест звука'} onClick={checkVoice}>*/}
-                {/*    Test*/}
-                {/*</Button>*/}
                 <Submenu submenuItems={voices} withNavLink={false} callback={onVoiceChange}
                          text={'Выбор голоса из доступных вариантов'} switchIcon={'VoiceSettings'}/>
+                <Button size='small' variant='outlined' onClick={checkVoice}
+                        className={classes.configButton} disabled={muted}>
+                    Тест звука
+                </Button>
+                <Typography variant='caption'>{current}: {muted ? 'выключен' : 'включен'}</Typography>
+                <Button color={'inherit'} title={muted ? 'Включить звук' : 'Отключить звук'}
+                        onClick={onMuteSwitch}>
+                    <MUIIcon icon={muted ? 'VolumeOn' : 'VolumeOff'}/>
+                </Button>
+
+
             </Paper>
         </>
     )

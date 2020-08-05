@@ -5,7 +5,6 @@ import {Container, Typography} from '@material-ui/core';
 import {AuthForm} from '../../components/components';
 import Loader from '../../components/loader/Loader';
 import {UserContext} from '../../context/user/UserContext';
-import {useFetch, useLocalStorage} from '../../hooks/customHooks';
 import {getUserFromResponse} from '../../functions';
 import {ROUTES} from '../../routes';
 import {
@@ -15,12 +14,13 @@ import {
     LS_TOKEN,
     LS_TOKEN_EXPIRATION
 } from '../../constants';
+import {useFetch, useLs} from '../../hooks/hooks';
 
 export const SignUp = (props) => {
 
     const [{isLoading, response, error}, doFetch] = useFetch(API_PATH.REGISTER);
-    const [, setToken] = useLocalStorage(LS_TOKEN);
-    const [, setTokenExpiration] = useLocalStorage(LS_TOKEN_EXPIRATION);
+    const [, setToken] = useLs(LS_TOKEN);
+    const [, setTokenExpiration] = useLs(LS_TOKEN_EXPIRATION);
     const [{isLoggedIn}, dispatch] = useContext(UserContext);
     const [old, setOld] = useState('');
 

@@ -3,7 +3,6 @@ import {Container, Typography} from '@material-ui/core';
 import {Redirect} from 'react-router-dom';
 
 import Loader from '../../components/loader/Loader';
-import {useLocalStorage} from '../../hooks/customHooks';
 import {UserContext} from '../../context/user/UserContext';
 import {AuthForm} from '../../components/auth/AuthForm';
 import {AUTH_ROUTES} from '../../routes';
@@ -14,12 +13,13 @@ import {
 } from '../../constants';
 import {useUser} from '../../hooks/userHooks';
 import {RebormoContext} from '../../context/rebormo/RebormoContext';
+import {useLs} from '../../hooks/hooks';
 
 
 export const SignIn = (props) => {
 
     const [{isLoading, response, error}, doFetch] = useUser(API_PATH.LOGIN);
-    const [, setToken] = useLocalStorage(LS_TOKEN);
+    const [, setToken] = useLs(LS_TOKEN);
     const [{isLoggedIn}, dispatch] = useContext(UserContext);
     const [old, setOld] = useState('');
     const {apiKey, getData} = useContext(RebormoContext);

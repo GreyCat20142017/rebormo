@@ -3,10 +3,10 @@ import {Container} from '@material-ui/core';
 
 import {SearchForm} from './SearchForm';
 import {SearchTable} from './SearchTable';
-import {useFetch} from '../../hooks/customHooks';
 import {UIContext} from '../../context/ui/UIContext';
 import {getSearchParams, getSearchUrl, mapApiData} from '../../functions';
 import {TEST_KEY, TRANSLATE_SOURCES} from '../../constants';
+import {useFetch} from '../../hooks/hooks';
 
 const SearchFormContainer = ({apiKey, onlySkyEng = false}) => {
 

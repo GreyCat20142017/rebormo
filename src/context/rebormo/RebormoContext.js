@@ -1,6 +1,5 @@
 import React, {createContext, useCallback, useEffect, useReducer} from 'react';
 
-import {useFetch} from '../../hooks/customHooks';
 import {
     getCurrentType, getCurrentUrl, getRefinedResponse, getSelectedCourse, getToken, getTotalPages,
     getUrlForLoggedUser, isLara
@@ -8,6 +7,7 @@ import {
 import {ROUTES} from '../../routes';
 import {LARA_KEY, TEST_KEY} from '../../constants';
 import {getHeaders} from '../../hooks/userHooks';
+import {useFetch} from '../../hooks/hooks';
 
 const getLessonCount = (state) => (
     state.isBormo ?

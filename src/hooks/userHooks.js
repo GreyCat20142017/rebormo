@@ -1,8 +1,8 @@
 import {useCallback, useEffect, useState} from 'react';
 import axios from 'axios';
 
-import {useLocalStorage} from './customHooks';
 import {LS_TOKEN} from '../constants';
+import {useLs} from './hooks';
 
 export const getHeaders = (token) => {
     let headers = {};
@@ -22,7 +22,7 @@ export const useUser = (url) => {
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
     const [options, setOptions] = useState({});
-    const [token] = useLocalStorage(LS_TOKEN);
+    const [token] = useLs(LS_TOKEN);
 
     const doFetch = useCallback((options = {}) => {
         setOptions(options);

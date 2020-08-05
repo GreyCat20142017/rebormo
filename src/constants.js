@@ -191,8 +191,6 @@ export const SUBMENU_CONTENT = {
 export const SNACK_OPEN_TIME =  3000;
 export const AXIOS_TIMEOUT = 7000;
 
-export const REBORMO_LS = 'Rebormo';
-
 export const HOTKEYS = {
     S: 's',
     D: 'd',
@@ -209,3 +207,9 @@ export const HOTKEYS = {
 
 
 export const BASE_URL = '';
+
+
+export const LS_THEME = 'rebormo_theme';
+export const LS_COMMON = 'rebormo_common';
+export const LS_VOICE = 'rebormo_voice';
+export const LS_OFFLINE = 'rebormo_offline';

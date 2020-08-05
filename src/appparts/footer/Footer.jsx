@@ -11,13 +11,8 @@ import {useStyles} from '../../App.css';
 const dataSources = Object.keys(DATA_SOURCES).filter(key => !DATA_SOURCES[key].disabled)
     .map((item, ind) => ({text: DATA_SOURCES[item]['COMMENT'], key: item, href: item}));
 
-const voices = window['speechSynthesis'] ? window.speechSynthesis.getVoices()
-    .filter((item) => item.lang.slice(0, 2) === 'en')
-    .map(el => ({voice: el, href: el.name, key: el.name, text: el.name})) : [];
-
-
 const Footer = ({apiKey, changeDataSource, getData}) => {
-    const {bormoSpeaker} = useContext(VoiceContext);
+    const {bormoSpeaker, voices} = useContext(VoiceContext);
     const [muted, setMuted] = useState(bormoSpeaker.muted);
     const currentDataSource = apiKey && DATA_SOURCES[apiKey] && DATA_SOURCES[apiKey]['COMMENT'] ? DATA_SOURCES[apiKey]['COMMENT'] : '';
     const classes = useStyles();
@@ -56,10 +51,10 @@ const Footer = ({apiKey, changeDataSource, getData}) => {
                     <MUIIcon icon={muted ? 'VolumeOn' : 'VolumeOff'}/>
                 </Button>
                 <Button color={'inherit'} title={'Тест звука'} onClick={() => bormoSpeaker.speak(VOICE_TEST_PHRASE)}>
-                    Test
+                    тест
                 </Button>
                 <Submenu submenuItems={voices} withNavLink={false} callback={onSelectVoice}
-                         text={'Выбор голоса из доступных вариантов'} switchIcon={'VoiceSettings'}/>
+                         text={'Выбор голоса из доступных вариантов (без сохранения в настройках)'} switchIcon={'VoiceSettings'}/>
             </div>
         </Toolbar>
     );

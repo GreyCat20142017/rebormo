@@ -21,14 +21,14 @@ const getRefinedValue = (currentValue, currentParams) => (
         currentParams.default
 );
 
-const SimpleSlider = ({noTitle = false, verticalOnMobile = false, params, sliderValue}) => {
+const SimpleSlider = ({noTitle = false, name, verticalOnMobile = false, params, onSliderChange, sliderValue}) => {
 
     const [value, setValue] = useState(getRefinedValue(sliderValue, params));
     const classes = useStyles();
 
 
     const handleChange = (event, value) => {
-        // onSliderChange(this.props.name, value);
+        onSliderChange(name, value);
         setValue(value);
     };
 
@@ -44,7 +44,7 @@ const SimpleSlider = ({noTitle = false, verticalOnMobile = false, params, slider
                     step={params.step}
                     orientation={'horizontal'}
                     aria-labelledby='Slider'
-                    onChange={handleChange}
+                    onChangeCommitted={handleChange}
             />
         </div>
     );

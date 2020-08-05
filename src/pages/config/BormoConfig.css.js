@@ -6,7 +6,7 @@ export const useStyles = makeStyles(theme => ({
         padding: theme.spacing(1)
     },
     configButton: {
-        margin: theme.spacing(1)
+        margin: theme.spacing(1),
     },
     configGroup: {
         margin: theme.spacing(1)
@@ -15,7 +15,7 @@ export const useStyles = makeStyles(theme => ({
         marginLeft: theme.spacing(1)
     },
     configPaper: {
-        marginBottom: '32px'
+        marginBottom: theme.spacing(2)
     },
     flex: {
         display: 'flex',
@@ -32,7 +32,10 @@ export const useStyles = makeStyles(theme => ({
         padding: theme.spacing(1),
         textAlign: 'center'
     },
-    buttons: {
-        margin: '0 auto'
+    mtb: {
+        // marginTop: theme.spacing(2)
+    },
+    tabs: {
+        marginTop: '50px'
     }
 }));

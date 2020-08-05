@@ -1,4 +1,6 @@
-import React, {createContext, useCallback, useReducer} from 'react';
+import React, {createContext, useState, useCallback, useReducer} from 'react';
+import {useLs} from '../../hooks/hooks';
+import {LS_THEME} from '../../constants';
 
 /**
  *  actions & reducers
@@ -14,13 +16,11 @@ const initialState = {
     instantStart: true,
     instantNextMode: true,
     countErrorAtPrompt: true,
-    keyboardModeByDefault: true,
-    currentTheme: 'neutral'
+    keyboardModeByDefault: true
 };
 
 const handlers = {
     [ACTIONS.CHANGE_BASE]: (state, {payload}) => ({...state}),
-    [ACTIONS.CHANGE_THEME]: (state, {payload}) => ({...state, currentTheme: payload}),
     [ACTIONS.CHANGE_VOICE]: (state, {payload}) => ({...state}),
     DEFAULT: state => state
 };
@@ -37,12 +37,18 @@ export const configReducer = (state, action) => {
 export const ConfigContext = createContext(null);
 
 export const ConfigContextProvider = ({children}) => {
-    const [state, dispatch] = useReducer(configReducer, initialState);
+    const [color, setColor] = useLs(LS_THEME, 'neutral');
+    const [state] = useReducer(configReducer, initialState);
+    const [currentTheme, setCurrentTheme] = useState(color);
 
-    const setTheme = useCallback((payload) => dispatch({type: ACTIONS.CHANGE_THEME, payload: payload}), []);
+    const setTheme = useCallback(
+        (payload) => {
+            setCurrentTheme(payload);
+            setColor(payload);
+        }, [setColor]);
 
-       return (
-        <ConfigContext.Provider value={{...state, setTheme}}>
+    return (
+        <ConfigContext.Provider value={{...state, currentTheme, setTheme}}>
             {children}
         </ConfigContext.Provider>
     )

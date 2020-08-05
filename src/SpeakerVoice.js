@@ -9,6 +9,7 @@ class SpeakerVoice {
         this.speaker = null;
         this.speakerMuted = muteValue;
         this.params = params;
+        this.preferableVoice = params['currentVoice'] || PREFFERABLE_VOICE;
     }
 
     resetParams = (ssu, params, voice = null) => {
@@ -36,9 +37,10 @@ class SpeakerVoice {
 
     setSpeaker = (voices) => {
         if (this.supportSound && this.speaker === null) {
+
             let voiceList = (voices && voices.length > 0) ? voices : window.speechSynthesis.getVoices();
             if (voiceList.length > 0) {
-                let voiceEn = voiceList.find((item) => item.name.slice(0, PREFFERABLE_VOICE.length) === PREFFERABLE_VOICE);
+                let voiceEn = voiceList.find((item) => item.name.slice(0, this.preferableVoice.length) === this.preferableVoice);
                 if (!voiceEn) {
                     voiceEn = voiceList.find((item) => item.lang.slice(0, 2) === 'en');
                 }
@@ -58,6 +60,8 @@ class SpeakerVoice {
     mute = (muteValue) => {
         this.speakerMuted = muteValue;
     }
+
+    muted = () => (this.speakerMuted);
 
     speak = (text) => {
         if (this.supportSound && this.supportEnglish && this.speaker && !this.speakerMuted) {
